@@ -8,6 +8,7 @@
 ![头像](https://avatars3.githubusercontent.com/u/1772352?s=100&v=4)
 ------------
 Zhang Zhao <netwolf103@gmail.com>
+------------
 Wechat: netwolf103
 
 ## MG ERP 安装
@@ -128,14 +129,14 @@ Wechat: netwolf103
 #### 同步订单物流单号
     php bin/console app:magento:sync-sales-order-shipment <api_username> <api_key> <api_url>
 ## 部分功能展示
-![退款列表](https://github.com/netwolf103/mg-erp/blob/master/Preview1.png?raw=true)
-![订单详情](https://github.com/netwolf103/mg-erp/blob/master/Preview2.png?raw=true)
-![导入物流单号](https://github.com/netwolf103/mg-erp/blob/master/Preview3.png?raw=true)
-![手动添加物流单号](https://github.com/netwolf103/mg-erp/blob/master/Preview4.png?raw=true)
-![订单产品换货](https://github.com/netwolf103/mg-erp/blob/master/Preview5.png?raw=true)
-![增加订单产品](https://github.com/netwolf103/mg-erp/blob/master/Preview6.png?raw=true)
-![编辑订单地址](https://github.com/netwolf103/mg-erp/blob/master/Preview7.png?raw=true)
-![发票详情](https://github.com/netwolf103/mg-erp/blob/master/Preview8.png?raw=true)
-![订单详情功能](https://github.com/netwolf103/mg-erp/blob/master/Preview9.png?raw=true)
-![订单列表](https://github.com/netwolf103/mg-erp/blob/master/Preview10.png?raw=true)
-![命令行](https://github.com/netwolf103/mg-erp/blob/master/Preview11.png?raw=true)
+![退款列表](https://github.com/netwolf103/mg-erp/blob/master/preview/Preview1.png?raw=true)
+![订单详情](https://github.com/netwolf103/mg-erp/blob/master/preview/Preview2.png?raw=true)
+![导入物流单号](https://github.com/netwolf103/mg-erp/blob/master/preview/Preview3.png?raw=true)
+![手动添加物流单号](https://github.com/netwolf103/mg-erp/blob/master/preview/Preview4.png?raw=true)
+![订单产品换货](https://github.com/netwolf103/mg-erp/blob/master/preview/Preview5.png?raw=true)
+![增加订单产品](https://github.com/netwolf103/mg-erp/blob/master/preview/Preview6.png?raw=true)
+![编辑订单地址](https://github.com/netwolf103/mg-erp/blob/master/preview/Preview7.png?raw=true)
+![发票详情](https://github.com/netwolf103/mg-erp/blob/master/preview/Preview8.png?raw=true)
+![订单详情功能](https://github.com/netwolf103/mg-erp/blob/master/preview/Preview9.png?raw=true)
+![订单列表](https://github.com/netwolf103/mg-erp/blob/master/preview/Preview10.png?raw=true)
+![命令行](https://github.com/netwolf103/mg-erp/blob/master/preview/Preview11.png?raw=true)
