@@ -5417,7 +5417,7 @@
                 "symfony/security-core": "~4.3",
                 "symfony/security-csrf": "~4.2",
                 "symfony/security-guard": "~4.2",
-                "symfony/security-http": "^4.3"
+                "symfony/security-http": "^4.3.8"
             },
             "conflict": {
                 "symfony/browser-kit": "<4.2",
@@ -5436,7 +5436,7 @@
                 "symfony/expression-language": "~3.4|~4.0",
                 "symfony/form": "~3.4|~4.0",
                 "symfony/framework-bundle": "~4.2",
-                "symfony/http-foundation": "~3.4|~4.0",
+                "symfony/http-foundation": "~3.4|~4.3.8",
                 "symfony/process": "~3.4|~4.0",
                 "symfony/translation": "~3.4|~4.0",
                 "symfony/twig-bridge": "~3.4|~4.0",
@@ -5665,7 +5665,7 @@
         },
         {
             "name": "symfony/security-http",
-            "version": "v4.3.2",
+            "version": "v4.3.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/security-http.git",
@@ -5757,7 +5757,7 @@
                 "doctrine/annotations": "~1.0",
                 "doctrine/cache": "~1.0",
                 "phpdocumentor/reflection-docblock": "^3.0|^4.0",
-                "symfony/cache": "~3.4|~4.0",
+                "symfony/cache": "~3.4|~4.3.8",
                 "symfony/config": "~3.4|~4.0",
                 "symfony/dependency-injection": "~3.4|~4.0",
                 "symfony/http-foundation": "~3.4|~4.0",
@@ -6236,7 +6236,7 @@
                 "symfony/form": "^4.3",
                 "symfony/http-foundation": "~4.3",
                 "symfony/http-kernel": "~3.4|~4.0",
-                "symfony/mime": "~4.3",
+                "symfony/mime": "~4.3.8",
                 "symfony/polyfill-intl-icu": "~1.0",
                 "symfony/routing": "~3.4|~4.0",
                 "symfony/security-acl": "~2.8|~3.0",
