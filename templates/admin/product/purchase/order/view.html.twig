@@ -1,0 +1,122 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}{% trans %}Product Purchase{% endtrans %}{% endblock %}
+
+{% block body %}
+<ol class="breadcrumb">
+	<li class="breadcrumb-item">
+		<a href="{{ path('admin_dashboard') }}">{% trans %}Dashboard{% endtrans %}</a>
+	</li>
+	<li class="breadcrumb-item">
+		<a href="{{ path('admin_product') }}">{% trans %}Manager Products{% endtrans %}</a>
+	</li>
+	<li class="breadcrumb-item">
+		<a href="{{ path('admin_product_purchase_order') }}">{% trans %}Manager Purchase Order{% endtrans %}</a>
+	</li>			
+	<li class="breadcrumb-item active">
+	{% trans %}Product Purchase{% endtrans %}
+	</li>
+</ol>
+<div class="mb-3">
+	{{ include('blocks/message.html.twig') }}
+
+	<div class="row">
+		<div class="col-sm-12 col-md-3">
+			<div class="card mb-2">
+				<div class="card-header d-flex">
+					Sku # {{ order.parent.sku }}
+					<div class="ml-auto actions">
+					{% if order.isComplete() == false %}
+					<a href="{{ path('admin_product_purchase_order_receipt', {'id': order.id}) }}">{% trans %}Receipt{% endtrans %}</a>
+					{% endif %}
+					</div>							
+				</div>
+				<div class="card-body">
+					<div class="mt-sm-n2 mr-sm-n2 mb-sm-n2 ml-sm-n2">
+						<span class="d-block">{% trans %}Order Date{% endtrans %}: {{ order.createdAt|date('Y-m-d H:i:s') }}</span>
+						<span class="d-block">{% trans %}Order Status{% endtrans %}: {{ order.status|order_purchase_status|trans }}</span>
+						<span class="d-block">{% trans %}Order Numbers{% endtrans %}: {{ order.sourceOrderNumber }}</span>
+						<span class="d-block">{% trans %}Track Number{% endtrans %}: <a href="{{ ApiServices.kuaidi100|replace({'%track_number%': order.trackNumber}) }}" target="_blank">{{ order.trackNumber }}</a></span>
+						<span class="d-block">{% trans %}Shipping Amount{% endtrans %}: {{ order.shippingAmount|format_price('CNY') }}</span>
+						<span class="d-block">{% trans %}Qty Ordered{% endtrans %}: {{ order.totalQtyOrdered }}</span>
+						<span class="d-block">{% trans %}Subtotal{% endtrans %}: {{ order.subtotal|format_price('CNY') }}</span>
+						<span class="d-block">{% trans %}Grand Total{% endtrans %}: {{ order.grandTotal|format_price('CNY') }}</span>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-sm-12 col-md-3">
+			<div class="card mb-2">
+				<div class="card-header">
+					{% trans %}Order Comments{% endtrans %}
+				</div>
+				<div class="card-body">
+					<div class="mt-sm-n2 mr-sm-n2 mb-sm-n2 ml-sm-n2">
+						{% if order.isNew() %}
+						{{ form(formComment) }}
+						{% endif %}
+						<ul class="order-comments">
+						{% for comment in order.getComments().slice(0, 10) %}
+							<li>
+								<strong>
+									{% if comment.user %}
+									{{ comment.getUser().getFullname() }}
+									{% endif %}
+									{{ comment.createdAt|date('Y-m-d H:i:s') }} | {{ comment.status|order_purchase_status|trans }}
+								</strong>
+								<small>{{ comment.comment|raw }}</small>
+							</li>
+						{% endfor %}
+						</ul>
+					</div>						
+				</div>
+			</div>
+		</div>	
+		
+		<div class="col-sm-12 col-md-6">
+			<div class="card mb-2">
+				<div class="card-header">
+					{% trans %}Items Ordered{% endtrans %}		
+				</div>
+				<div class="card-body">
+					<div class="mt-sm-n2 mr-sm-n2 mb-sm-n2 ml-sm-n2">
+						<table class="table table-bordered" width="100%" cellspacing="0">
+							<colgroup>
+								<col>
+								<col>
+								<col>
+								<col>
+								<col>
+								<col>
+							</colgroup>						
+							<thead>
+								<tr>
+									<th>{% trans %}Ring Size{% endtrans %}</th>
+									<th>{% trans %}Unit Price{% endtrans %}</th>
+									<th>{% trans %}Purchase Quantity{% endtrans %}</th>
+									<th>{% trans %}Subtotal{% endtrans %}</th>
+									<th>{% trans %}Created At{% endtrans %}</th>
+									<th>{% trans %}Updated At{% endtrans %}</th>									
+								</tr>
+							</thead>
+							<tbody>
+							{% for item in order.getItems() %}
+								<tr>
+									<td>{{ item.size }}</td>
+									<td>{{ item.price|format_price('CNY') }}</td>
+									<td>{{ item.qtyOrdered }}</td>
+									<td>{{ item.subtotal|format_price('CNY') }}</td>
+									<td>{{ item.createdAt|date('Y-m-d H:i:s') }}</td>
+									<td>{{ item.updatedAt|date('Y-m-d H:i:s') }}</td>
+								</tr>
+							{% endfor %}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>	
+	</div>	
+</div>
+{% endblock %}

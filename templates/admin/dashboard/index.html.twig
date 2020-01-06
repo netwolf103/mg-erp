@@ -1,0 +1,52 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block body %}
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">
+    <a href="#">{% trans %}Dashboard{% endtrans %}</a>
+  </li>
+  <li class="breadcrumb-item active">{% trans %}Overview{% endtrans %}</li>
+</ol>
+
+<div class="mb-3">
+	{{ include('blocks/message.html.twig') }}
+	<div class="row">
+		<div class="col-sm-12 col-md-6">
+			<div class="card mb-2">
+				<div class="card-header">
+					{% trans %}Sales Order{% endtrans %}
+				</div>
+				<div class="card-body">
+					<div class="mt-sm-n2 mr-sm-n2 mb-sm-n2 ml-sm-n2">
+						<span class="d-block">{% trans %}All Sales Order{% endtrans %}: {{ salesOrderCountAll }}</span>
+						<span class="d-block">{% trans %}Not Shipped Orders{% endtrans %}: {{ salesOrderCountNotShipments }}</span>
+						<span class="d-block">{% trans %}Today Sales{% endtrans %}: {{ salesOrderCountTotay }}</span>
+						<span class="d-block">{% trans %}Week Sales{% endtrans %}: {{ salesOrderCountWeek }}</span>
+						<span class="d-block">{% trans %}Month Sales{% endtrans %}: {{ salesOrderCountMonth }}</span>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-sm-12 col-md-6">
+			<div class="card mb-2">
+				<div class="card-header">
+					{% trans %}Customer Stat{% endtrans %}
+				</div>
+				<div class="card-body">
+					<div class="mt-sm-n2 mr-sm-n2 mb-sm-n2 ml-sm-n2">
+						<span class="d-block">{% trans %}All Customers{% endtrans %}: {{ customerCountAll }}</span>
+						<span class="d-block">{% trans %}Today New Customers{% endtrans %}: {{ customerCountTotay }}</span>
+						<span class="d-block">{% trans %}Week New Customers{% endtrans %}: {{ customerCountWeek }}</span>
+						<span class="d-block">{% trans %}Month New Customers{% endtrans %}: {{ customerCountMonth }}</span>
+					</div>
+				</div>
+			</div>
+		</div>		
+	</di>
+</div>
+
+{% endblock %}

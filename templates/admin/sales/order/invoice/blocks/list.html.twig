@@ -1,0 +1,97 @@
+<div class="table-responsive" data-filter-response>
+	<div class="dataTables_wrapper">
+		{{ include('blocks/paginate.html.twig', {'numPages': paginator.numPages, 'numResults': paginator.numResults}) }}
+
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="actions">
+					<div class="row">
+						<div class="col-sm-12 col-md-8">
+							<a href="javascript:;" class="select-all">{% trans %}Select All{% endtrans %}</a>
+							<span class="separator">|</span>
+							<a href="javascript:;" class="unselect-all">{% trans %}Unselect All{% endtrans %}</a>
+						</div>
+						<div class="col-sm-12 col-md-4">
+							<div class="handle-action">
+								{% trans %}Actions{% endtrans %}
+								<select class="form-control form-control-sm" name="action">
+									<option></option>
+									<option value="delete">{% trans %}Delete{% endtrans %}</option>
+								</select>
+								<button class="btn btn-dark btn-sm">{% trans %}Submit{% endtrans %}</button>
+							</div>
+						</div>								
+					</div>
+				</div>
+
+				<table class="table table-bordered" width="100%" cellspacing="0">
+					<colgroup>
+						<col>
+						<col width="105">
+						<col width="130">
+						<col width="105">
+						<col>
+						<col>
+						<col>
+						<col>
+						<col>
+					</colgroup>					
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>{% trans %}Invoice #{% endtrans %}</th>
+							<th>{% trans %}Invoice Date{% endtrans %}</th>
+							<th>{% trans %}Order #{% endtrans %}</th>
+							<th>{% trans %}Order Date{% endtrans %}</th>
+							<th>{% trans %}Bill to Name{% endtrans %}</th>
+							<th>{% trans %}Status{% endtrans %}</th>
+							<th>{% trans %}Amount{% endtrans %}</th>	
+							<th>{% trans %}Action{% endtrans %}</th>					
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="filter">
+							<td></td>
+							<td><input type="text" name="filters[increment_id]" class="form-control form-control-sm" value="{{ app.request.getSession().get(filterSessionKey)|getFilter('increment_id')}}" /></td>
+							<td>
+								<div class="input-group input-group-sm mb-1">
+									<div class="input-group-prepend">
+										<span class="input-group-text"">{% trans %}From{% endtrans %}:</span>
+									</div>
+									<input data-role="datetime" type="date" name="filters[created_at][from]" class="form-control" value="{{ app.request.getSession().get(filterSessionKey)|getFilter('created_at.from')}}" />
+								</div>
+								<div class="input-group input-group-sm">
+									<div class="input-group-prepend">
+										<span class="input-group-text"">{% trans %}To{% endtrans %}:</span>
+									</div>
+									<input data-role="datetime" type="date" name="filters[created_at][to]" class="form-control" value="{{ app.request.getSession().get(filterSessionKey)|getFilter('created_at.to')}}" />
+								</div>
+							</td>					
+							<td><input type="text" name="filters[order_increment_id]" class="form-control form-control-sm" value="{{ app.request.getSession().get(filterSessionKey)|getFilter('order_increment_id')}}" /></td>					
+							<td></td>					
+							<td></td>					
+							<td></td>					
+							<td></td>					
+							<td></td>										
+						</tr>
+					{% for invoice in paginator.results %}
+						<tr>
+							<td><input type="checkbox" name="ids" value="{{ invoice.id }}" /></td>
+							<td><a href="{{ path('admin_sales_order_invoice_view', {'id':invoice.id}) }}">{{ invoice.incrementId }}</a></td>
+							<td>{{ invoice.createdAt|date('Y-m-d H:i:s') }}</td>
+							<td>
+							<a href="{{ path('admin_sales_order_view', {'id':invoice.getParent().id}) }}">{{ invoice.getParent().incrementId }}</a>
+							</td>
+							<td>{{ invoice.getParent().createdAt|date('Y-m-d H:i:s') }}</td>
+							<td>{{ invoice.getParent().getBillingAddress().getFullName() }}</td>
+							<td>{{ invoice.state|invoice_state|trans }}</td>
+							<td>{{ invoice.grandTotal }}</td>
+							<td class="actions text-center"><a href="{{ path('admin_sales_order_invoice_view', {'id': invoice.id}) }}" class="btn btn-dark btn-sm btn-block">{% trans %}View{% endtrans%}</a></td>
+						</tr>
+					{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

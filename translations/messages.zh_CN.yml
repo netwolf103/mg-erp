@@ -1,0 +1,392 @@
+Chinese: 中文
+Login: 登录
+Log in: 用户登录
+Username: 登录名
+Email: 邮箱
+Password: 密码
+Remember Password: 记住密码
+Profile: 个人资料
+Logout: 退出登录
+Dashboard: 仪表盘
+Add: 添加
+List: 列表
+Action: 操作
+View: 查看
+Detail: 详情
+Edit: 编辑
+Remove: 删除
+Status: 状态
+Save: 保存
+Created At: 创建时间
+Logged At: 登录时间
+Updated At: 更新时间
+Active: 激活
+Inactive: 未激活
+Is active: 状态
+The changes saved!: 数据已保存!
+Number: 第
+Page: 页
+Search: 搜索
+Reset Filter: 重置搜索
+of %numPages% pages: 共%numPages%页
+Total %numResults% records found: 共%numResults%条数据
+Submit: 提交
+Delete: 删除
+Actions: 操作
+Select All: 选择全部
+Unselect All: 取消选择
+Enabled: 已启用
+Disabled: 已禁用
+History: 历史
+Operator: 执行人
+Operate Result: 运行结果
+Operate Date: 运行结果
+
+Manager Users: 用户管理
+Users: 用户
+Roles: 角色
+User Role: 用户角色
+Role Name: 角色名
+Role Description: 角色说明
+Role Edit: 编辑角色
+Role Add: 添加角色
+Manager Roles: 管理角色
+User Edit: 编辑用户
+User Add: 添加用户
+The user removed.: 用户已删除
+Login History: 登录历史
+Manager Purchase Order: 管理采购单
+Product Purchase: 产品采购
+Manager Products: 产品管理
+Products: 产品
+Product Type: 产品类型
+Product Name: 名称
+Product Sale: 产品销量
+Visibility: 可见度
+Not Visible Individually: 不可见
+Catalog: 类目
+Catalog, Search: 类目, 搜索
+Price: 售价
+Inventory: 库存
+Low Stock: 低库存
+Stock Availability: 上架状态
+Out of Stock: 下架
+In Stock: 上架
+Inventory Low Alert: 低库存预警值
+Stock Alert: 低库存产品
+Image: 图片
+Purchase Price: 进货价
+Special Price: 活动价
+Product Description: 产品描述
+Product Edit: 编辑产品
+Product Add: 添加产品
+Url Key: Url Key
+Has Options: 是否有选项
+Custom Options: 自定义选项
+Is Required: 是否必填
+Sort Order: 排序
+Input Type: 输入类型
+Dropdown: 下拉菜单
+Field: 字段
+Title: 标题
+Price Type: 价格类型
+Parent Option: 父选项
+Fixed: 固定
+Percent: 百分比
+Images: 图片
+Purchase Url: 采购网址
+Has Sample?: 有样品?
+-- Please Select --: -- 请选择 --
+Option Sizes: 尺码
+Engravings: 刻字
+Ring Size: 尺码
+Max Characters: 最多字符数
+Upload Images: 上传图片
+From: 从
+To: 到
+Close: 关闭
+Sales: 销量
+Google Product: 谷歌产品
+Generate Google Product: 生成Google商品
+Manager Google Products: 谷歌商品
+Google Product Details: 谷歌商品详情
+Push To Google: 推送到谷歌
+Google Product data specification: 谷歌商品数据规范参考
+GTitle: 商品名称
+GDescription: 商品说明
+GLink: 商品着陆页
+GImage Link: 商品主图片网址
+GAdditional Image Link: 商品附加图网址
+GAvailability: 商品库存状况
+GAvailability Date: 预订商品发货日期
+GCost Of Goods Sold: 销售成本
+GExpiration Date: 商品停止展示日期
+GPrice: 商品价格
+GSale Price: 商品促销价
+GSale Price Effective Date: 促销价有效期
+GUnit Price Measure: 价格计量单位
+GUnit Pricing Base Measure: 基准价格计量单位
+GInstallment: 分期付款
+GGoogle Product Category Id: Google商品类别
+GProduct Type: 商品类型
+Brand: 品牌
+GIdentifier Exists: 是否有Gtin、MPN、品牌
+GCondition: 使用情况
+GAdult: 包含成人内容
+GMultipack: 多件组合中
+GIs Bundle: 是否套装
+GEnergy Efficiency Class: 商品能效等级
+GMin Energy Efficiency Class: 商品最低能效等级
+GMax Energy Efficiency Class: 商品最高能效等级
+GAge Group: 商品受众年龄段
+GColor: 颜色
+GGender: 适用性别
+GMaterial: 商品材质
+GPattern: 商品款式
+GSize: 商品尺寸
+GSize Type: 尺码类型
+GSize System: 尺码体系
+GItem Group Id: 商品组ID
+GAds Redirect: 广告重定向网址
+GCustom Label 0: 自定义标签 0
+GCustom Label 1: 自定义标签 1
+GCustom Label 2: 自定义标签 2
+GCustom Label 3: 自定义标签 3
+GCustom Label 4: 自定义标签 4
+GPromotion Id: 促销ID
+GExcluded Destination: 禁止展示地点
+GIncluded Destination: 允许展示地点
+GShipping: 运费
+GShipping Label: 配送标签
+GShipping Weight: 物品重量
+GShipping Length: 物品包装长度
+GShipping Width: 物品包装宽度
+GShipping Height: 物品包装高度
+GTransit Time Label: 运送时间标签
+GMax Handling Time: 最长订单处理时间
+GMin Handling Time: 最短订单处理时间
+GTax: 税费
+GTax Category: 税费种类
+'Reference Link: <a href=":link" target="_blank">:link</a>': '参考链接: <a href=":link" target="_blank">:link</a>'
+
+Manager Sales: 销售管理
+Manager Orders: 订单管理
+Orders: 订单
+Shippments: 物流
+Increment Id: 订单号
+Subtotal: 总价
+Grand Total: 累计
+Customer Email: 客户邮箱
+Purchased On: 下单时间
+Payment Status: 支付状态
+Payment Method: 支付方式
+Shipping Amount: 运费
+Contact: 联系人
+Street: 街道
+City: '城市'
+Region: '州'
+Postcode: '邮编'
+City, Region, Postcode: 市, 州, 邮编
+Country: 国家
+Country Id: 国家
+Telephone: 电话
+Firstname: 姓
+Lastname: 名
+Fullname: 姓名
+Geo Pull: 地理同步
+Map: 地图
+Suspected Address: 可疑地址
+Confirm Correct: 确认正确
+Address History: 地址历史
+Address Type: 地址类型
+Shipping Address: 收货地址
+Billing Address: 账单地址
+Payment Information: 付款信息
+Amount Ordered: 产品费
+Amount Shipping: 物流费
+Shipping & Handling Information: 运输信息
+Standard Shipping: 平邮
+DHL: DHL快递
+Stock Product: 库存产品
+Virtual Product: 虚拟产品
+Factory Product: 工厂产品
+Purchase Product: 采购产品
+Undefined Product: 未定义产品
+Purchase: 采购
+Purchase Quantity: 采购数量
+Unit Price: 单价
+Item Type: 产品类型
+Original Price: 原价
+Row Total: 行总计
+Order Date: 下单时间
+Order Status: 订单状态
+Platform Tracking Number: 平台物流单号
+Placed from IP: 客户IP
+Items Ordered: 下单产品
+Customer Information: 客户信息
+Size & Engravings: 刻字 & 尺码
+Order Type: 订单类型
+Virtual Order: 虚拟单
+Stock Order: 库存单
+Purchase Order: 采购单
+Factory Order: 工厂单
+Factory Combination: 组合单
+Shipping Method: 运输方式
+Shipping Method Edit: 修改运输方式
+Shipping History: 物流历史
+Order Details: 订单详情
+Order Totals: 订单总计
+Order Comments: 订单备注
+Order Comment: 备注信息
+Comment: 备注
+Notify Customer by Email: 邮件通知客户
+Tax Amount: 税费
+Add To Cart Discount Percent: 加购折扣百分比
+Discount Amount: 折扣
+Discount Percent: 折扣百分比
+Address Edit: 编辑地址
+Item Edit: 商品编辑
+Item Add: 添加商品
+Item Cancel: 取消商品
+Item Refund: 退回商品
+Item Exchange: 产品换货
+Cancel: 取消
+Refund: 退货
+Exchange: 换货
+None: 无
+Manager Refund: 退款
+Refund Status: 退款状态
+Has not refunded: 未退款
+Has refunded: 已退款
+Refuse to refund: 拒绝退款
+Agree: 同意
+Refuse: 拒绝
+Refund Detail: 退款详情
+Refund Created At: 退款申请时间
+Refund Confirm Created At: 退款发放时间
+Refunded At: 退款时间
+Qty Ordered: 购买数量
+Qty Canceled: 取消数量
+Qty Invoiced: 发票数量
+Qty Shipped: 已发数量
+Qty Refunded: 退货数量
+"sku (Qty Ordered: qty_ordered, Qty Shipped: qty_shipped, Qty Canceled: qty_canceled, Qty Refunded: qty_refunded)": "sku (购买数量: qty_ordered, 已发数量: qty_shipped, 取消数量: qty_canceled, 退货数量: qty_refunded)"
+Refund Amount: 退款金额
+Option Engravings: 刻字选项
+Manager Comments: 备注列表
+View All: 查看所有
+Comment User: 备注人
+View Product: 查看产品
+Order Detail: 订单详情
+Receipt: 收货
+Purchased: 已采购.
+Received: 已收货
+Pull: 同步
+Hold: 暂停
+UnHold: 取消暂停
+Part Shipped: 部分发货
+Undelivered: 未送达
+Waiting For Customer Contact Us: 等待客户联系
+Invoice: 发票
+"Invoice #": 发票号
+Print Invoice: 打印发票
+Manager Invoice: 管理发票
+Invoice Details: 发票详情
+Amount: 金额
+Bill to Name: 结算人
+Ship to Name: 收货人
+Invoice Date: 发票日期
+Invoice Totals: 发票总额
+Sales Volume: 销量
+Order Email Edit: 订单邮箱编辑
+Batch Pull Invoice: 批量同步发票
+Please enter the order numbers, multiple order separated by ",".: 请输入订单号码，多个订单间以英文","分隔。
+Order Numbers: 订单号
+All Sales Order: 总订单数
+Not Shipped Orders: 未发货订单数
+Sales Order: 订单销量
+Today Sales: 今日销量
+Week Sales: 本周销量
+Month Sales: 本月销量
+Customer Stat: 客户统计
+All Customers: 总客户数
+Today New Customers: 今日新注册客户
+Week New Customers: 本周新注册客户
+Month New Customers: 本月新注册客户
+Overview: 概览
+Related Orders: 关联订单
+Remove Related Orders: 移除关联订单
+Please enter the order number, with "," between multiple orders.: 请输入关联订单号，多个订单之间以","分隔.
+Manager Transaction: 管理交易号
+Pull Transaction Id: 同步交易号
+Order Transaction Id: 订单交易号
+Transaction Id: 交易号
+Parent Transaction Id: 父交易号
+Transaction Type: 交易类型
+Update Synced: 更新为已同步
+Send Confirm Email: 发送确认邮件
+Confirm Email History: 确认邮件发送记录
+Number of mails sent: 邮件发送数
+
+Add Expedited: 创建加急
+Expedited: 加急
+Expedited Order: 加急单
+Expedited Comment: 加急备注
+Expedited Date: 加急日期
+Expedited Creator: 加急人
+Expedited Detail: 加急详情
+Expedited Cancel: 取消加急
+
+Manager Shippments: 物流管理
+Date Shipped: 发货时间
+Ship To Name: 收件人
+Track Number: 物流单号
+Ship: 发货
+Carrier: 运营商
+Track Add: 物流添加
+Track Edit: 物流编辑
+View Shipment Detail: 查看物流详情
+Import Shipments: 导入运单号
+Track Number Csv File: 物流单号CSV文件
+Import: 导入
+Track number csv file format: CSV文件格式
+Download csv template: 下载CSV模板
+Push Tracking Number: 推送物流单号
+
+Manager Customer: 客户管理
+Customers: 客户
+Address: 地址
+
+Manager Stat: 数据统计
+Products Stat: 产品数据
+Product Sales: 产品销量
+Orders Stat: 订单统计
+Orders Sales: 订单数据
+Shippments Stat: 物流统计
+Shipped Stat: 发货统计
+
+Manager Purchase: 采购管理
+Manager Supplier: 管理供货商
+Supplier: 供货商
+Supplier Name: 供应商
+Contact Name: 联系人
+Contact Number: 联系电话
+Contact Email: 联系邮箱
+Contact Address: 联系地址
+Supplier Add: 添加供货商
+Supplier Edit: 修改供货商
+
+Sync all products.: 同步所有产品
+
+Manager Config: 配置管理
+Manager Shipping Methods: 物流方法
+General: 通用
+Web Title: 网站标题
+Brand Name: 品牌名
+Free Shipping Minimum Amount: 免邮最低消费金额
+Currency Rates: 货币汇率
+Google Merchants: 谷歌商店
+Sandbox Model: 沙箱模式
+Api Version: Api版本
+Enable: 启用
+Oceanpayment Api: 钱海API

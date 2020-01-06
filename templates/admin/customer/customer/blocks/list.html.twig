@@ -1,0 +1,61 @@
+<div class="table-responsive" data-filter-response>
+	<div class="dataTables_wrapper">
+		{{ include('blocks/paginate.html.twig', {'numPages': paginator.numPages, 'numResults': paginator.numResults}) }}
+
+		<div class="row">
+			<div class="col-sm-12">
+				<table class="table table-bordered" width="100%" cellspacing="0">
+					<colgroup>
+						<col width="60">
+						<col width="200">
+						<col width="150">
+						<col width="150">
+						<col>
+						<col width="150">
+						<col width="150">
+						<col width="60">
+					</colgroup>
+
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>{% trans %}Email{% endtrans %}</th>
+							<th>{% trans %}Firstname{% endtrans %}</th>
+							<th>{% trans %}Lastname{% endtrans %}</th>
+							<th>{% trans %}Address{% endtrans %}</th>
+							<th>{% trans %}Created At{% endtrans %}</th>
+							<th>{% trans %}Updated At{% endtrans %}</th>						
+							<th>{% trans %}Action{% endtrans %}</th>						
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="filter">
+							<td></td>
+							<td><input type="text" name="filters[email]" class="form-control form-control-sm" value="{{ app.request.getSession().get(filterSessionKey)|getFilter('email') }}" /></td>
+							<td><input type="text" name="filters[firstname]" class="form-control form-control-sm" value="{{ app.request.getSession().get(filterSessionKey)|getFilter('firstname') }}" /></td>
+							<td><input type="text" name="filters[lastname]" class="form-control form-control-sm" value="{{ app.request.getSession().get(filterSessionKey)|getFilter('lastname') }}" /></td>
+							<td></td>					
+							<td></td>					
+						</tr>
+					{% for customer in paginator.results %}
+						<tr>
+							<td class="text-center">{{ customer.id }}</td>
+							<td>{{ customer.email }}</td>
+							<td>{{ customer.firstname }}</td>
+							<td>{{ customer.lastname }}</td>
+							<td>
+							{% for address in customer.getAddress() %}
+							<span class="d-block">{{ address.street }}, {{ address.city }}, {{ address.region }}, {{ address.countryId }}, {{ address.postcode }}, {{ address.telephone }}</span>
+							{% endfor %}
+							</td>
+							<td>{{ customer.createdAt|date('Y-m-d H:i:s') }}</td>
+							<td>{{ customer.updatedAt|date('Y-m-d H:i:s') }}</td>
+							<td class="actions text-center"><a href="{{ path('admin_customer_pull', {'id':customer.id}) }}" class="btn btn-dark btn-sm btn-block">{% trans %}Pull{% endtrans %}</a></td>
+						</tr>
+					{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}{{ site_name() }}{% endblock %}</title>
+        {% block stylesheets %}
+        <link href="{{ asset('skin/default/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ asset('skin/default/css/sb-admin.css') }}" rel="stylesheet">
+        {% endblock %}
+    </head>
+    <body>
+    	{{ include('admin/blocks/navbar.html.twig') }}
+
+    	<div id="wrapper">
+	    	{{ include('admin/blocks/sidebar.html.twig') }}
+	    	<div id="content-wrapper">
+	        	<div class="container-fluid">{% block body %}{% endblock %}</div>
+                {% block footer %}
+                {{ include('blocks/footer.html.twig') }}
+                {% endblock %}
+	    	</div>
+    	</div>
+        {% block javascripts %}
+		<script src="{{ asset('skin/default/vendor/jquery/jquery.min.js') }}"></script>
+		<script src="{{ asset('skin/default/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+        <script src="{{ asset('skin/default/js/sb-admin.js') }}"></script>
+        {% endblock %}
+        <div id="loading"><div class="loader"></div></div>
+    </body>
+</html>

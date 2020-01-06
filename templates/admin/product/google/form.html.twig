@@ -1,0 +1,28 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}
+	{% trans %}Product Edit{% endtrans %} - {{ google.gTitle }}
+{% endblock %}
+
+{% block body %}
+
+<ol class="breadcrumb">
+	<li class="breadcrumb-item">
+		<a href="{{ path('admin_dashboard') }}">{% trans %}Dashboard{% endtrans %}</a>
+	</li>
+	<li class="breadcrumb-item">
+		<a href="{{ path('admin_product') }}">{% trans %}Manager Products{% endtrans %}</a>
+	</li>	
+	<li class="breadcrumb-item">
+		<a href="{{ path('admin_product_google') }}">{% trans %}Manager Google Products{% endtrans %}</a>
+	</li>	
+	<li class="breadcrumb-item active">
+	{% trans %}Product Edit{% endtrans %} - {{ google.gTitle }}
+	</li>
+</ol>
+
+<div class="mb-3">
+	{{ include('blocks/message.html.twig') }}
+	{{ form(form) }}
+</div>
+{% endblock %}

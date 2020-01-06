@@ -1,0 +1,182 @@
+<div class="table-responsive" data-filter-response>
+	<div class="dataTables_wrapper">
+		{{ include('blocks/paginate.html.twig', {'numPages': paginator.numPages, 'numResults': paginator.numResults}) }}
+
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="actions">
+					<div class="row">
+						<div class="col-sm-12 col-md-8">
+							<a href="javascript:;" class="select-all">{% trans %}Select All{% endtrans %}</a>
+							<span class="separator">|</span>
+							<a href="javascript:;" class="unselect-all">{% trans %}Unselect All{% endtrans %}</a>
+						</div>
+						<div class="col-sm-12 col-md-4">
+							<div class="handle-action">
+								{% trans %}Actions{% endtrans %}
+								<select class="form-control form-control-sm" name="action">
+									<option></option>
+									<option value="delete">{% trans %}Delete{% endtrans %}</option>
+								</select>
+								<button class="btn btn-dark btn-sm">{% trans %}Submit{% endtrans %}</button>
+							</div>
+						</div>								
+					</div>
+				</div>
+
+				<table class="table table-bordered" width="100%" cellspacing="0">
+					<colgroup>
+						<col>
+						<col>
+						<col>
+						<col>
+						<col width="100">
+						<col width="100">
+						<col width="100">
+						<col>
+						<col>
+						<col>
+						<col>
+						<col>
+						<col>
+						<col>
+						<col width="180">
+					</colgroup>				
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>{% trans %}Sku{% endtrans %}</th>
+							<th>{% trans %}Product Type{% endtrans %}</th>
+							<th>{% trans %}Image{% endtrans %}</th>
+							<th>{% trans %}Product Name{% endtrans %}</th>
+							<th>{% trans %}Status{% endtrans %}</th>
+							<th>{% trans %}Google Product{% endtrans %}</th>
+							<th>{% trans %}Has Sample?{% endtrans %}</th>
+							<th>{% trans %}Inventory{% endtrans %}</th>
+							<th>{% trans %}Stock Availability{% endtrans %}</th>
+							<th>{% trans %}Price{% endtrans %}</th>
+							<th>{% trans %}Sales Volume{% endtrans %}</th>
+							<th>{% trans %}Created At{% endtrans %}</th>
+							<th>{% trans %}Updated At{% endtrans %}</th>	
+							<th>{% trans %}Action{% endtrans %}</th>					
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="filter">
+							<td></td>
+							<td><input type="text" name="filters[sku]" class="form-control form-control-sm" value="{{ app.request.getSession().get(filterSessionKey)|getFilter('sku')}}" /></td>
+							<td>
+							<select name="filters[product_line]" class="form-control form-control-sm">
+								<option></option>
+								{% for value, name in product_line_list() %}
+								<option value="{{ value }}"{% if app.request.getSession().get(filterSessionKey)|getFilter('product_line', '-1') == value %} selected="selected"{% endif %}>{{ name|trans }}</option>
+								{% endfor %}
+							</select>
+							</td>
+							<td></td>
+							<td><input type="text" name="filters[name]" class="form-control form-control-sm" value="{{ app.request.getSession().get(filterSessionKey)|getFilter('name')}}" /></td>
+							<td>
+							<select name="filters[status]" class="form-control form-control-sm">
+								<option></option>
+								{% for value, name in product_status_list() %}
+								<option value="{{ value }}"{% if app.request.getSession().get(filterSessionKey)|getFilter('status', '-1') == value %} selected="selected"{% endif %}>{{ name|trans }}</option>
+								{% endfor %}
+							</select>
+							</td>
+							<td>
+							<select name="filters[google]" class="form-control form-control-sm">
+								<option></option>
+								{% for value, name in {'no':'No', 'yes':'Yes'} %}
+								<option value="{{ value }}"{% if app.request.getSession().get(filterSessionKey)|getFilter('google', '0') == value %} selected="selected"{% endif %}>{{ name|trans }}</option>
+								{% endfor %}
+							</select>
+							</td>							
+							<td>
+							<select name="filters[hasSample]" class="form-control form-control-sm">
+								<option></option>
+								{% for value, name in {0:'No', 1:'Yes'} %}
+								<option value="{{ value }}"{% if app.request.getSession().get(filterSessionKey)|getFilter('hasSample', '-1') == value %} selected="selected"{% endif %}>{{ name|trans }}</option>
+								{% endfor %}
+							</select>
+							</td>					
+							<td></td>					
+							<td>
+							<select name="filters[catalogInventory]" class="form-control form-control-sm">
+								<option></option>
+								{% for value, name in product_status_stock_list() %}
+								<option value="{{ value }}"{% if app.request.getSession().get(filterSessionKey)|getFilter('catalogInventory', '-1') == value %} selected="selected"{% endif %}>{{ name|trans }}</option>
+								{% endfor %}
+							</select>
+							</td>					
+							<td></td>					
+							<td></td>					
+							<td>						
+								<div class="input-group input-group-sm mb-1">
+									<div class="input-group-prepend">
+										<span class="input-group-text"">{% trans %}From{% endtrans %}:</span>
+									</div>
+									<input data-role="datetime" type="date" name="filters[created_at][from]" class="form-control" value="{{ app.request.getSession().get(filterSessionKey)|getFilter('created_at.from')}}" />
+								</div>
+								<div class="input-group input-group-sm">
+									<div class="input-group-prepend">
+										<span class="input-group-text"">{% trans %}To{% endtrans %}:</span>
+									</div>
+									<input data-role="datetime" type="date" name="filters[created_at][to]" class="form-control" value="{{ app.request.getSession().get(filterSessionKey)|getFilter('created_at.to')}}" />
+								</div>
+							</td>					
+							<td>
+								<div class="input-group input-group-sm mb-1">
+									<div class="input-group-prepend">
+										<span class="input-group-text"">{% trans %}From{% endtrans %}:</span>
+									</div>
+									<input data-role="datetime" type="date" name="filters[updated_at][from]" class="form-control" value="{{ app.request.getSession().get(filterSessionKey)|getFilter('updated_at.from')}}" />
+								</div>
+								<div class="input-group input-group-sm">
+									<div class="input-group-prepend">
+										<span class="input-group-text"">{% trans %}To{% endtrans %}:</span>
+									</div>
+									<input data-role="datetime" type="date" name="filters[updated_at][to]" class="form-control" value="{{ app.request.getSession().get(filterSessionKey)|getFilter('updated_at.to')}}" />
+								</div>
+							</td>					
+							<td></td>					
+						</tr>
+					{% for product in paginator.results %}
+						<tr>
+							<td><input type="checkbox" name="ids" value="{{ product.id }}" /></td>
+							<td>{{ product.sku }}</td>
+							<td>{{ product.getLineType()|product_line|trans }}</td>
+							<td>
+							{% if product.getMedia().first() %}
+							<img src="{{ product.getMedia().first().getUrl()|imagine_filter('thumbnail_80x80') }}" width="80" height="80" class="thumbnail" />
+							{% endif %}
+							</td>
+							<td><a href="{{ product.productUrl }}" target="_blank" title="{% trans %}View Product{% endtrans %}">{{ product.name }}</a></td>
+							<td>{{ product.status|product_status|trans }}</td>
+							<td>{{ product.google|getYesOrNo }}</td>
+							<td>{{ product.hasSample|getYesOrNo }}</td>							
+							<td>{{ product.inventory }}</td>
+							<td>
+							{% if product.catalogInventory %}
+							{{ product.catalogInventory.getIsInStock()|product_stock_status|trans }}
+							{% endif %}
+							</td>
+							<td>{{ product.price|format_price('$') }}</td>
+							<td><a href="{{ path('admin_product_view_sales', {'product_id':product.id}) }}">{{ product.getOrderItems().count() }}</a></td>
+							<td>{{ product.createdAt|date('Y-m-d H:i:s') }}</td>
+							<td>{{ product.updatedAt|date('Y-m-d H:i:s') }}</td>
+							<td class="actions text-center">
+							<a href="{{ path('admin_product_edit', {'id': product.id}) }}" class="btn btn-dark btn-sm btn-block">{% trans %}Edit{% endtrans%}</a>
+							<a href="{{ path('admin_product_pull', {'id': product.id}) }}" class="btn btn-dark btn-sm btn-block">{% trans %}Pull{% endtrans%}</a>
+							<a href="{{ path('admin_product_google_create', {'product_id': product.id}) }}" class="btn btn-dark btn-sm btn-block">{% trans %}Generate Google Product{% endtrans%}</a>
+							{% if product.isPurchase() %}
+							<a href="{{ path('admin_product_purchase_order_add', {'product_id': product.id}) }}" class="btn btn-dark btn-sm btn-block">{% trans %}Purchase{% endtrans%}</a>
+							{% endif %}
+							</td>
+						</tr>
+					{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

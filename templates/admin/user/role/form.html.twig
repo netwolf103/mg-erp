@@ -1,0 +1,33 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}
+	{% if role.id %}
+	{% trans %}Role Edit{% endtrans %} - {{ role.name }}
+	{% else %}
+	{% trans %}Role Add{% endtrans %}
+	{% endif %}
+{% endblock %}
+
+{% block body %}
+
+<ol class="breadcrumb">
+	<li class="breadcrumb-item">
+		<a href="{{ path('admin_dashboard') }}">{% trans %}Dashboard{% endtrans %}</a>
+	</li>
+	<li class="breadcrumb-item">
+		<a href="{{ path('admin_role') }}">{% trans %}Manager Roles{% endtrans %}</a>
+	</li>	
+	<li class="breadcrumb-item active">
+	{% if role.id %}
+	{% trans %}Role Edit{% endtrans %} - {{ role.name }}
+	{% else %}
+	{% trans %}Role Add{% endtrans %}
+	{% endif %}
+	</li>
+</ol>
+
+<div class="mb-3">
+	{{ include('blocks/message.html.twig') }}
+	{{ form(form) }}
+</div>
+{% endblock %}

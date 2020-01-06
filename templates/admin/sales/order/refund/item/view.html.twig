@@ -1,0 +1,101 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}
+	{% trans %}Refund Detail{% endtrans %}
+{% endblock %}
+
+{% block body %}
+
+<ol class="breadcrumb">
+	<li class="breadcrumb-item">
+		<a href="{{ path('admin_dashboard') }}">{% trans %}Dashboard{% endtrans %}</a>
+	</li>
+	<li class="breadcrumb-item">
+		<a href="{{ path('admin_sales_order_refund') }}">{% trans %}Manager Refund{% endtrans %}</a>
+	</li>	
+	<li class="breadcrumb-item active">{% trans %}Refund Detail{% endtrans %}</li>
+</ol>
+
+<div class="mb-3">
+	{{ include('blocks/message.html.twig') }}
+
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="card mb-2">
+				<div class="card-header">
+				# <a href="{{ path('admin_sales_order_view', {'id': item.getParent().id}) }}" title="{% trans %}View Order{% endtrans %}">{{ item.getParent().incrementId }}</a> - <a href="{{ item.getProduct().productUrl }}" target="_blank" title="{% trans %}View Product{% endtrans %}">{{ item.sku }}</a> - {% trans %}Refund Detail{% endtrans %}
+				</div>
+				<div class="card-body">
+					<div class="mt-sm-n2 mr-sm-n2 mb-sm-n2 ml-sm-n2">
+						<span class="d-block">{% trans %}Order Date{% endtrans %}: {{ item.createdAt|date('Y-m-d H:i:s') }}</span>
+						<span class="d-block">{% trans %}Order Status{% endtrans %}: {{ item.getParent().status|order_status|trans }}</span>
+						<span class="d-block">{% trans %}Order Type{% endtrans %}: {{ item.getParent().orderType|order_type|trans }}</span>
+					</div>
+				</div>
+			</div>
+		</div>		
+	</div>
+
+	<div class="row">
+		<div class="col-sm-12 col-md-12">
+			<div class="card mb-2">
+				<div class="card-header d-flex">
+					{% trans %}Items Ordered{% endtrans %}
+				</div>
+				<div class="card-body">
+					<div class="mt-sm-n2 mr-sm-n2 mb-sm-n2 ml-sm-n2">
+					<table class="table table-bordered" width="100%" cellspacing="0">
+						<thead>
+							<tr>
+								<th>{% trans %}Sku{% endtrans %}</th>															
+								<th>{% trans %}Size & Engravings{% endtrans %}</th>								
+								<th>{% trans %}Qty{% endtrans %}</th>															
+								<th>{% trans %}Price{% endtrans %}</th>								
+								<th>{% trans %}Qty Refunded{% endtrans %}</th>
+								<th>{% trans %}Refund Amount{% endtrans %}</th>
+								<th>{% trans %}Refund Created At{% endtrans %}</th>
+								<th>{% trans %}Refund Confirm Created At{% endtrans %}</th>
+								<th>{% trans %}Refund Status{% endtrans %}</th>
+								<th>{% trans %}Track Number{% endtrans %}</th>
+							</tr>
+						</thead>
+						<tbody>
+						{% for refund in item.getRefunds() %}
+							<tr>
+								<td>{{ refund.sku }}</td>
+								<td>{{ item.productOptions|format_options|raw }}</td>
+								<td>
+									<span class="d-block">{% trans %}Ordered{% endtrans %}: {{ item.qtyOrdered }}</span>
+									<span class="d-block">{% trans %}Invoiced{% endtrans %}: {{ item.qtyInvoiced }}</span>
+									<span class="d-block">{% trans %}Canceled{% endtrans %}: {{ item.qtyCanceled }}</span>
+									<span class="d-block">{% trans %}Refunded{% endtrans %}: {{ item.qtyRefunded }}</span>
+									<span class="d-block">{% trans %}Shipped{% endtrans %}: {{ item.qtyShipped }}</span>
+								</td>
+								<td>{{ item.price|format_price(item.getParent().orderCurrencyCode) }}</td>
+								<td>{{ refund.qtyRefunded }}</td>
+								<td>{{ refund.refundAmount|format_price(item.getParent().orderCurrencyCode) }}</td>
+								<td>{{ refund.createdAt|date('Y-m-d H:i:s') }}</td>
+								<td>
+								{%if refund.status %}
+								{{ refund.refundedAt|date('Y-m-d H:i:s') }}
+								{% endif %}
+								</td>
+								<td>{{ refund.status|refund_status|trans }}</td>
+								<td>
+									{% for track in refund.getTracks() %}
+									<span class="d-block">{{ track.carrierName}}: <a href="{{ ApiServices.ShipmentTrack|replace({'%track_number%': track.trackNumber}) }}" target="_blank">{{ track.trackNumber }}</span>
+									{% else %}
+									{% trans %}None{% endtrans %}
+									{% endfor %}
+								</td>								
+							</tr>
+						{% endfor %}
+						</tbody>
+					</table>
+					</div>
+				</div>
+			</div>
+		</div>	
+	</div>	
+</div>
+{% endblock %}

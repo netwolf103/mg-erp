@@ -1,0 +1,234 @@
+<div class="table-responsive" data-filter-response>
+	<div class="dataTables_wrapper">
+		{{ include('blocks/paginate.html.twig', {'numPages': paginator.numPages, 'numResults': paginator.numResults}) }}
+
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="actions">
+					<div class="row">
+						<div class="col-sm-12 col-md-8">
+							<a href="javascript:;" class="select-all">{% trans %}Select All{% endtrans %}</a>
+							<span class="separator">|</span>
+							<a href="javascript:;" class="unselect-all">{% trans %}Unselect All{% endtrans %}</a>
+						</div>
+						<div class="col-sm-12 col-md-4">
+							<div class="handle-action">
+								{% trans %}Actions{% endtrans %}
+								<select class="form-control form-control-sm" name="action">
+									<option></option>
+									<option value="delete">{% trans %}Delete{% endtrans %}</option>
+								</select>
+								<button class="btn btn-dark btn-sm">{% trans %}Submit{% endtrans %}</button>
+							</div>
+						</div>								
+					</div>
+				</div>
+
+				<table class="table table-bordered" width="100%" cellspacing="0">
+					<colgroup>
+						<col>
+						<col width="90">
+						<col width="90">
+						<col width="60">
+						<col width="60">
+						<col>
+						<col width="100">
+						<col width="70">
+						<col width="90">
+						<col width="90">
+						<col>
+						<col>
+						<col width="75">
+						<col>
+						<col>
+						<col width="60">
+						<col>
+						<col width="60">
+					</colgroup>				
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>{% trans %}Increment Id{% endtrans %}</th>
+							<th>{% trans %}Invoice #{% endtrans %}</th>
+							<th>{% trans %}Expedited{% endtrans %}</th>
+							<th>{% trans %}Platform Tracking Number{% endtrans %}</th>
+							<th>{% trans %}Order Type{% endtrans %}</th>
+							<th>{% trans %}Sku{% endtrans %}</th>
+							<th>{% trans %}Images{% endtrans %}</th>
+							<th>{% trans %}Bill to Name{% endtrans %}</th>
+							<th>{% trans %}Ship to Name{% endtrans %}</th>
+							<th>{% trans %}Shipping Amount{% endtrans %}</th>
+							<th>{% trans %}Order Status{% endtrans %}</th>
+							<th>{% trans %}Shipping Method{% endtrans %}</th>
+							<th>{% trans %}Customer Email{% endtrans %}</th>
+							<th>{% trans %}Payment Method{% endtrans %}</th>
+							<th>{% trans %}Suspected Address{% endtrans %}</th>
+							<th>{% trans %}Purchased On{% endtrans %}</th>	
+							<th>{% trans %}Action{% endtrans %}</th>					
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="filter">
+							<td></td>
+							<td><input type="text" name="filters[increment_id]" class="form-control form-control-sm" value="{{ app.request.getSession().get(filterSessionKey)|getFilter('increment_id')}}" /></td>
+							<td></td>
+							<td>
+							<select name="filters[expedited]" class="form-control form-control-sm">
+								<option></option>
+								{% for value, name in {0:'No', 1:'Yes'} %}
+								<option value="{{ value }}"{% if app.request.getSession().get(filterSessionKey)|getFilter('expedited', -1) == value %} selected="selected"{% endif %}>{{ name|trans }}</option>
+								{% endfor %}
+							</select>
+							</td>
+							<td>
+							{% set options = ['No', 'Yes'] %}
+							<select name="filters[tracking_number_to_platform_synced]" class="form-control form-control-sm">
+								<option></option>
+								{% for value,name in options %}
+								<option value="{{ value }}"{% if app.request.getSession().get(filterSessionKey)|getFilter('tracking_number_to_platform_synced', '-1') == value %} selected{% endif %}>{{ name|trans }}</option>
+								{% endfor %}
+							</select>
+							</td>
+							<td>
+							<select name="filters[order_type]" class="form-control form-control-sm">
+								<option></option>
+								{% for value,name in order_type_list() %}
+								<option value="{{ value }}"{% if app.request.getSession().get(filterSessionKey)|getFilter('order_type', '-1') == value %} selected{% endif %}>{{ name|trans }}</option>
+								{% endfor %}
+							</select>
+							</td>					
+							<td><input type="text" name="filters[sku]" class="form-control form-control-sm" value="{{ app.request.getSession().get(filterSessionKey)|getFilter('sku')}}" /></td>					
+							<td></td>					
+							<td><input type="text" name="filters[bill]" class="form-control form-control-sm" value="{{ app.request.getSession().get(filterSessionKey)|getFilter('bill')}}" /></td>					
+							<td><input type="text" name="filters[ship]" class="form-control form-control-sm" value="{{ app.request.getSession().get(filterSessionKey)|getFilter('ship')}}" /></td>					
+							<td></td>														
+							<td>
+							<select name="filters[status]" class="form-control form-control-sm">
+								<option></option>
+								{% for value,name in order_status_list() %}
+								<option value="{{ value }}"{% if app.request.getSession().get(filterSessionKey)|getFilter('status') == value %} selected{% endif %}>{{ name|trans }}</option>
+								{% endfor %}
+							</select>
+							</td>
+							<td>
+							<select name="filters[shipping_method]" class="form-control form-control-sm">
+								<option></option>
+								{% for value,name in shipping_methods %}
+								<option value="{{ value }}"{% if app.request.getSession().get(filterSessionKey)|getFilter('shipping_method') == value %} selected{% endif %}>{{ name|trans }}</option>
+								{% endfor %}
+							</select>
+							</td>					
+							<td><input type="text" name="filters[email]" class="form-control form-control-sm" value="{{ app.request.getSession().get(filterSessionKey)|getFilter('email')}}" /></td>					
+							<td>
+							<select name="filters[payment_method]" class="form-control form-control-sm">
+								<option></option>
+								{% for value,name in payment_method_list() %}
+								<option value="{{ value }}"{% if app.request.getSession().get(filterSessionKey)|getFilter('payment_method') == value %} selected{% endif %}>{{ name|trans }}</option>
+								{% endfor %}
+							</select>							
+							</td>
+							<td>
+							<select name="filters[addressWrong]" class="form-control form-control-sm">
+								<option></option>
+								{% for value, name in {0:'No', 1:'Yes'} %}
+								<option value="{{ value }}"{% if app.request.getSession().get(filterSessionKey)|getFilter('addressWrong', -1) == value %} selected="selected"{% endif %}>{{ name|trans }}</option>
+								{% endfor %}
+							</select>
+							</td>
+							<td>
+								<div class="input-group input-group-sm mb-1">
+									<div class="input-group-prepend">
+										<span class="input-group-text"">{% trans %}From{% endtrans %}:</span>
+									</div>
+									<input data-role="datetime" type="date" name="filters[created_at][from]" class="form-control" value="{{ app.request.getSession().get(filterSessionKey)|getFilter('created_at.from')}}" />
+								</div>
+								<div class="input-group input-group-sm">
+									<div class="input-group-prepend">
+										<span class="input-group-text"">{% trans %}To{% endtrans %}:</span>
+									</div>
+									<input data-role="datetime" type="date" name="filters[created_at][to]" class="form-control" value="{{ app.request.getSession().get(filterSessionKey)|getFilter('created_at.to')}}" />
+								</div>
+							</td>					
+							<td></td>					
+						</tr>
+					{% for order in paginator.results %}
+						<tr>
+							<td><input type="checkbox" name="ids" value="{{ order.id }}" /></td>
+							<td><a href="{{ path('admin_sales_order_view', {'id':order.id}) }}">{{ order.incrementId }}</a></td>
+							<td>
+							{% if order.getInvoice() %}
+							<a href="{{ path('admin_sales_order_invoice_view', {'id':order.getInvoice().id}) }}">{{ order.getInvoice().incrementId }}</a>
+							{% else %}
+							<a href="{{ path('admin_sales_order_order_invoice_pull', {'order_id': order.id}) }}">{% trans %}Pull{% endtrans %}</a>
+							{% endif %}
+							</td>
+							<td>
+							{% if order.expedited %}
+							<a href="{{ path('admin_sales_order_expedited_view', {'id': order.getExpedited().id}) }}" target="_blank" title="{% trans %}Expedited Detail{% endtrans %}"><span class="text-danger">{% trans %}Yes{% endtrans %}</span></a>
+							{% else %}
+							{% trans %}No{% endtrans %}
+							{% endif %}
+							</td>
+							<td>{{ order.trackingNumberToPlatformSynced|order_platform_tracking_status }}</td>
+							<td>{{ order.orderType|order_type|trans }}</td>
+							<td>
+								{% for item in order.items%}
+								<span class="d-block">
+								<a href="{{ path('admin_product_edit', {'id':item.getProduct().id}) }}">{{ item.sku }}</a>
+								</span>
+								<span class="d-block">{{ item.productOptions|format_options|raw }}</span>
+								<span class="d-block text-primary">{% trans %}Qty Ordered{% endtrans %}: <strong>{{ item.qtyOrdered }}</strong></span>
+								<span class="d-block">{% trans %}Qty Invoiced{% endtrans %}: {{ item.qtyInvoiced }}</span>
+								<span class="d-block text-danger">{% trans %}Qty Canceled{% endtrans %}: <strong>{{ item.qtyCanceled }}</strong></span>
+								<span class="d-block text-danger">{% trans %}Qty Refunded{% endtrans %}: <strong>{{ item.qtyRefunded }}</strong></span>
+								<span class="d-block text-success">{% trans %}Qty Shipped{% endtrans %}: <strong>{{ item.qtyShipped }}</strong></span>
+
+								<div class="divider"></div>								
+								{% endfor %}
+							</td>
+							<td align="center">
+								{% for item in order.items%}
+								{% if item.getProduct().getMedia().first() %}
+								<span class="d-block"><img src="{{ item.getProduct().getMedia().first().getUrl()|imagine_filter('thumbnail_60x60') }}" width="60" height="60" class="thumbnail" /></span>
+								{% endif %}
+								{% endfor %}
+							</td>
+							<td>
+								{{ order.getBillingAddress().getFullName() }}
+							</td>
+							<td>
+							{% if order.getShippingAddress() %}
+								{{ order.getShippingAddress().getFullName() }}
+							{% endif %}
+							</td>
+							<td>{{ order.payment.shippingAmount|format_price(order.orderCurrencyCode) }}</td>
+							<td>{{ order.status|order_status|trans }}</td>
+							<td><span class="{{ order.shippingMethod|order_shipping_method_class }}">{{ order.shippingMethod|order_shipping_method|trans }}</span></td>
+							<td>{{ order.customerEmail }}</td>
+							<td>{{ order.payment.method|payment_method }}</td>
+							<td>
+							{% if order.getShippingAddress() and order.getShippingAddress().getIsWrong() %}
+							<span class="d-block text-danger">{{ order.getShippingAddress().getIsWrong()|getYesOrNo|trans }}</span>
+							{% endif %}
+							</td>
+							<td>{{ order.createdAt|date('Y-m-d H:i:s') }}</td>
+							<td class="actions text-center">
+							<a href="{{ path('admin_sales_order_view', {'id': order.id}) }}" class="btn btn-dark btn-sm btn-block">{% trans %}View{% endtrans%}</a>
+							{% if order.expedited is empty %}
+							<a href="{{ path('admin_sales_order_expedited_add', {'id': order.id, '_referer': app.request.uri}) }}" class="btn btn-dark btn-sm btn-block">{% trans %}Expedited{% endtrans%}</a>
+							{% endif %}
+							{% if order.getInvoice() %}
+							<a href="{{ path('admin_sales_order_invoice_print', {'id': order.getInvoice().id}) }}" class="btn btn-dark btn-sm btn-block">{% trans %}Print Invoice{% endtrans%}</a>
+							{% endif %}
+							{% if is_granted(['ROLE_SUPPER_ADMIN']) %}
+							<a href="{{ path('admin_sales_order_remove', {'id': order.id}) }}" class="btn btn-dark btn-sm btn-block">{% trans %}Remove{% endtrans%}</a>
+							{% endif %}
+							</td>
+						</tr>
+					{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

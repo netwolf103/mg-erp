@@ -1,0 +1,65 @@
+<div class="table-responsive" data-filter-response>
+	<div class="dataTables_wrapper">
+		{{ include('blocks/paginate.html.twig', {'numPages': paginator.numPages, 'numResults': paginator.numResults}) }}
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="actions">
+					<div class="row">
+						<div class="col-sm-12 col-md-8">
+							<a href="javascript:;" class="select-all">{% trans %}Select All{% endtrans %}</a>
+							<span class="separator">|</span>
+							<a href="javascript:;" class="unselect-all">{% trans %}Unselect All{% endtrans %}</a>
+						</div>
+						<div class="col-sm-12 col-md-4">
+							<div class="handle-action">
+								{% trans %}Actions{% endtrans %}
+								<select class="form-control form-control-sm" name="action">
+									<option></option>
+									<option value="delete">{% trans %}Delete{% endtrans %}</option>
+								</select>
+								<button class="btn btn-dark btn-sm">{% trans %}Submit{% endtrans %}</button>
+							</div>
+						</div>								
+					</div>
+				</div>					
+				<table class="table table-bordered" width="100%" cellspacing="0">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>{% trans %}Supplier Name{% endtrans %}</th>
+							<th>{% trans %}Contact Name{% endtrans %}</th>
+							<th>{% trans %}Contact Number{% endtrans %}</th>
+							<th>{% trans %}Contact Email{% endtrans %}</th>
+							<th>{% trans %}Contact Address{% endtrans %}</th>
+							<th>{% trans %}Created At{% endtrans %}</th>
+							<th>{% trans %}Updated At{% endtrans %}</th>
+							<th>{% trans %}Action{% endtrans %}</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="filter">
+							<td></td>
+							<td><input type="text" name="filters[username]" class="form-control form-control-sm" value="{{ app.request.getSession().get(filterSessionKey)|getFilter('username')}}" /></td>
+							<td><input type="text" name="filters[email]" class="form-control form-control-sm" value="{{ app.request.getSession().get(filterSessionKey)|getFilter('email')}}" /></td>
+							<td></td>
+							<td></td>						
+						</tr>
+					{% for supplier in paginator.results %}
+						<tr>
+							<td><input type="checkbox" name="ids" value="{{ supplier.id }}" /></td>
+							<td>{{ supplier.name }}</td>
+							<td>{{ supplier.contactName }}</td>
+							<td>{{ supplier.contactNumber }}</td>
+							<td>{{ supplier.contactEmail }}</td>
+							<td>{{ supplier.contactAddress }}</td>
+							<td>{{ supplier.createdAt|date('Y-m-d H:i:s') }}</td>
+							<td>{{ supplier.updatedAt|date('Y-m-d H:i:s') }}</td>
+							<td class="actions text-center"><a href="{{ path('admin_purchase_supplier_edit', {'id': supplier.id}) }}" class="btn btn-dark btn-sm btn-block">{% trans %}Edit{% endtrans%}</a></td>
+						</tr>
+					{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

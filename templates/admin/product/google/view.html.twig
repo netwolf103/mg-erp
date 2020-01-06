@@ -1,0 +1,127 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}{% trans %}Google Product Details{% endtrans %}{% endblock %}
+
+{% block body %}
+<ol class="breadcrumb">
+	<li class="breadcrumb-item">
+		<a href="{{ path('admin_dashboard') }}">{% trans %}Dashboard{% endtrans %}</a>
+	</li>
+	<li class="breadcrumb-item">
+		<a href="{{ path('admin_product') }}">{% trans %}Manager Products{% endtrans %}</a>
+	</li>
+	<li class="breadcrumb-item">
+		<a href="{{ path('admin_product_google') }}">{% trans %}Manager Google Products{% endtrans %}</a>
+	</li>	
+	<li class="breadcrumb-item active">{% trans %}Google Product Details{% endtrans %}</li>
+</ol>
+
+<div class="mb-3">
+	{{ include('blocks/message.html.twig') }}
+	<div class="row">
+		<div class="col-sm-12 col-md-12">
+			<div class="card mb-2">
+				<div class="card-header d-flex">
+					Id # {{ google.getGId() }}
+					<div class="ml-auto actions">
+					<a href="{{ path('admin_product_google_edit', {'id': google.id}) }}" class="btn btn-primary btn-sm">{% trans %}Edit{% endtrans %}</a>			
+					<a href="{{ path('admin_product_google_push', {'id': google.id}) }}" class="btn btn-primary btn-sm">{% trans %}Push To Google{% endtrans %}</a>			
+					<a href="{{ Google.Merchants.help.url.product_data_specification }}" target="_blank" class="btn btn-primary btn-sm">{% trans %}Google Product data specification{% endtrans %}</a>			
+					</div>			
+				</div>
+				<div class="card-body">
+					<div class="mt-sm-n2 mr-sm-n2 mb-sm-n2 ml-sm-n2">
+						<table class="table table-bordered" width="100%" cellspacing="0">
+							<colgroup>
+								<col width="200">
+								<col>
+							</colgroup>							
+							<tbody>
+								<tr>
+									<td>{% trans %}Image{% endtrans %}</td>
+									<td>
+									{% if google.parent.getMedia().first() %}
+									<img src="{{ google.parent.getMedia().first().getUrl()|imagine_filter('thumbnail_80x80') }}" width="80" height="80" class="thumbnail" />
+									{% endif %}
+									</td>
+								</tr>
+								<tr><td>{% trans %}GTitle{% endtrans %}</td><td>{{ google.gTitle }}</td></tr>
+								<tr><td>{% trans %}GDescription{% endtrans %}</td><td>{{ google.gDescription }}</td></tr>
+								<tr><td>{% trans %}GLink{% endtrans %}</td><td>{{ google.gLink }}</td></tr>
+								<tr><td>{% trans %}GImage Link{% endtrans %}</td><td>{{ google.gImageLink }}</td></tr>
+								<tr><td>{% trans %}GAdditional Image Link{% endtrans %}</td><td>{{ google.gAdditionalImageLink }}</td></tr>
+								<tr><td>{% trans %}GAvailability{% endtrans %}</td><td>{{ google.gAvailability }}</td></tr>
+								<tr><td>{% trans %}GAvailability Date{% endtrans %}</td><td>{{ google.gAvailabilityDate }}</td></tr>
+								<tr><td>{% trans %}GCost Of Goods Sold{% endtrans %}</td><td>{{ google.gCostOfGoodsSold }}</td></tr>
+								<tr>
+									<td>{% trans %}GExpiration Date{% endtrans %}</td>
+									<td>
+									{% if google.gExpirationDate %}
+									{{ google.gExpirationDate|date('Y-m-d H:i:s') }}
+									{% endif %}
+									</td>
+								</tr>
+								<tr><td>{% trans %}GPrice{% endtrans %}</td><td>{{ google.gPrice }}</td></tr>
+								<tr><td>{% trans %}GSale Price{% endtrans %}</td><td>{{ google.gSalePrice }}</td></tr>
+								<tr>
+									<td>{% trans %}GSale Price Effective Date{% endtrans %}</td>
+									<td>
+									{% if google.gSalePriceEffectiveDate %}
+									{{ google.gSalePriceEffectiveDate|date('Y-m-d H:i:s') }}
+									{% endif %}
+									</td>
+								</tr>
+								<tr><td>{% trans %}GUnit Price Measure{% endtrans %}</td><td>{{ google.gUnitPriceMeasure }}</td></tr>
+								<tr><td>{% trans %}GUnit Pricing Base Measure{% endtrans %}</td><td>{{ google.gUnitPricingBaseMeasure }}</td></tr>
+								<tr><td>{% trans %}GInstallment{% endtrans %}</td><td>{{ google.gInstallment }}</td></tr>
+								<tr><td>{% trans %}GGoogle Product Category Id{% endtrans %}</td><td>{{ google.gGoogleProductCategoryId }} {% trans with {':link': Google.Merchants.help.url.taxonomy} %}Reference Link: <a href=":link" target="_blank">:link</a>{% endtrans %}</td></tr>
+								<tr><td>{% trans %}GProduct Type{% endtrans %}</td><td>{{ google.gProductType }}</td></tr>
+								<tr><td>{% trans %}Brand{% endtrans %}</td><td>{{ google.gBrand }}</td></tr>
+								<tr><td>{% trans %}Gtin{% endtrans %}</td><td>{{ google.gGtin }}</td></tr>
+								<tr><td>{% trans %}MPN{% endtrans %}</td><td>{{ google.gMpn }}</td></tr>
+								<tr><td>{% trans %}GIdentifier Exists{% endtrans %}</td><td>{{ google.gIdentifierExists|google_yesorno }}</td></tr>
+								<tr><td>{% trans %}GCondition{% endtrans %}</td><td>{{ google.gCondition }}</td></tr>
+								<tr><td>{% trans %}GAdult{% endtrans %}</td><td>{{ google.gAdult|google_yesorno }}</td></tr>
+								<tr><td>{% trans %}GMultipack{% endtrans %}</td><td>{{ google.gMultipack }}</td></tr>
+								<tr><td>{% trans %}GIs Bundle{% endtrans %}</td><td>{{ google.gIsBundle|google_yesorno }}</td></tr>
+								<tr><td>{% trans %}GEnergy Efficiency Class{% endtrans %}</td><td>{{ google.GEnergyEfficiencyClass }}</td></tr>
+								<tr><td>{% trans %}GMin Energy Efficiency Class{% endtrans %}</td><td>{{ google.GMinEnergyEfficiencyClass }}</td></tr>
+								<tr><td>{% trans %}GMax Energy Efficiency Class{% endtrans %}</td><td>{{ google.GMaxEnergyEfficiencyClass }}</td></tr>
+								<tr><td>{% trans %}GAge Group{% endtrans %}</td><td>{{ google.GAgeGroup }}</td></tr>
+								<tr><td>{% trans %}GColor{% endtrans %}</td><td>{{ google.GColor }}</td></tr>
+								<tr><td>{% trans %}GGender{% endtrans %}</td><td>{{ google.GGender }}</td></tr>
+								<tr><td>{% trans %}GMaterial{% endtrans %}</td><td>{{ google.GMaterial }}</td></tr>
+								<tr><td>{% trans %}GPattern{% endtrans %}</td><td>{{ google.GPattern }}</td></tr>
+								<tr><td>{% trans %}GSize{% endtrans %}</td><td>{{ google.GSize }}</td></tr>
+								<tr><td>{% trans %}GSize Type{% endtrans %}</td><td>{{ google.GSizeType }}</td></tr>
+								<tr><td>{% trans %}GSize System{% endtrans %}</td><td>{{ google.GSizeSystem }}</td></tr>
+								<tr><td>{% trans %}GItem Group Id{% endtrans %}</td><td>{{ google.GItemGroupId }}</td></tr>
+								<tr><td>{% trans %}GAds Redirect{% endtrans %}</td><td>{{ google.GAdsRedirect }}</td></tr>
+								<tr><td>{% trans %}GCustom Label 0{% endtrans %}</td><td>{{ google.GCustomLabel0 }}</td></tr>
+								<tr><td>{% trans %}GCustom Label 1{% endtrans %}</td><td>{{ google.GCustomLabel1 }}</td></tr>
+								<tr><td>{% trans %}GCustom Label 2{% endtrans %}</td><td>{{ google.GCustomLabel2 }}</td></tr>
+								<tr><td>{% trans %}GCustom Label 3{% endtrans %}</td><td>{{ google.GCustomLabel3 }}</td></tr>
+								<tr><td>{% trans %}GCustom Label 4{% endtrans %}</td><td>{{ google.GCustomLabel4 }}</td></tr>
+								<tr><td>{% trans %}GPromotion Id{% endtrans %}</td><td>{{ google.GPromotionId }}</td></tr>
+								<tr><td>{% trans %}GExcluded Destination{% endtrans %}</td><td>{{ google.GExcludedDestination }}</td></tr>
+								<tr><td>{% trans %}GIncluded Destination{% endtrans %}</td><td>{{ google.GIncludedDestination }}</td></tr>
+								<tr><td>{% trans %}GShipping{% endtrans %}</td><td>{{ google.GShipping }}</td></tr>
+								<tr><td>{% trans %}GShipping Label{% endtrans %}</td><td>{{ google.GShippingLabel }}</td></tr>
+								<tr><td>{% trans %}GShipping Weight{% endtrans %}</td><td>{{ google.GShippingWeight }}</td></tr>
+								<tr><td>{% trans %}GShipping Length{% endtrans %}</td><td>{{ google.GShippingLength }}</td></tr>
+								<tr><td>{% trans %}GShipping Width{% endtrans %}</td><td>{{ google.GShippingWidth }}</td></tr>
+								<tr><td>{% trans %}GShipping Height{% endtrans %}</td><td>{{ google.GShippingHeight }}</td></tr>
+								<tr><td>{% trans %}GTransit Time Label{% endtrans %}</td><td>{{ google.GTransitTimeLabel }}</td></tr>
+								<tr><td>{% trans %}GMax Handling Time{% endtrans %}</td><td>{{ google.GMaxHandlingTime }}</td></tr>
+								<tr><td>{% trans %}GMin Handling Time{% endtrans %}</td><td>{{ google.GMinHandlingTime }}</td></tr>
+								<tr><td>{% trans %}GTax{% endtrans %}</td><td>{{ google.GTax }}</td></tr>
+								<tr><td>{% trans %}GTax Category{% endtrans %}</td><td>{{ google.GTaxCategory }}</td></tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>	
+	</div>	
+</div>
+{% endblock %}

@@ -1,0 +1,81 @@
+<div class="table-responsive" data-filter-response>
+	<div class="dataTables_wrapper">
+		{{ include('blocks/paginate.html.twig', {'numPages': paginator.numPages, 'numResults': paginator.numResults}) }}
+
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="actions">
+					<div class="row">
+						<div class="col-sm-12 col-md-8">
+							<a href="javascript:;" class="select-all">{% trans %}Select All{% endtrans %}</a>
+							<span class="separator">|</span>
+							<a href="javascript:;" class="unselect-all">{% trans %}Unselect All{% endtrans %}</a>
+						</div>
+						<div class="col-sm-12 col-md-4">
+							<div class="handle-action">
+								{% trans %}Actions{% endtrans %}
+								<select class="form-control form-control-sm" name="action">
+									<option></option>
+									<option value="delete">{% trans %}Delete{% endtrans %}</option>
+								</select>
+								<button class="btn btn-dark btn-sm">{% trans %}Submit{% endtrans %}</button>
+							</div>
+						</div>								
+					</div>
+				</div>
+
+				<table class="table table-bordered" width="100%" cellspacing="0">
+					<colgroup>
+						<col width="20">
+						<col width="100">
+						<col width="200">
+						<col width="200">
+						<col width="200">
+						<col width="200">
+						<col>
+					</colgroup>				
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>{% trans %}Increment Id{% endtrans %}</th>
+							<th>{% trans %}Transaction Id{% endtrans %}</th>
+							<th>{% trans %}Parent Transaction Id{% endtrans %}</th>
+							<th>{% trans %}Payment Method{% endtrans %}</th>
+							<th>{% trans %}Transaction Type{% endtrans %}</th>
+							<th>{% trans %}Created At{% endtrans %}</th>					
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="filter">
+							<td></td>
+							<td><input type="text" name="filters[increment_id]" class="form-control form-control-sm" value="{{ app.request.getSession().get(filterSessionKey)|getFilter('increment_id')}}" /></td>
+							<td><input type="text" name="filters[txn_id]" class="form-control form-control-sm" value="{{ app.request.getSession().get(filterSessionKey)|getFilter('txn_id')}}" /></td>
+							<td><input type="text" name="filters[parent_txn_id]" class="form-control form-control-sm" value="{{ app.request.getSession().get(filterSessionKey)|getFilter('parent_txn_id')}}" /></td>				
+							<td></td>					
+							<td>
+							<select name="filters[txn_type]" class="form-control form-control-sm">
+								<option></option>
+								{% for value,name in payment_transaction_type_list() %}
+								<option value="{{ value }}"{% if app.request.getSession().get(filterSessionKey)|getFilter('txn_type') == value %} selected{% endif %}>{{ name }}</option>
+								{% endfor %}
+							</select>
+							</td>					
+							<td></td>									
+						</tr>
+					{% for transaction in paginator.results %}
+						<tr>
+							<td><input type="checkbox" name="ids" value="{{ transaction.id }}" /></td>
+							<td><a href="{{ path('admin_sales_order_view', {'id':transaction.getParentOrder().id}) }}">{{ transaction.getParentOrder().incrementId }}</a></td>
+							<td>{{ transaction.txnId }}</td>
+							<td>{{ transaction.parentTxnId }}</td>
+							<td>{{ transaction.getParentOrder().payment.method|payment_method }}</td>
+							<td>{{ transaction.txnType|capitalize }}</td>
+							<td>{{ transaction.createdAt|date('Y-m-d H:i:s') }}</td>
+						</tr>
+					{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

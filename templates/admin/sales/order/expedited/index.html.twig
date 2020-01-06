@@ -1,0 +1,20 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}{% trans %}Manager Invoice{% endtrans %}{% endblock %}
+
+{% block body %}
+<ol class="breadcrumb">
+	<li class="breadcrumb-item">
+		<a href="{{ path('admin_dashboard') }}">{% trans %}Dashboard{% endtrans %}</a>
+	</li>
+	<li class="breadcrumb-item">
+		<a href="{{ path('admin_sales_order') }}">{% trans %}Manager Orders{% endtrans %}</a>
+	</li>	
+	<li class="breadcrumb-item active">{% trans %}Expedited Order{% endtrans %}</li>
+</ol>
+
+<div class="mb-3">
+	{{ include('blocks/message.html.twig') }}
+	{{ include('admin/sales/order/expedited/blocks/list.html.twig') }}
+</div>
+{% endblock %}

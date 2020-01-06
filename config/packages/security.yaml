@@ -1,0 +1,83 @@
+security:
+    encoders:
+        App\Entity\User:
+            algorithm: bcrypt
+
+    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    providers:
+        # used to reload user from session & other features (e.g. switch_user)
+        app_user_provider:
+            entity:
+                class: App\Entity\User
+                property: username
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            anonymous: true
+            guard:
+                authenticators:
+                    - App\Security\LoginFormAuthenticator
+            logout:
+                path: security_logout
+
+            # activate different ways to authenticate
+            # https://symfony.com/doc/current/security.html#firewalls-authentication
+
+            # https://symfony.com/doc/current/security/impersonating_user.html
+            # switch_user: true
+    role_hierarchy:
+        ROLE_MANAGE_GOOGLE: [ROLE_USER]
+        ROLE_MANAGE_PRODUCT: [ROLE_MANAGE_GOOGLE]
+
+        ROLE_SERVICE: [ROLE_MANAGE_PRODUCT]
+        ROLE_SHIPPER: [ROLE_MANAGE_PRODUCT]
+        ROLE_MARKET: [ROLE_MANAGE_PRODUCT]
+        ROLE_VENDOR: [ROLE_MANAGE_PRODUCT]
+
+        ROLE_ADMIN: [ROLE_SERVICE, ROLE_SHIPPER, ROLE_MARKET, ROLE_VENDOR]
+        ROLE_SUPPER_ADMIN: [ROLE_ADMIN]
+
+    # Easy way to control access for large sections of your site
+    # Note: Only the *first* access control that matches will be used
+    access_control:
+        # - { path: ^/admin, roles: ROLE_ADMIN }
+        # - { path: ^/profile, roles: ROLE_USER }
+        - {path: ^/admin/dashboard, roles: ROLE_USER}
+
+        - {path: ^/admin/product/google, roles: [ROLE_MANAGE_GOOGLE]}
+
+        - {path: shipment/import$, roles: ROLE_SHIPPER}
+        - {path: shipment/add$, roles: ROLE_SHIPPER}
+
+        - {path: ^/admin/product/purchase/\d+/order/add, roles: [ROLE_ADMIN]}
+        - {path: ^/admin/product/purchase/order/edit, roles: [ROLE_ADMIN]}
+        - {path: ^/admin/product/purchase/order/remove, roles: [ROLE_ADMIN]}
+        - {path: ^/admin/product/purchase, roles: [ROLE_SHIPPER]}
+
+        - {path: admin/sales/order/remove/\d+, roles: ROLE_SUPPER_ADMIN}
+
+        - {path: ^/admin/sales/order/refund/\d+/(.*)$, roles: ROLE_ADMIN}
+        - {path: ^/admin/sales/order/refund$, roles: ROLE_SERVICE}
+
+        - {path: admin/sales/order/\d+/address/edit/\d+, roles: ROLE_SERVICE}
+        - {path: admin/sales/order/\d+/shipping/method/edit, roles: ROLE_SERVICE}
+        - {path: admin/sales/order/\d+/item/\d+/edit, roles: ROLE_SERVICE}
+        - {path: admin/sales/order/\d+/item/\d+/cancel, roles: ROLE_SERVICE}
+        - {path: admin/sales/order/\d+/item/\d+/refund, roles: ROLE_SERVICE}
+        - {path: admin/sales/order/\d+/item/\d+/remove, roles: ROLE_SERVICE}
+        - {path: admin/sales/order/\d+/item/\d+/add, roles: ROLE_SERVICE}
+        - {path: admin/sales/order/hold/\d+, roles: ROLE_SERVICE}
+        - {path: admin/sales/order/unhold/\d+, roles: ROLE_SERVICE}
+        - {path: ^/admin/sales/order/\d+/related, roles: ROLE_SERVICE}
+        - {path: ^/admin/sales/order/\d+/shipping, roles: ROLE_SERVICE}
+
+        - {path: ^/admin/sales/order/invoice, roles: [ROLE_SERVICE, ROLE_SHIPPER]}
+        - {path: ^/admin/sales/order/shipment, roles: [ROLE_SERVICE, ROLE_SHIPPER]}
+        - {path: ^/admin/sales/order, roles: [ROLE_SERVICE, ROLE_SHIPPER, ROLE_MARKET]}
+
+        - {path: ^/admin/product, roles: [ROLE_SERVICE, ROLE_SHIPPER, ROLE_MARKET]}
+
+        - {path: ^/admin/supper, roles: ROLE_SUPPER_ADMIN}
+        - {path: ^/admin, roles: ROLE_ADMIN}

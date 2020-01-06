@@ -1,0 +1,156 @@
+<div class="table-responsive" data-filter-response>
+	<div class="dataTables_wrapper">
+		{{ include('blocks/paginate.html.twig', {'numPages': paginator.numPages, 'numResults': paginator.numResults}) }}
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="actions">
+					<div class="row">
+						<div class="col-sm-12 col-md-8">
+							<a href="javascript:;" class="select-all">{% trans %}Select All{% endtrans %}</a>
+							<span class="separator">|</span>
+							<a href="javascript:;" class="unselect-all">{% trans %}Unselect All{% endtrans %}</a>
+						</div>
+						<div class="col-sm-12 col-md-4">
+							<div class="handle-action">
+								{% trans %}Actions{% endtrans %}
+								<select class="form-control form-control-sm" name="action">
+									<option></option>
+									<option value="delete">{% trans %}Delete{% endtrans %}</option>
+								</select>
+								<button class="btn btn-dark btn-sm">{% trans %}Submit{% endtrans %}</button>
+							</div>
+						</div>								
+					</div>
+				</div>					
+				<table class="table table-bordered" width="100%" cellspacing="0">
+					<colgroup>
+						<col>
+						<col>
+						<col width="90">
+						<col width="150">
+						<col width="90">
+						<col width="90">
+						<col width="90">
+						<col width="90">
+						<col width="90">
+						<col>
+						<col>
+						<col>
+						<col>
+						<col width="60">
+					</colgroup>				
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>{% trans %}Image{% endtrans %}</th>
+							<th>{% trans %}Sku{% endtrans %}</th>
+							<th>{% trans %}Items{% endtrans %}</th>
+							<th>{% trans %}Status{% endtrans %}</th>
+							<th>{% trans %}Shipping Amount{% endtrans %}</th>
+							<th>{% trans %}Qty Ordered{% endtrans %}</th>
+							<th>{% trans %}Subtotal{% endtrans %}</th>
+							<th>{% trans %}Grand Total{% endtrans %}</th>
+							<th>{% trans %}Order Numbers{% endtrans %}</th>
+							<th>{% trans %}Track Number{% endtrans %}</th>
+							<th>{% trans %}Created At{% endtrans %}</th>
+							<th>{% trans %}Updated At{% endtrans %}</th>
+							<th>{% trans %}Action{% endtrans %}</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="filter">
+							<td></td>
+							<td></td>
+							<td><input type="text" name="filters[sku]" class="form-control form-control-sm" value="{{ app.request.getSession().get(filterSessionKey)|getFilter('sku')}}" /></td>
+							<td></td>
+							<td>
+							<select name="filters[status]" class="form-control form-control-sm">
+								<option></option>
+								{% for value,name in order_purchase_status_list() %}
+								<option value="{{ value }}"{% if app.request.getSession().get(filterSessionKey)|getFilter('order_type', '-1') == value %} selected{% endif %}>{{ name|trans }}</option>
+								{% endfor %}
+							</select>							
+							</td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td><input type="text" name="filters[order_number]" class="form-control form-control-sm" value="{{ app.request.getSession().get(filterSessionKey)|getFilter('order_number')}}" /></td>
+							<td><input type="text" name="filters[track_number]" class="form-control form-control-sm" value="{{ app.request.getSession().get(filterSessionKey)|getFilter('track_number')}}" /></td>
+							<td>
+								<div class="input-group input-group-sm mb-1">
+									<div class="input-group-prepend">
+										<span class="input-group-text"">{% trans %}From{% endtrans %}:</span>
+									</div>
+									<input data-role="datetime" type="date" name="filters[created_at][from]" class="form-control" value="{{ app.request.getSession().get(filterSessionKey)|getFilter('created_at.from')}}" />
+								</div>
+								<div class="input-group input-group-sm">
+									<div class="input-group-prepend">
+										<span class="input-group-text"">{% trans %}To{% endtrans %}:</span>
+									</div>
+									<input data-role="datetime" type="date" name="filters[created_at][to]" class="form-control" value="{{ app.request.getSession().get(filterSessionKey)|getFilter('created_at.to')}}" />
+								</div>
+							</td>
+							<td>
+								<div class="input-group input-group-sm mb-1">
+									<div class="input-group-prepend">
+										<span class="input-group-text"">{% trans %}From{% endtrans %}:</span>
+									</div>
+									<input data-role="datetime" type="date" name="filters[updated_at][from]" class="form-control" value="{{ app.request.getSession().get(filterSessionKey)|getFilter('updated_at.from')}}" />
+								</div>
+								<div class="input-group input-group-sm">
+									<div class="input-group-prepend">
+										<span class="input-group-text"">{% trans %}To{% endtrans %}:</span>
+									</div>
+									<input data-role="datetime" type="date" name="filters[updated_at][to]" class="form-control" value="{{ app.request.getSession().get(filterSessionKey)|getFilter('updated_at.to')}}" />
+								</div>
+							</td>
+							<td></td>						
+						</tr>
+					{% for order in paginator.results %}
+						<tr>
+							<td><input type="checkbox" name="ids" value="{{ order.id }}" /></td>
+							<td>
+							{% if order.parent.getMedia().first() %}
+							<img src="{{ order.parent.getMedia().first().getUrl()|imagine_filter('thumbnail_80x80') }}" width="80" height="80" class="thumbnail" />
+							{% endif %}
+							</td>
+							<td>{{ order.parent.sku }}</td>
+							<td>
+							{% for item in order.getItems() %}
+							<span class="d-block">{% trans %}Ring Size{% endtrans %}: {{ item.size }}</span>
+							{% if item.size %}
+							{% endif %}
+							<span class="d-block">{% trans %}Unit Price{% endtrans %}: {{ item.price|format_price('CNY') }}</span>
+							<span class="d-block">{% trans %}Purchase Quantity{% endtrans %}: {{ item.qtyOrdered }}</span>
+							<span class="d-block">{% trans %}Subtotal{% endtrans %}: {{ item.subtotal|format_price('CNY') }}</span>
+							<div class="divider"></div>
+							{% endfor %}
+							</td>
+							<td>{{ order.status|order_purchase_status|trans }}</td>
+							<td>{{ order.shippingAmount|format_price('CNY') }}</td>
+							<td>{{ order.totalQtyOrdered }}</td>
+							<td>{{ order.subtotal|format_price('CNY') }}</td>
+							<td>{{ order.grandTotal|format_price('CNY') }}</td>
+							<td>{{ order.sourceOrderNumber }}</td>
+							<td><a href="{{ ApiServices.kuaidi100|replace({'%track_number%': order.trackNumber}) }}" target="_blank">{{ order.trackNumber }}</td>
+							<td>{{ order.createdAt|date('Y-m-d H:i:s') }}</td>
+							<td>{{ order.updatedAt|date('Y-m-d H:i:s') }}</td>
+							<td class="actions text-center">
+							<a href="{{ path('admin_product_purchase_order_view', {'id': order.id}) }}" class="btn btn-dark btn-sm btn-block">{% trans %}View{% endtrans%}</a>
+							{% if order.isComplete() == false %}
+							{% if is_granted(['ROLE_SHIPPER']) %}
+							<a href="{{ path('admin_product_purchase_order_edit', {'id': order.id}) }}" class="btn btn-dark btn-sm btn-block">{% trans %}Edit{% endtrans%}</a>
+							<a href="{{ path('admin_product_purchase_order_remove', {'id': order.id}) }}" class="btn btn-dark btn-sm btn-block">{% trans %}Remove{% endtrans%}</a>
+							{% endif %}
+							<a href="{{ path('admin_product_purchase_order_receipt', {'id': order.id}) }}" class="btn btn-dark btn-sm btn-block">{% trans %}Receipt{% endtrans%}</a>
+							{% endif %}
+							</td>
+						</tr>
+					{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

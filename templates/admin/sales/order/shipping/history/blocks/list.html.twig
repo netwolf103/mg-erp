@@ -1,0 +1,70 @@
+<div class="table-responsive" data-filter-response>
+	<div class="dataTables_wrapper">
+		{{ include('blocks/paginate.html.twig', {'numPages': paginator.numPages, 'numResults': paginator.numResults}) }}
+
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="actions">
+					<div class="row">
+						<div class="col-sm-12 col-md-8">
+							<a href="javascript:;" class="select-all">{% trans %}Select All{% endtrans %}</a>
+							<span class="separator">|</span>
+							<a href="javascript:;" class="unselect-all">{% trans %}Unselect All{% endtrans %}</a>
+						</div>
+						<div class="col-sm-12 col-md-4">
+							<div class="handle-action">
+								{% trans %}Actions{% endtrans %}
+								<select class="form-control form-control-sm" name="action">
+									<option></option>
+									<option value="delete">{% trans %}Delete{% endtrans %}</option>
+								</select>
+								<button class="btn btn-dark btn-sm">{% trans %}Submit{% endtrans %}</button>
+							</div>
+						</div>								
+					</div>
+				</div>
+
+				<table class="table table-bordered" width="100%" cellspacing="0">
+					<colgroup>
+						<col>
+						<col>
+						<col width="300">
+						<col width="60">
+						<col>
+						<col width="160">
+					</colgroup>
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>{% trans %}Order #{% endtrans %}</th>
+							<th>{% trans %}Shipping Method{% endtrans %}</th>
+							<th>{% trans %}Amount Shipping{% endtrans %}</th>	
+							<th>{% trans %}Shipping History{% endtrans %}</th>	
+							<th>{% trans %}Created At{% endtrans %}</th>					
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="filter">
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>					
+							<td></td>					
+							<td></td>															
+						</tr>					
+					{% for history in paginator.results %}
+						<tr>
+							<td><input type="checkbox" name="ids" value="{{ history.id }}" /></td>
+							<td>{{ history.getParent().incrementId  }}</td>
+							<td>{{ history.description }}</td>
+							<td>{{ history.amount }}</td>
+							<td>{{ history.comment }}</td>
+							<td>{{ history.createdAt|date('Y-m-d H:i:s') }}</td>
+						</tr>
+					{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,38 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}
+	{% if track.id %}
+	{% trans %}Track Edit{% endtrans %} 
+	{% else %}
+	{% trans %}Track Add{% endtrans %}
+	{% endif %}
+{% endblock %}
+
+{% block body %}
+
+<ol class="breadcrumb">
+	<li class="breadcrumb-item">
+		<a href="{{ path('admin_dashboard') }}">{% trans %}Dashboard{% endtrans %}</a>
+	</li>
+	<li class="breadcrumb-item">
+		<a href="{{ path('admin_sales_order') }}">{% trans %}Manager Orders{% endtrans %}</a>
+	</li>
+	{% if order %}
+	<li class="breadcrumb-item">
+		<a href="{{ path('admin_sales_order_view', {'id': order.id}) }}">{% trans %}Order Details{% endtrans %}</a>
+	</li>
+	{% endif %}		
+	<li class="breadcrumb-item active">
+	{% if track.id %}
+	{% trans %}Track Edit{% endtrans %}
+	{% else %}
+	{% trans %}Track Add{% endtrans %}
+	{% endif %}
+	</li>
+</ol>
+
+<div class="mb-3">
+	{{ include('blocks/message.html.twig') }}
+	{{ form(form) }}
+</div>
+{% endblock %}

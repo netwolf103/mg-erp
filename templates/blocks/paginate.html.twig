@@ -1,0 +1,40 @@
+<div class="paginate">
+	<div class="row">
+		<div class="col-sm-12 col-md-9">
+			<div class="pager">
+				{% trans %}Number{% endtrans %}
+				{% if paginator.hasPreviousPage%}
+				<a class="arrow" href="{{ path(app.request.get('_route'),  app.request.get('_route_params')|merge({'page': paginator.previousPage})) }}"><i class="fa fa-angle-left"></i></a>
+				{% endif %}
+				<input type="text" class="form-control form-control-sm page" min="1" max="{{ numPages }}" data-role="pages" value="{{ paginator.currentPage }}" data-url="{{ url(app.request.get('_route'), app.request.get('_route_params')|merge({'page': 1})) }}" />
+				{% if paginator.hasNextPage%}
+				<a class="arrow" href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'page': paginator.nextPage})) }}"><i class="fa fa-angle-right"></i></a>
+				{% endif %}
+				{% trans %}Page{% endtrans %}, 
+
+				{% trans %}of %numPages% pages{% endtrans %}
+
+				, {% trans %}Total %numResults% records found{% endtrans %}
+
+				<span class="separator">|</span>
+
+				View
+				<select class="form-control form-control-sm" id="select-limit" action-xhr="{{ app.request.getRequestUri() }}">
+					{% for i in range(10, 100, 20) %}
+					<option value="{{ i }}"{% if i == app.request.getSession().get('Page.Limit', 20) %} selected="selected"{% endif %}>{{ i }}</option>
+					{% endfor %}
+				</select>
+				per page
+
+			</div>
+		</div>
+		<div class="col-sm-12 col-md-3">
+			<div class="filter-action">
+			<form method="post" action="{{ url(app.request.get('_route'), app.request.get('_route_params')|merge({'page': 1})) }}">
+				<button class="btn btn-dark btn-sm" id="resetFilter" type="button">{% trans %}Reset Filter{% endtrans %}</button>
+				<button class="btn btn-dark btn-sm" id="doFilter" type="button">{% trans %}Search{% endtrans %}</button>
+			</form>
+			</div>
+		</div>
+	</div>
+</div>

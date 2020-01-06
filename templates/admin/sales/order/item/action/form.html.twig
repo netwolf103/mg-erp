@@ -1,0 +1,40 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}
+	{{ title|trans }}
+{% endblock %}
+
+{% block body %}
+
+<ol class="breadcrumb">
+	<li class="breadcrumb-item">
+		<a href="{{ path('admin_dashboard') }}">{% trans %}Dashboard{% endtrans %}</a>
+	</li>
+	<li class="breadcrumb-item">
+		<a href="{{ path('admin_sales_order') }}">{% trans %}Manager Orders{% endtrans %}</a>
+	</li>
+	<li class="breadcrumb-item">
+		<a href="{{ path('admin_sales_order_view', {'id': order.id}) }}">{% trans %}Order Details{% endtrans %}</a>
+	</li>		
+	<li class="breadcrumb-item active">{{ title|trans }}</li>
+</ol>
+
+<div class="mb-3">
+	{{ include('blocks/message.html.twig') }}
+	<div class="card mb-2">
+		<div class="card-header">
+		# {{ order.incrementId}} - {{ item.sku }}
+		</div>
+		<div class="card-body">
+			<div class="mt-sm-n2 mr-sm-n2 mb-sm-n2 ml-sm-n2">
+			<span class="d-block">{% trans %}Qty Ordered{% endtrans %}: {{ item.qtyOrdered }}</span>
+			<span class="d-block">{% trans %}Qty Invoiced{% endtrans %}: {{ item.qtyInvoiced }}</span>
+			<span class="d-block">{% trans %}Qty Shipped{% endtrans %}: {{ item.qtyShipped }}</span>
+			<span class="d-block">{% trans %}Qty Canceled{% endtrans %}: {{ item.qtyCanceled }}</span>
+			<span class="d-block">{% trans %}Qty Refunded{% endtrans %}: {{ item.qtyRefunded }}</span>
+			</div>
+		</div>
+	</div>
+	{{ form(form) }}
+</div>
+{% endblock %}

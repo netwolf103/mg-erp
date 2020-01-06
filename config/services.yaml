@@ -1,0 +1,125 @@
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+    free_shipping_minimum_amount: 59
+
+    currency_rates:
+        USD: 1
+        AUD: 1.4588
+        CAD: 1.3610
+        EUR: 0.8738
+        GBP: 0.7848
+        MXN: 19.6420
+        NZD: 1.4908
+        PHP: 52.5000
+        SGD: 1.3621
+
+    shipping_methods:
+        freeshipping_freeshipping: Standard Shipping
+        flatrate_flatrate: DHL
+
+    payment_methods:
+        paypal_express: Paypal Express
+        oceanpayment_csecreditcard: Oceanpayment
+        tracking_apis:
+            paypal_express: App\Api\Paypal\Reset\Tracking
+            oceanpayment_csecreditcard: App\Api\Oceanpayment\Tracking
+    tracking:
+        dhl:
+            site: https://www.dhl.com/
+            carrier: dhl
+        yunexpress:
+            site: http://www.yuntrack.com
+            carrier: cn_other
+        eub:
+            site: http://www.ems.com.cn
+            carrier: cn_ems
+        ems:
+            site: http://www.ems.com.cn
+            carrier: cn_ems                           
+
+    upload_path: 'public/media'
+    upload_path_catalog: '%upload_path%/catalog/product'
+    upload_path_catalog_local: '%upload_path_catalog%/local'
+
+    uploader_directory: '%kernel.project_dir%/%upload_path%'
+    uploader_directory_catalog: '%uploader_directory%/catalog/product'
+    uploader_directory_catalog_local: '%uploader_directory_catalog%/local'
+    
+    ApiServices:
+        ShipmentTrack: 'https://t.17track.net/en#nums=%%track_number%%'
+        IpSearch: 'http://ip-api.com/'
+        kuaidi100: 'https://m.kuaidi100.com/result.jsp?nu=%%track_number%%'
+        Nominatim: 'https://nominatim.openstreetmap.org'
+        
+    Google:
+        Merchants:
+            help:
+                url:
+                    product_data_specification: https://support.google.com/merchants/answer/7052112
+                    taxonomy: https://www.google.com/basepages/producttype/taxonomy-with-ids.zh-CN.txt
+
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+    # makes classes in src/ available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
+    App\:
+        resource: '../src/*'
+        exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
+
+    # controllers are imported separately to make sure services can be injected
+    # as action arguments even if you don't extend any base controller class
+    App\Controller\:
+        resource: '../src/Controller'
+        tags: ['controller.service_arguments']       
+
+    # Event subscriber.
+    App\EventSubscriber\Sales\Order\ItemSubscriber:
+        tags:
+            - { name: doctrine.event_subscriber }
+
+    App\EventSubscriber\LocaleSubscriber:
+        arguments: ['%kernel.default_locale%']
+
+    App\EventSubscriber\Api\AuthorizationSubscriber:
+        arguments: ['kernel.controller']                                    
+
+    # Event Listener
+    App\EventListener\ORM\EntityListener:
+        tags:
+            - { name: doctrine.event_listener, event: preUpdate }
+
+    App\EventListener\ControllerListener:
+        tags:
+            - { name: kernel.event_listener, event: controller.data.verify }
+
+    App\EventListener\Sales\Order\Shipment\TrackListener:
+        tags:
+            - { name: kernel.event_listener, event: sales.order.shipment.track.preadd }            
+
+    App\EventListener\Sales\Order\AddressListener:
+        tags:
+            - { name: kernel.event_listener, event: sales.order.address.update }
+
+    App\EventListener\Sales\Order\ItemListener:
+        tags:
+            - { name: kernel.event_listener, event: sales.order.item.update }                                               
+            - { name: kernel.event_listener, event: sales.order.item.new }                                               
+            - { name: kernel.event_listener, event: sales.order.item.remove }                                               
+            - { name: kernel.event_listener, event: sales.order.item.cancel }                                               
+            - { name: kernel.event_listener, event: sales.order.item.refund } 
+            - { name: kernel.event_listener, event: sales.order.item.exchange } 
+
+    App\EventListener\Sales\Order\ShippingListener:
+        tags:
+            - { name: kernel.event_listener, event: sales.order.shipping.update }                                                          
+
+    # add more service definitions when explicit configuration is needed
+    # please note that last definitions always *replace* previous ones

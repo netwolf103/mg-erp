@@ -1,0 +1,176 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}{% trans %}Invoice Details{% endtrans %}{% endblock %}
+
+{% block body %}
+<ol class="breadcrumb">
+	<li class="breadcrumb-item">
+		<a href="{{ path('admin_dashboard') }}">{% trans %}Dashboard{% endtrans %}</a>
+	</li>
+	<li class="breadcrumb-item">
+		<a href="{{ path('admin_sales_order') }}">{% trans %}Manager Orders{% endtrans %}</a>
+	</li>	
+	<li class="breadcrumb-item">
+		<a href="{{ path('admin_sales_order_invoice') }}">{% trans %}Manager Invoice{% endtrans %}</a>
+	</li>
+	<li class="breadcrumb-item active">{% trans %}Invoice Details{% endtrans %}</li>
+</ol>
+
+<div class="mb-3">
+	{{ include('blocks/message.html.twig') }}
+	<div class="row">
+		<div class="col-sm-12 col-md-6">
+			<div class="card mb-2">
+				<div class="card-header d-flex">
+					Order # <a href="{{ path('admin_sales_order_view', {'id': order.id}) }}">{{ order.incrementId }}</a> - Invoice # {{ invoice.incrementId }}
+					<div class="ml-auto actions">
+					<a href="{{ path('admin_sales_order_invoice_print', {'id': invoice.id}) }}">{% trans %}Print Invoice{% endtrans %}</a>
+					</div>
+				</div>
+				<div class="card-body">
+					<div class="mt-sm-n2 mr-sm-n2 mb-sm-n2 ml-sm-n2">
+						<span class="d-block">{% trans %}Order Date{% endtrans %}: {{ order.createdAt|date('Y-m-d H:i:s') }}</span>
+						<span class="d-block">{% trans %}Order Status{% endtrans %}: {{ order.status|order_status|trans }}</span>
+						<span class="d-block">{% trans %}Order Type{% endtrans %}: {{ order.orderType|order_type|trans }}</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-12 col-md-6">
+			<div class="card mb-2">
+				<div class="card-header">
+					{% trans %}Customer Information{% endtrans %}
+				</div>
+				<div class="card-body">
+					<div class="mt-sm-n2 mr-sm-n2 mb-sm-n2 ml-sm-n2">
+						<span class="d-block">{% trans %}Email{% endtrans %}: {{ order.customerEmail }}</span>
+						<span class="d-block">{% trans %}Placed from IP{% endtrans %}: {{ order.remoteIp }}</span>
+					</div>
+				</div>
+			</div>
+		</div>		
+	</div>
+
+	<div class="row">
+		<div class="col-sm-12 col-md-6">
+			<div class="card mb-2">
+				<div class="card-header">
+					{% trans %}Billing Address{% endtrans %}			
+				</div>
+				<div class="card-body">
+					{% if order.getBillingAddress() %}
+					<div class="mt-sm-n2 mr-sm-n2 mb-sm-n2 ml-sm-n2">
+						<span class="d-block">{% trans %}Contact{% endtrans %}: {{ order.getBillingAddress().firstname }} {{ order.getBillingAddress().lastname }}</span>
+						<span class="d-block">{% trans %}Street{% endtrans %}: {{ order.getBillingAddress().street }}</span>
+						<span class="d-block">{% trans %}City, Region, Postcode{% endtrans %}: {{ order.getBillingAddress().city }}, {{ order.getBillingAddress().region }}, {{ order.getBillingAddress().postcode }}</span>
+						<span class="d-block">{% trans %}Country{% endtrans %}: {{ order.getBillingAddress().countryId()|country('en') }} ({{ order.getBillingAddress().countryId|country }})</span>
+						<span class="d-block">{% trans %}Telephone{% endtrans %}: {{ order.getBillingAddress().telephone }}</span>
+					</div>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-12 col-md-6">
+			<div class="card mb-2">
+				<div class="card-header">
+					{% trans %}Shipping Address{% endtrans %}
+				</div>
+				<div class="card-body">
+					{% if order.getShippingAddress() %}
+					<div class="mt-sm-n2 mr-sm-n2 mb-sm-n2 ml-sm-n2">
+						<span class="d-block">{% trans %}Contact{% endtrans %}: {{ order.getShippingAddress().firstname }} {{ order.getShippingAddress().lastname }}</span>
+						<span class="d-block">{% trans %}Street{% endtrans %}: {{ order.getShippingAddress().street }}</span>
+						<span class="d-block">{% trans %}City, Region, Postcode{% endtrans %}: {{ order.getShippingAddress().city }}, {{ order.getShippingAddress().region }}, {{ order.getShippingAddress().postcode }}</span>
+						<span class="d-block">{% trans %}Country{% endtrans %}: {{ order.getShippingAddress().countryId|country('en') }} ({{ order.getShippingAddress().countryId|country }})</span>
+						<span class="d-block">{% trans %}Telephone{% endtrans %}: {{ order.getShippingAddress().telephone }}</span>
+					</div>		
+					{% endif %}			
+				</div>
+			</div>
+		</div>		
+	</div>
+
+	<div class="row">
+		<div class="col-sm-12 col-md-6">
+			<div class="card mb-2">
+				<div class="card-header">
+					{% trans %}Payment Information{% endtrans %}
+				</div>
+				<div class="card-body">
+					<div class="mt-sm-n2 mr-sm-n2 mb-sm-n2 ml-sm-n2">
+						<span class="d-block">{% trans %}Payment Method{% endtrans %}: {{ order.getPayment().method }}</span>
+						<span class="d-block">{% trans %}Amount Ordered{% endtrans %}: {{ order.getPayment().baseAmountOrdered|format_price('$') }}</span>
+						<span class="d-block">{% trans %}Amount Shipping{% endtrans %}: {{ order.getPayment().baseShippingAmount|format_price('$') }}</span>
+					</div>						
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-12 col-md-6">
+			<div class="card mb-2">
+				<div class="card-header">
+					{% trans %}Shipping & Handling Information{% endtrans %}
+				</div>
+				<div class="card-body">
+					<div class="mt-sm-n2 mr-sm-n2 mb-sm-n2 ml-sm-n2">
+						<span class="d-block">{% trans %}Shipping Method{% endtrans %}: {{ order.shippingDescription }}</span>
+						<span class="d-block">{% trans %}Shipping Amount{% endtrans %}: {{ order.shippingAmount|format_price(order.orderCurrencyCode) }}</span>
+					</div>						
+				</div>
+			</div>
+		</div>		
+	</div>
+	<div class="row">
+		<div class="col-sm-12 col-md-12">
+			<div class="card mb-2">
+				<div class="card-header">
+					{% trans %}Items Ordered{% endtrans %}
+				</div>
+				<div class="card-body">
+					<div class="mt-sm-n2 mr-sm-n2 mb-sm-n2 ml-sm-n2">
+					<table class="table table-bordered" width="100%" cellspacing="0">
+						<thead>
+							<tr>
+								<th>{% trans %}Product Name{% endtrans %}</th>
+								<th>{% trans %}Sku{% endtrans %}</th>								
+								<th>{% trans %}Price{% endtrans %}</th>					
+								<th>{% trans %}Qty{% endtrans %}</th>					
+								<th>{% trans %}Subtotal{% endtrans %}</th>					
+								<th>{% trans %}Row Total{% endtrans %}</th>					
+							</tr>
+						</thead>
+						<tbody>
+						{% for item in invoice.getItems() %}
+							<tr>
+								<td>{{ item.name }}</td>
+								<td>{{ item.sku }}</td>
+								<td>{{ item.price|format_price(invoice.orderCurrencyCode) }}</td>
+								<td>{{ item.qty }}</td>
+								<td>{{ (item.qty * item.price)|format_price(invoice.orderCurrencyCode)  }}</td>
+								<td>{{ item.rowTotal|format_price(invoice.orderCurrencyCode)  }}</td>
+							</tr>
+						{% endfor %}
+						</tbody>
+					</table>
+					</div>
+				</div>
+			</div>
+		</div>	
+	</div>
+
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="card mb-2">
+				<div class="card-header">
+					{% trans %}Invoice Totals{% endtrans %}
+				</div>
+				<div class="card-body">
+					<div class="mt-sm-n2 mr-sm-n2 mb-sm-n2 ml-sm-n2">
+						<span class="d-block">{% trans %}Subtotal{% endtrans %}: {{ invoice.subTotal|format_price(invoice.orderCurrencyCode) }}</span>
+						<span class="d-block">{% trans %}Grand Total{% endtrans %}: {{ invoice.grandTotal|format_price(invoice.orderCurrencyCode) }}</span>
+					</div>						
+				</div>
+			</div>		
+		</div>		
+	</div>				
+</div>
+{% endblock %}

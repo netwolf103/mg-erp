@@ -1,0 +1,94 @@
+<div class="table-responsive" data-filter-response>
+	<div class="dataTables_wrapper">
+		{{ include('blocks/paginate.html.twig', {'numPages': paginator.numPages, 'numResults': paginator.numResults}) }}
+
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="actions">
+					<div class="row">
+						<div class="col-sm-12 col-md-8">
+							<a href="javascript:;" class="select-all">{% trans %}Select All{% endtrans %}</a>
+							<span class="separator">|</span>
+							<a href="javascript:;" class="unselect-all">{% trans %}Unselect All{% endtrans %}</a>
+						</div>
+						<div class="col-sm-12 col-md-4">
+							<div class="handle-action">
+								{% trans %}Actions{% endtrans %}
+								<select class="form-control form-control-sm" name="action">
+									<option></option>
+									<option value="delete">{% trans %}Delete{% endtrans %}</option>
+								</select>
+								<button class="btn btn-dark btn-sm">{% trans %}Submit{% endtrans %}</button>
+							</div>
+						</div>								
+					</div>
+				</div>
+
+				<table class="table table-bordered" width="100%" cellspacing="0">
+					<colgroup>
+						<col>
+						<col>
+						<col>
+						<col>
+						<col>
+						<col>
+						<col>
+						<col>
+						<col>
+						<col>
+						<col width="400">
+						<col>
+					</colgroup>
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>{% trans %}Address Type{% endtrans %}</th>
+							<th>{% trans %}Firstname{% endtrans %}</th>
+							<th>{% trans %}Lastname{% endtrans %}</th>	
+							<th>{% trans %}Street{% endtrans %}</th>	
+							<th>{% trans %}City{% endtrans %}</th>	
+							<th>{% trans %}Region{% endtrans %}</th>	
+							<th>{% trans %}Postcode{% endtrans %}</th>	
+							<th>{% trans %}Country{% endtrans %}</th>	
+							<th>{% trans %}Telephone{% endtrans %}</th>	
+							<th>{% trans %}Address History{% endtrans %}</th>	
+							<th>{% trans %}Created At{% endtrans %}</th>					
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="filter">
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>					
+							<td></td>					
+							<td></td>															
+							<td></td>															
+							<td></td>															
+							<td></td>															
+							<td></td>															
+							<td></td>															
+							<td></td>															
+						</tr>					
+					{% for history in paginator.results %}
+						<tr>
+							<td><input type="checkbox" name="ids" value="{{ history.id }}" /></td>
+							<td>{{ history.addressType  }}</td>
+							<td>{{ history.firstname }}</td>
+							<td>{{ history.lastname }}</td>
+							<td>{{ history.street }}</td>
+							<td>{{ history.city }}</td>
+							<td>{{ history.region }}</td>
+							<td>{{ history.postcode }}</td>
+							<td>{{ history.countryId|country('en') }}</td>
+							<td>{{ history.telephone }}</td>
+							<td>{{ history.comment }}</td>
+							<td>{{ history.createdAt|date('Y-m-d H:i:s') }}</td>
+						</tr>
+					{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

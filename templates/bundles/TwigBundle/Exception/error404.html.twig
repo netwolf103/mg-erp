@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ status_text }} - {{ status_code }}{% endblock %}
+
+{% block stylesheets %}
+<link href="{{ asset('skin/default/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
+<link href="{{ asset('skin/default/css/sb-admin.css') }}" rel="stylesheet">
+<link href="{{ asset('skin/default/css/login.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="card mx-auto mt-5">
+        <div class="card-header">{{ status_text }} - {{ status_code }}</div>
+        <div class="card-body">
+            <h1>{{ trans }}Oops! An Error Occurred{{ endtrans }}</h1>
+            <h2>{{ trans }}The server returned a{{ endtrans }} "{{ status_code }} {{ status_text }}".</h2>
+            <p><a href="{{ path('admin_dashboard') }}">{{ trans }}Return to the dashboard{{ endtrans }}</a>.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

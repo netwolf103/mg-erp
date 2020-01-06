@@ -1,0 +1,70 @@
+<div class="table-responsive" data-filter-response>
+	<div class="dataTables_wrapper">
+		{{ include('blocks/paginate.html.twig', {'numPages': paginator.numPages, 'numResults': paginator.numResults}) }}
+
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="actions">
+					<div class="row">
+						<div class="col-sm-12 col-md-8">
+							<a href="javascript:;" class="select-all">{% trans %}Select All{% endtrans %}</a>
+							<span class="separator">|</span>
+							<a href="javascript:;" class="unselect-all">{% trans %}Unselect All{% endtrans %}</a>
+						</div>
+						<div class="col-sm-12 col-md-4">
+							<div class="handle-action">
+								{% trans %}Actions{% endtrans %}
+								<select class="form-control form-control-sm" name="action">
+									<option></option>
+									<option value="delete">{% trans %}Delete{% endtrans %}</option>
+								</select>
+								<button class="btn btn-dark btn-sm">{% trans %}Submit{% endtrans %}</button>
+							</div>
+						</div>								
+					</div>
+				</div>
+
+				<table class="table table-bordered" width="100%" cellspacing="0">
+					<colgroup>
+						<col width="30">
+						<col width="200">
+						<col width="200">
+						<col>
+						<col>
+						<col width="60">
+					</colgroup>				
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>{% trans %}Sku{% endtrans %}</th>					
+							<th>{% trans %}Ring Size{% endtrans %}</th>					
+							<th>{% trans %}Inventory{% endtrans %}</th>					
+							<th>{% trans %}Inventory Low Alert{% endtrans %}</th>
+							<th>{% trans %}Action{% endtrans %}</th>					
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="filter">
+							<td></td>
+							<td><input type="text" name="filters[sku]" class="form-control form-control-sm" value="{{ app.request.getSession().get(filterSessionKey)|getFilter('sku')}}" /></td>
+							<td></td>
+							<td></td>
+							<td></td>						
+							<td></td>						
+						</tr>					
+					{% for alert in paginator.results %}
+						<tr>
+							<td><input type="checkbox" name="ids" value="{{ alert.id }}" /></td>
+							<td><a href="{{ path('admin_product_edit', {'id': alert.getProduct().id}) }}">{{ alert.sku }}</a></td>
+							<td>{{ alert.getParent().title }}</td>
+							<td>{{ alert.getParent().inventory }}</td>
+							<td>{{ alert.getParent().inventoryLow }}</td>
+							<td class="actions text-center"><a href="{{ path('admin_product_stock_alert_close', {'id': alert.id}) }}" class="btn btn-dark btn-sm btn-block">{% trans %}Close{% endtrans%}</a></td>
+						</tr>
+					{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

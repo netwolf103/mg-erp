@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{{ title }}</title>
+        <style type="text/css">
+        	table {
+        		font-size: 13px;
+        		padding: 0;
+        		margin: 0;
+        		border-left: 1px #333 solid;
+        		border-bottom: 1px #333 solid;
+        		width: 100%;
+        	}
+        	td {
+        		padding: 10px;
+        		border-width: 1px 1px 0 0;
+        		border-color: #333;
+        		border-style: solid;
+        	}
+        	th {
+        		padding: 10px;
+        		border-top: 1px #333 solid;
+        		border-right: 1px #333 solid;
+        	}
+        	p, dl {
+        		margin: 0;
+        	}
+        	.trh {
+        		background: #eee;
+        	}
+        	.totals {
+        		text-align: right;
+        	}
+        	.totals table {
+        		border:0;
+        		width: auto;
+        	}
+        	.totals td {
+        		border: 0;
+        	}
+        </style>
+    </head>
+    <body>
+        <table cellpadding="0" cellspacing="0" style="background: #666; color:#fff;">
+        	<tbody>
+        		<tr>
+        			<td>
+        				<p>Invoice # {{ invoice.incrementId  }}</p>
+        				<p>Order # {{ order.incrementId  }}</p>
+        				<p>Order Date # {{ order.createdAt|date('M d,Y')  }}</p>
+        			</td>
+        		</tr>
+        	</tbody>
+        </table>
+        <table cellpadding="0" cellspacing="0" style="margin-bottom: 10px;">
+        	<tbody>
+        		<tr class="trh">
+        			<th width="50%">Sold to:</th>
+        			<th width="50%">Ship to:</th>
+        		</tr>
+        		<tr>
+        			<td>
+        				<p>{{ order.getBillingAddress().getFullName() }}</p>
+        				<p>{{ order.getBillingAddress().getStreet() }}</p>
+        				<p>{{ order.getBillingAddress().getCity() }}, {{ order.getBillingAddress().getRegion() }}, {{ order.getBillingAddress().getPostcode() }}</p>
+        				<p>{{ order.getBillingAddress().getCountryId() }}</p>
+        				<p>T: {{ order.getBillingAddress().getTelephone () }}</p>
+        			</td>
+        			<td>
+        				<p>{{ order.getShippingAddress().getFullName() }}</p>
+        				<p>{{ order.getShippingAddress().getStreet() }}</p>
+        				<p>{{ order.getShippingAddress().getCity() }}, {{ order.getShippingAddress().getRegion() }}, {{ order.getShippingAddress().getPostcode() }}</p>
+        				<p>{{ order.getShippingAddress().getCountryId() }}</p>
+        				<p>T: {{ order.getShippingAddress().getTelephone () }}</p>
+        			</td>        			
+        		</tr>       		        		
+        	</tbody>
+        </table>
+        <table cellpadding="0" cellspacing="0" style="margin-bottom: 10px;">
+        	<tbody>
+        		<tr class="trh">
+        			<th width="50%">Payment Method</th>
+        			<th width="50%">Shipping Method:</th>
+        		</tr>
+        		<tr>
+        			<td>
+        				<p>{{ order.getPayment().method }}</p>
+        				<p>Payer Email: {{ order.customerEmail }}</p>
+        			</td>
+        			<td>
+        				<p>{{ order.shippingDescription }}</p>
+        				<p>(Total Shipping Charges {{ order.shippingAmount|format_price(order.orderCurrencyCode) }})</p>
+        			</td>
+        		</tr>         		
+        	</tbody>
+        </table>
+        <table cellpadding="0" cellspacing="0" style="margin-bottom: 10px;">
+        	<tbody>
+        		<tr class="trh">
+        			<th>Products</th>
+        			<th>SKU</th>
+        			<th>Price</th>
+        			<th>Qty</th>
+        			<th>Tax</th>
+        			<th>Subtotal</th>
+        		</tr>
+        		{% for item in order.getItems() %}
+        		<tr>
+        			<td>
+        				<p>{{ item.name }}</p>
+        				<p>{{ item.productOptions|format_options('en')|raw }}</p>
+        			</td>
+        			<td>{{ item.sku }}</td>
+        			<td>{{ item.price|format_price(order.orderCurrencyCode) }}</td>
+        			<td>{{ item.qtyOrdered }}</td>
+        			<td>{{ item.taxAmount|format_price(order.orderCurrencyCode) }}</td>
+        			<td>{{ item.rowTotal|format_price(order.orderCurrencyCode) }}</td>
+        		</tr>  
+        		{% endfor %}      		
+        	</tbody>
+        </table>
+        <div class="totals">
+	        <table cellpadding="0" cellspacing="0" style="float: right;">
+	        	<tbody>
+	        		<tr>
+	        			<td><strong>Subtotal:</strong></td>
+	        			<td class="value">{{ order.subtotal|format_price(order.orderCurrencyCode) }}</td>
+	        		</tr>
+	        		<tr>
+	        			<td><strong>Discount:</strong></td>
+	        			<td class="value">{{ order.discountAmount|format_price(order.orderCurrencyCode, true) }}</td>
+	        		</tr>
+	        		<tr>
+	        			<td><strong>Grand Total:</strong></td>
+	        			<td class="value">{{ order.grandTotal|format_price(order.orderCurrencyCode) }}</td>
+	        		</tr>         		        		
+	        	</tbody>
+	        </table>
+    	</div>
+    </body>
+</html>

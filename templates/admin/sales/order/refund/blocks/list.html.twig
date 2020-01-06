@@ -1,0 +1,152 @@
+<div class="table-responsive" data-filter-response>
+	<div class="dataTables_wrapper">
+		{{ include('blocks/paginate.html.twig', {'numPages': paginator.numPages, 'numResults': paginator.numResults}) }}
+
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="actions">
+					<div class="row">
+						<div class="col-sm-12 col-md-8">
+							<a href="javascript:;" class="select-all">{% trans %}Select All{% endtrans %}</a>
+							<span class="separator">|</span>
+							<a href="javascript:;" class="unselect-all">{% trans %}Unselect All{% endtrans %}</a>
+						</div>
+						<div class="col-sm-12 col-md-4">
+							<div class="handle-action">
+								{% trans %}Actions{% endtrans %}
+								<select class="form-control form-control-sm" name="action">
+									<option></option>
+									<option value="delete">{% trans %}Delete{% endtrans %}</option>
+								</select>
+								<button class="btn btn-dark btn-sm">{% trans %}Submit{% endtrans %}</button>
+							</div>
+						</div>								
+					</div>
+				</div>
+
+				<table class="table table-bordered" width="100%" cellspacing="0">
+					<colgroup>
+						<col>
+						<col width="100">
+						<col width="100">
+						<col>
+						<col>
+						<col>
+						<col>
+						<col>
+						<col width="100">
+						<col width="130">
+						<col width="130">
+						<col>
+						<col width="60">
+					</colgroup>
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>{% trans %}Increment Id{% endtrans %}</th>
+							<th>{% trans %}Sku{% endtrans %}</th>	
+							<th>{% trans %}Price{% endtrans %}</th>	
+							<th>{% trans %}Qty Ordered{% endtrans %}</th>	
+							<th>{% trans %}Qty Refunded{% endtrans %}</th>	
+							<th>{% trans %}Row Total{% endtrans %}</th>	
+							<th>{% trans %}Refund Amount{% endtrans %}</th>	
+							<th>{% trans %}Refund Status{% endtrans %}</th>	
+							<th>{% trans %}Created At{% endtrans %}</th>	
+							<th>{% trans %}Refunded At{% endtrans %}</th>	
+							<th>{% trans %}Track Number{% endtrans %}</th>	
+							<th>{% trans %}Action{% endtrans %}</th>					
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="filter">
+							<td></td>
+							<td></td>
+							<td><input type="text" name="filters[sku]" class="form-control form-control-sm" value="{{ app.request.getSession().get(filterSessionKey)|getFilter('sku')}}" /></td>					
+							<td></td>					
+							<td></td>					
+							<td></td>					
+							<td></td>					
+							<td></td>					
+							<td>
+							<select name="filters[status]" class="form-control form-control-sm">
+								<option></option>
+							{% for value, label in refund_status_list() %}	
+								<option value="{{ value }}" {% if app.request.getSession().get(filterSessionKey)|getFilter('status', '-1') == value %} selected="selected"{% endif %}>{{ label|trans }}</option>
+							{% endfor %}
+							</select>
+							</td>
+							<td>
+								<div class="input-group input-group-sm mb-1">
+									<div class="input-group-prepend">
+										<span class="input-group-text"">{% trans %}From{% endtrans %}:</span>
+									</div>
+									<input data-role="datetime" type="date" name="filters[created_at][from]" class="form-control" value="{{ app.request.getSession().get(filterSessionKey)|getFilter('created_at.from')}}" />
+								</div>
+								<div class="input-group input-group-sm">
+									<div class="input-group-prepend">
+										<span class="input-group-text"">{% trans %}To{% endtrans %}:</span>
+									</div>
+									<input data-role="datetime" type="date" name="filters[created_at][to]" class="form-control" value="{{ app.request.getSession().get(filterSessionKey)|getFilter('created_at.to')}}" />
+								</div>
+							</td>										
+							<td>
+								<div class="input-group input-group-sm mb-1">
+									<div class="input-group-prepend">
+										<span class="input-group-text"">{% trans %}From{% endtrans %}:</span>
+									</div>
+									<input data-role="datetime" type="date" name="filters[refunded_at][from]" class="form-control" value="{{ app.request.getSession().get(filterSessionKey)|getFilter('refunded_at.from')}}" />
+								</div>
+								<div class="input-group input-group-sm">
+									<div class="input-group-prepend">
+										<span class="input-group-text"">{% trans %}To{% endtrans %}:</span>
+									</div>
+									<input data-role="datetime" type="date" name="filters[refunded_at][to]" class="form-control" value="{{ app.request.getSession().get(filterSessionKey)|getFilter('refunded_at.to')}}" />
+								</div>
+							</td>										
+							<td></td>										
+							<td></td>										
+						</tr>					
+					{% for refund in paginator.results %}
+						<tr>
+							<td><input type="checkbox" name="ids" value="{{ refund.id }}" /></td>
+							<td><a href="{{ path('admin_sales_order_view', {'id': refund.getItem().getParent().id}) }}" title="{% trans %}View Order{% endtrans%}">{{ refund.getItem().getParent().incrementId }}</a></td>
+							<td>{{ refund.sku }}</td>
+							<td>{{ refund.price|format_price(refund.getItem().getParent().getOrderCurrencyCode()) }}</td>
+							<td>{{ refund.qtyOrdered }}</td>
+							<td>{{ refund.qtyRefunded }}</td>
+							<td>{{ refund.rowTotal|format_price(refund.getItem().getParent().getOrderCurrencyCode()) }}</td>
+							<td>{{ refund.refundAmount|format_price(refund.getItem().getParent().getOrderCurrencyCode()) }}</td>
+							<td>{{ refund.status|refund_status|trans }}</td>
+							<td>{{ refund.createdAt|date('Y-m-d H:i:s') }}</td>
+							<td>
+							{%if refund.status %}
+							{{ refund.refundedAt|date('Y-m-d H:i:s') }}
+							{% endif %}
+							</td>
+							<td>
+								{% for track in refund.getTracks() %}
+								<span class="d-block">{{ track.carrierName}}: <a href="{{ ApiServices.ShipmentTrack|replace({'%track_number%': track.trackNumber}) }}" target="_blank">{{ track.trackNumber }}</span>
+								{% else %}
+								{% trans %}None{% endtrans %}
+								{% endfor %}
+							</td>
+							<td class="actions text-center">
+							{% if is_granted(['ROLE_ADMIN']) and refund.canAgree() %}
+								<a href="{{ path('admin_sales_order_refund_agree', {'id': refund.id}) }}" class="btn btn-dark btn-sm btn-block">{% trans %}Agree{% endtrans%}</a>
+							{% endif %}
+							{% if is_granted(['ROLE_ADMIN']) and refund.canRefuse() %}
+								<a href="{{ path('admin_sales_order_refund_refuse', {'id': refund.id}) }}" class="btn btn-dark btn-sm btn-block">{% trans %}Refuse{% endtrans%}</a>
+							{% endif %}
+							{% if is_granted(['ROLE_ADMIN']) %}
+								<a href="{{ path('admin_sales_order_refund_remove', {'id': refund.id}) }}" class="btn btn-dark btn-sm btn-block">{% trans %}Remove{% endtrans%}</a>
+							{% endif %}							
+								<a href="{{ path('admin_sales_order_refund_view_item', {'id': refund.getItem().id}) }}" class="btn btn-dark btn-sm btn-block">{% trans %}Detail{% endtrans%}</a>
+							</td>
+						</tr>
+					{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,91 @@
+<div class="table-responsive" data-filter-response>
+	<div class="dataTables_wrapper">
+		{{ include('blocks/paginate.html.twig', {'numPages': paginator.numPages, 'numResults': paginator.numResults}) }}
+
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="actions">
+					<div class="row">
+						<div class="col-sm-12 col-md-8">
+							<a href="javascript:;" class="select-all">{% trans %}Select All{% endtrans %}</a>
+							<span class="separator">|</span>
+							<a href="javascript:;" class="unselect-all">{% trans %}Unselect All{% endtrans %}</a>
+						</div>
+						<div class="col-sm-12 col-md-4">
+							<div class="handle-action">
+								{% trans %}Actions{% endtrans %}
+								<select class="form-control form-control-sm" name="action">
+									<option></option>
+									<option value="delete">{% trans %}Delete{% endtrans %}</option>
+								</select>
+								<button class="btn btn-dark btn-sm">{% trans %}Submit{% endtrans %}</button>
+							</div>
+						</div>								
+					</div>
+				</div>
+
+				<table class="table table-bordered" width="100%" cellspacing="0">
+					<colgroup>
+						<col>
+						<col width="100">
+						<col>
+						<col>
+						<col>
+						<col>
+						<col>
+					</colgroup>				
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>{% trans %}Sku{% endtrans %}</th>
+							<th>{% trans %}Image{% endtrans %}</th>
+							<th>{% trans %}Product Name{% endtrans %}</th>
+							<th>{% trans %}Size & Engravings{% endtrans %}</th>
+							<th>{% trans %}Ordered{% endtrans %}</th>
+							<th>{% trans %}Purchased On{% endtrans %}</th>						
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="filter">
+							<td></td>
+							<td><input type="text" name="filters[sku]" class="form-control form-control-sm" value="{{ app.request.getSession().get(filterSessionKey)|getFilter('sku')}}" /></td>
+							<td></td>
+							<td><input type="text" name="filters[name]" class="form-control form-control-sm" value="{{ app.request.getSession().get(filterSessionKey)|getFilter('name')}}" /></td>
+							<td></td>
+							<td></td>										
+							<td>						
+								<div class="input-group input-group-sm mb-1">
+									<div class="input-group-prepend">
+										<span class="input-group-text"">{% trans %}From{% endtrans %}:</span>
+									</div>
+									<input data-role="datetime" type="date" name="filters[created_at][from]" class="form-control" value="{{ app.request.getSession().get(filterSessionKey)|getFilter('created_at.from')}}" />
+								</div>
+								<div class="input-group input-group-sm">
+									<div class="input-group-prepend">
+										<span class="input-group-text"">{% trans %}To{% endtrans %}:</span>
+									</div>
+									<input data-role="datetime" type="date" name="filters[created_at][to]" class="form-control" value="{{ app.request.getSession().get(filterSessionKey)|getFilter('created_at.to')}}" />
+								</div>
+							</td>															
+						</tr>
+					{% for item in paginator.results %}
+						<tr>
+							<td><input type="checkbox" name="ids" value="{{ item.id }}" /></td>
+							<td>{{ item.sku }}</td>
+							<td>
+							{% if item.product.getMedia().first() %}
+							<img src="{{ item.product.getMedia().first().getUrl()|imagine_filter('thumbnail_80x80') }}" width="80" height="80" class="thumbnail" />
+							{% endif %}
+							</td>
+							<td><a href="{{ item.product.productUrl }}" target="_blank" title="{% trans %}View Product{% endtrans %}">{{ item.name }}</a></td>
+							<td>{{ item.productOptions|format_options|raw }}</td>
+							<td>{{ item.qtyOrdered }}</td>
+							<td>{{ item.createdAt|date('Y-m-d H:i:s') }}</td>
+						</tr>
+					{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

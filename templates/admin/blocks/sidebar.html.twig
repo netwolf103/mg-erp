@@ -1,0 +1,181 @@
+<ul class="sidebar navbar-nav">
+  <li class="nav-item active">
+    <a class="nav-link" href="{{ path('admin_dashboard') }}">
+      <i class="fas fa-fw fa-tachometer-alt"></i>
+      <span>{% trans %}Dashboard{% endtrans %}</span>
+    </a>
+  </li>
+
+  {# ---------------------用户管理------------------ #}
+  {% if is_granted('ROLE_ADMIN') %}
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="{{ path('admin_user') }}" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <i class="fas fa-fw fa-folder"></i>
+      <span>{% trans %}Manager Users{% endtrans %}</span>
+    </a>
+    <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+      <h6 class="dropdown-header">{% trans %}Users{% endtrans %}:</h6>
+      <a class="dropdown-item" href="{{ path('admin_user') }}">{% trans %}List{% endtrans %}</a>
+      <a class="dropdown-item" href="{{ path('admin_user_add') }}">{% trans %}Add{% endtrans %}</a>
+
+      <div class="dropdown-divider"></div>
+
+      <h6 class="dropdown-header">{% trans %}Roles{% endtrans %}:</h6>
+      <a class="dropdown-item" href="{{ path('admin_role') }}">{% trans %}List{% endtrans %}</a>
+      <a class="dropdown-item" href="{{ path('admin_role_add') }}">{% trans %}Add{% endtrans %}</a>
+    </div>
+  </li>
+  {% endif %}
+
+  {# ---------------------产品管理-------------------- #}
+  {% if is_granted(['ROLE_MANAGE_GOOGLE']) %}
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="{{ path('admin_product') }}" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <i class="fas fa-fw fa-folder"></i>
+      <span>{% trans %}Manager Products{% endtrans %}</span>
+    </a>
+    <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+    {% if is_granted(['ROLE_MANAGE_PRODUCT']) %}
+      <h6 class="dropdown-header">{% trans %}Products{% endtrans %}:</h6>
+      <a class="dropdown-item" href="{{ path('admin_product') }}">{% trans %}List{% endtrans %}</a>
+      <a class="dropdown-item" href="{{ path('admin_product_add') }}">{% trans %}Add{% endtrans %}</a>
+      <a class="dropdown-item" href="{{ path('admin_product_sales') }}">{% trans %}Sales{% endtrans %}</a>
+      {% if is_granted(['ROLE_SHIPPER']) %}
+      <a class="dropdown-item" href="{{ path('admin_product_purchase_order') }}">{% trans %}Purchase{% endtrans %}</a>
+      {% endif %}
+
+      <div class="dropdown-divider"></div> 
+
+      <h6 class="dropdown-header">{% trans %}Inventory{% endtrans %}:</h6>
+      <a class="dropdown-item" href="{{ path('admin_product_stock_alert') }}">{% trans %}Low Stock{% endtrans %}</a>
+
+      <div class="dropdown-divider"></div>
+    {% endif %}
+
+      <h6 class="dropdown-header">{% trans %}Google{% endtrans %}:</h6>
+      <a class="dropdown-item" href="{{ path('admin_product_google') }}">{% trans %}List{% endtrans %}</a>
+    </div>
+  </li>
+  {% endif %}
+
+  {# ----------------------销售管理------------------ #}
+  {% if is_granted(['ROLE_SERVICE', 'ROLE_SHIPPER', 'ROLE_MARKET']) %}
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="{{ path('admin_sales_order') }}" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <i class="fas fa-fw fa-folder"></i>
+      <span>{% trans %}Manager Sales{% endtrans %}</span>
+    </a>
+    <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+      <h6 class="dropdown-header">{% trans %}Orders{% endtrans %}:</h6>
+      <a class="dropdown-item" href="{{ path('admin_sales_order') }}">{% trans %}List{% endtrans %}</a>
+      <a class="dropdown-item" href="{{ path('admin_sales_order_expedited') }}">{% trans %}Expedited{% endtrans %}</a>
+      <a class="dropdown-item" href="{{ path('admin_sales_order_payment_transaction') }}">{% trans %}Transaction Id{% endtrans %}</a>
+
+      <div class="dropdown-divider"></div>
+
+      <h6 class="dropdown-header">{% trans %}Invoice{% endtrans %}:</h6>
+      <a class="dropdown-item" href="{{ path('admin_sales_order_invoice') }}">{% trans %}List{% endtrans %}</a>
+      <a class="dropdown-item" href="{{ path('admin_sales_order_order_invoice_pull') }}">{% trans %}Pull{% endtrans %}</a>
+
+      <div class="dropdown-divider"></div>      
+
+      <h6 class="dropdown-header">{% trans %}Shippments{% endtrans %}:</h6>
+      <a class="dropdown-item" href="{{ path('admin_sales_shipment') }}">{% trans %}List{% endtrans %}</a>
+
+      {% if is_granted('ROLE_SERVICE') %}
+      <div class="dropdown-divider"></div>
+
+      <h6 class="dropdown-header">{% trans %}Manager Refund{% endtrans %}:</h6>
+      <a class="dropdown-item" href="{{ path('admin_sales_order_refund') }}">{% trans %}List{% endtrans %}</a>   
+      {% endif %}   
+    </div>
+  </li>
+  {% endif %}
+
+  {# ---------------------采购管理-------------------- #}
+  {% if is_granted('ROLE_ADMIN') %}
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <i class="fas fa-fw fa-folder"></i>
+      <span>{% trans %}Manager Purchase{% endtrans %}</span>
+    </a>
+    <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+      <h6 class="dropdown-header">{% trans %}Supplier{% endtrans %}:</h6>
+      <a class="dropdown-item" href="{{ path('admin_purchase_supplier') }}">{% trans %}List{% endtrans %}</a>
+      <a class="dropdown-item" href="{{ path('admin_purchase_supplier_add') }}">{% trans %}Add{% endtrans %}</a>
+    </div>
+  </li>
+  {% endif %}
+
+  {# ---------------------客户管理-------------------- #}
+  {% if is_granted('ROLE_SERVICE') %}
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="{{ path('admin_customer_customer') }}" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <i class="fas fa-fw fa-folder"></i>
+      <span>{% trans %}Manager Customer{% endtrans %}</span>
+    </a>
+    <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+      <h6 class="dropdown-header">{% trans %}Customers{% endtrans %}:</h6>
+      <a class="dropdown-item" href="{{ path('admin_customer_customer') }}">{% trans %}List{% endtrans %}</a>
+    </div>
+  </li>
+  {% endif %}     
+
+  {# ----------------------数据统计------------------ #}
+  {% if is_granted('ROLE_ADMIN') %}
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <i class="fas fa-fw fa-folder"></i>
+      <span>{% trans %}Manager Stat{% endtrans %}</span>
+    </a>
+    <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+      <h6 class="dropdown-header">{% trans %}Products Stat{% endtrans %}:</h6>
+      <a class="dropdown-item" href="{{ path('admin_sales_order') }}">{% trans %}Product Sales{% endtrans %}</a>
+
+      <div class="dropdown-divider"></div>
+
+      <h6 class="dropdown-header">{% trans %}Orders Stat{% endtrans %}:</h6>
+      <a class="dropdown-item" href="{{ path('admin_user') }}">{% trans %}Orders Sales{% endtrans %}</a>
+
+      <div class="dropdown-divider"></div>
+
+      <h6 class="dropdown-header">{% trans %}Shippments Stat{% endtrans %}:</h6>
+      <a class="dropdown-item" href="{{ path('admin_user') }}">{% trans %}Shipped Stat{% endtrans %}</a>      
+    </div>
+  </li>
+  {% endif %}
+
+  {# ---------------------Web Services--------------- #}
+  {% if is_granted('ROLE_ADMIN') %}
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <i class="fas fa-fw fa-folder"></i>
+      <span>{% trans %}Web Services{% endtrans %}</span>
+    </a>
+    <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+      <h6 class="dropdown-header">{% trans %}Reset Api Users{% endtrans %}:</h6>
+      <a class="dropdown-item" href="{{ path('admin_api_users') }}">{% trans %}List{% endtrans %}</a>
+      <a class="dropdown-item" href="{{ path('admin_api_users_add') }}">{% trans %}Add{% endtrans %}</a>
+    </div>
+  </li>
+  {% endif %}
+
+  {# ---------------------配置--------------- #}
+  {% if is_granted('ROLE_ADMIN') %}
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <i class="fas fa-fw fa-folder"></i>
+      <span>{% trans %}Manager Config{% endtrans %}</span>
+    </a>
+    <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+      <h6 class="dropdown-header">{% trans %}General{% endtrans %}:</h6>
+      <a class="dropdown-item" href="{{ path('admin_config_general_web') }}">{% trans %}General{% endtrans %}</a>
+
+      <div class="dropdown-divider"></div>
+
+      <h6 class="dropdown-header">{% trans %}Manager Shipping Methods{% endtrans %}:</h6>
+      <a class="dropdown-item" href="{{ path('admin_config_shipping_method') }}">{% trans %}List{% endtrans %}</a>
+    </div>
+  </li>
+  {% endif %}             
+</ul>

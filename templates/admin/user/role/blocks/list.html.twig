@@ -1,0 +1,56 @@
+<div class="table-responsive" data-filter-response>
+	<div class="dataTables_wrapper">
+		{{ include('blocks/paginate.html.twig', {'numPages': paginator.numPages, 'numResults': paginator.numResults}) }}
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="actions">
+					<div class="row">
+						<div class="col-sm-12 col-md-8">
+							<a href="javascript:;" class="select-all">{% trans %}Select All{% endtrans %}</a>
+							<span class="separator">|</span>
+							<a href="javascript:;" class="unselect-all">{% trans %}Unselect All{% endtrans %}</a>
+						</div>
+						<div class="col-sm-12 col-md-4">
+							<div class="handle-action">
+								{% trans %}Actions{% endtrans %}
+								<select class="form-control form-control-sm" name="action">
+									<option></option>
+									<option value="delete">{% trans %}Delete{% endtrans %}</option>
+								</select>
+								<button class="btn btn-dark btn-sm">{% trans %}Submit{% endtrans %}</button>
+							</div>
+						</div>								
+					</div>
+				</div>					
+				<table class="table table-bordered" width="100%" cellspacing="0">
+					<colgroup>
+						<col width="40">
+						<col>
+						<col width="60">
+					</colgroup>				
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>{% trans %}Role Name{% endtrans %}</th>
+							<th>{% trans %}Action{% endtrans %}</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="filter">
+							<td></td>
+							<td><input type="text" name="filters[name]" class="form-control form-control-sm" value="{{ app.request.getSession().get(filterSessionKey)|getFilter('name')}}" /></td>
+							<td></td>						
+						</tr>
+					{% for role in paginator.results %}
+						<tr>
+							<td class="text-center"><input type="checkbox" name="ids" value="{{ role.id }}" /></td>
+							<td>{{ role.name }}</td>
+							<td class="actions text-center"><a href="{{ path('admin_role_edit', {'id': role.id}) }}" class="btn btn-dark btn-sm btn-block">{% trans %}Edit{% endtrans%}</a></td>
+						</tr>
+					{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,40 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}
+	{% trans %}Import Shipments{% endtrans %} 
+{% endblock %}
+
+{% block body %}
+
+<ol class="breadcrumb">
+	<li class="breadcrumb-item">
+		<a href="{{ path('admin_dashboard') }}">{% trans %}Dashboard{% endtrans %}</a>
+	</li>
+	<li class="breadcrumb-item">
+		<a href="{{ path('admin_sales_order') }}">{% trans %}Manager Orders{% endtrans %}</a>
+	</li>
+	<li class="breadcrumb-item">
+		<a href="{{ path('admin_sales_shipment') }}">{% trans %}Manager Shippments{% endtrans %}</a>
+	</li>		
+	<li class="breadcrumb-item active">
+	{% trans %}Import Shipments{% endtrans %}
+	</li>
+</ol>
+
+<div class="mb-3">
+	{{ include('blocks/message.html.twig') }}
+	<div class="card mb-2">
+		<div class="card-header">
+		{% trans %}Import Shipments{% endtrans %}
+		</div>
+		<div class="card-body">
+			<div class="mt-sm-n2 mr-sm-n2 mb-sm-n2 ml-sm-n2">
+			<p>{% trans %}Track number csv file format{% endtrans %}:</p>
+			<p>{% trans %}increment_id, sku, qty_shipped, carrier_title, track_number{% endtrans %}</p>
+			<p><a href="{{ asset('media/import_track_number_template.csv') }}">{% trans %}Download csv template{% endtrans %}</a></p>
+			</div>
+		</div>
+	</div>	
+	{{ form(form) }}
+</div>
+{% endblock %}

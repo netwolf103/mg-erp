@@ -1,0 +1,417 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}{% trans %}Manager Orders{% endtrans %}{% endblock %}
+
+{% block body %}
+<ol class="breadcrumb">
+	<li class="breadcrumb-item">
+		<a href="{{ path('admin_dashboard') }}">{% trans %}Dashboard{% endtrans %}</a>
+	</li>
+	<li class="breadcrumb-item">
+		<a href="{{ path('admin_sales_order') }}">{% trans %}Manager Orders{% endtrans %}</a>
+	</li>
+	<li class="breadcrumb-item active">{% trans %}Order Details{% endtrans %}</li>
+</ol>
+
+<div class="mb-3">
+	{{ include('blocks/message.html.twig') }}
+	<div class="row">
+		<div class="col-sm-12 col-md-6">
+			<div class="card mb-2">
+				<div class="card-header d-flex">
+					Order # {{ order.getIncrementId }}
+					<div class="ml-auto actions">
+					<a href="{{ path('admin_sales_order_pull', {'id': order.id}) }}" class="btn btn-primary btn-sm">{% trans %}Pull{% endtrans %}</a>
+					<a href="{{ path('admin_sales_order_order_invoice_view', {'id': order.id}) }}" class="btn btn-primary btn-sm">{% trans %}Invoice{% endtrans %}</a>
+
+					{% if order.canHold() and is_granted(['ROLE_SERVICE']) %}
+					<a href="{{ path('admin_sales_order_hold', {'id': order.id}) }}" class="btn btn-primary btn-sm">{% trans %}Hold{% endtrans %}</a>
+					{% endif %}
+
+					{% if order.canUnHold() and is_granted(['ROLE_SERVICE']) %}
+					<a href="{{ path('admin_sales_order_unhold', {'id': order.id}) }}" class="btn btn-primary btn-sm">{% trans %}UnHold{% endtrans %}</a>
+					{% endif %}
+
+					{% if is_granted(['ROLE_SERVICE']) %}
+					<a href="{{ path('admin_sales_order_related_add', {'order_id': order.id}) }}" class="btn btn-primary btn-sm">{% trans %}Related Orders{% endtrans %}</a>
+					{% endif %}
+
+					{% if is_granted(['ROLE_SERVICE']) and order.getRelatedOrders().isEmpty() != true %}
+					<a href="{{ path('admin_sales_order_related_remove', {'order_id': order.id}) }}" class="btn btn-primary btn-sm">{% trans %}Remove Related Orders{% endtrans %}</a>
+					{% endif %}										
+					
+					{% if order.canShip() and is_granted(['ROLE_SHIPPER']) %}
+					<a href="{{ path('admin_sales_shipment_add', {'id': order.id}) }}" class="btn btn-primary btn-sm">{% trans %}Ship{% endtrans %}</a>
+					{% endif %}
+
+					{% if is_granted(['ROLE_SERVICE']) %}
+					<a href="{{ path('admin_sales_order_email_sendconfirm', {'order_id': order.id}) }}" class="btn btn-primary btn-sm">{% trans %}Send Confirm Email{% endtrans %}</a>
+					{% endif %}					
+					</div>			
+				</div>
+				<div class="card-body">
+					<div class="mt-sm-n2 mr-sm-n2 mb-sm-n2 ml-sm-n2">
+						<span class="d-block">{% trans %}Order Date{% endtrans %}: {{ order.createdAt|date('Y-m-d H:i:s') }}</span>
+						<span class="d-block">{% trans %}Order Status{% endtrans %}: {{ order.status|order_status|trans }}</span>
+						<span class="d-block">{% trans %}Order Type{% endtrans %}: {{ order.orderType|order_type|trans }}</span>
+						<span class="d-block">
+						{% if order.getRelatedOrders().isEmpty() != true %}
+						{% trans %}Related Orders{% endtrans %}:
+						{% for relatedOrder in order.getRelatedOrders() %}
+						<a href="{{ path('admin_sales_order_view', {'id':relatedOrder.orderId}) }}">{{ relatedOrder.incrementId }}</a>
+						{% endfor %}
+						{% endif %}
+						</span>
+						{% if order.expedited %}
+						{% trans %}Expedited{% endtrans %}:
+						<span class="text-danger">{% trans %}Yes{% endtrans %}</span>
+						{% endif %}
+						<span class="d-block">{% trans %}Platform Tracking Number{% endtrans %}: {{ order.trackingNumberToPlatformSynced|order_platform_tracking_status }}</span>
+						{% if order.getConfirmEmailHistorys().isEmpty() != true %}
+						<span class="d-block">{% trans %}Number of mails sent{% endtrans %}: <a href="{{ path('admin_sales_order_email_send_history', {'order_id':order.id}) }}">{{ order.getConfirmEmailHistorys().count() }}</a></span>
+						{% endif %}
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-12 col-md-6">
+			<div class="card mb-2">
+				<div class="card-header d-flex">
+					{% trans %}Customer Information{% endtrans %}
+					{% if is_granted(['ROLE_SERVICE']) %}
+					<div class="ml-auto actions">
+					<a href="{{ path('admin_sales_order_email_edit', {'order_id': order.id}) }}" class="btn btn-primary btn-sm">{% trans %}Edit{% endtrans %}</a></div>	
+					{% endif %}						
+				</div>
+				<div class="card-body">
+					<div class="mt-sm-n2 mr-sm-n2 mb-sm-n2 ml-sm-n2">
+						<span class="d-block">{% trans %}Email{% endtrans %}: {{ order.customerEmail }}</span>
+						<span class="d-block">{% trans %}Placed from IP{% endtrans %}: <a href="{{ ApiServices.IpSearch }}#{{ order.remoteIp }}" target="_blank"  title="{% trans %}View Detail{% endtrans %}">{{ order.remoteIp }}</a></span>
+					</div>
+				</div>
+			</div>
+		</div>		
+	</div>
+
+	<div class="row">
+		<div class="col-sm-12 col-md-6">
+			<div class="card mb-2">
+				<div class="card-header d-flex">
+					{% trans %}Billing Address{% endtrans %}
+					<div class="ml-auto actions">
+					{% if order.getBillingAddress() and order.canEditAddress() and is_granted(['ROLE_SERVICE']) %}
+					<a href="{{ path('admin_sales_order_address_edit', {'order_id': order.id, 'id': order.getBillingAddress().id}) }}" class="btn btn-primary btn-sm">{% trans %}Edit{% endtrans %}</a>	
+					{% endif %}
+					{% if order.getBillingAddress() and order.getBillingAddress().getHistorys().isEmpty() != true %}
+					<a href="{{ path('admin_sales_order_address_history', {'order_id': order.id, 'address_id': order.getBillingAddress().id}) }}" class="btn btn-primary btn-sm">{% trans %}History{% endtrans %}</a>
+					{% endif %}
+					</div>			
+				</div>
+				<div class="card-body">
+					{% if order.getBillingAddress() %}
+					<div class="mt-sm-n2 mr-sm-n2 mb-sm-n2 ml-sm-n2">
+						<span class="d-block">{% trans %}Contact{% endtrans %}: {{ order.getBillingAddress().firstname }} {{ order.getBillingAddress().lastname }}</span>
+						<span class="d-block">{% trans %}Street{% endtrans %}: {{ order.getBillingAddress().street }}</span>
+						<span class="d-block">{% trans %}City, Region, Postcode{% endtrans %}: {{ order.getBillingAddress().city }}, {{ order.getBillingAddress().region }}, {{ order.getBillingAddress().postcode }}</span>
+						<span class="d-block">{% trans %}Country{% endtrans %}: {{ order.getBillingAddress().countryId()|country('en') }} ({{ order.getBillingAddress().countryId|country }})</span>
+						<span class="d-block">{% trans %}Telephone{% endtrans %}: {{ order.getBillingAddress().telephone }}</span>
+					</div>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-12 col-md-6">
+			<div class="card mb-2">
+				<div class="card-header d-flex">
+					{% trans %}Shipping Address{% endtrans %}
+					<div class="ml-auto actions">
+					{% if order.getShippingAddress() and order.canEditAddress() and is_granted(['ROLE_SERVICE']) %}
+					<a href="{{ path('admin_sales_order_address_edit', {'order_id': order.id, 'id': order.getShippingAddress().id}) }}" class="btn btn-primary btn-sm">{% trans %}Edit{% endtrans %}</a>
+					{% endif %}
+					{% if order.getShippingAddress() and order.getShippingAddress().getHistorys().isEmpty() != true %}
+					<a href="{{ path('admin_sales_order_address_history', {'order_id': order.id, 'address_id': order.getShippingAddress().id}) }}" class="btn btn-primary btn-sm">{% trans %}History{% endtrans %}</a>
+					{% endif %}
+					{% if order.getShippingAddress() and order.getShippingAddress().getGeos().isEmpty() == true %}
+					<a href="{{ path('admin_sales_order_address_geo_pull', {'address_id': order.getShippingAddress().id}) }}" class="btn btn-primary btn-sm">{% trans %}Geo Pull{% endtrans %}</a>
+					{% else %}
+					<a href="{{ ApiServices.Nominatim }}/reverse.php?lat={{ order.getShippingAddress().getGeos().first().lat }}&lon={{ order.getShippingAddress().getGeos().first().lon }}&format=html&zoom=18&accept-language={{ app.request.getLocale() }}" target="_blank" class="btn btn-primary btn-sm">{% trans %}Map{% endtrans %}</a>
+					{% endif %}
+					{% if order.getShippingAddress() and order.getShippingAddress().getIsWrong() %}
+					<a href="{{ path('admin_sales_order_address_confirm_ok', {'id': order.getShippingAddress().id}) }}" class="btn btn-primary btn-sm">{% trans %}Confirm Correct{% endtrans %}</a>
+					{% endif %}
+					</div>
+				</div>
+				<div class="card-body">
+					{% if order.getShippingAddress() %}
+					<div class="mt-sm-n2 mr-sm-n2 mb-sm-n2 ml-sm-n2">
+						<span class="d-block">{% trans %}Contact{% endtrans %}: {{ order.getShippingAddress().firstname }} {{ order.getShippingAddress().lastname }}</span>
+						<span class="d-block">{% trans %}Street{% endtrans %}: {{ order.getShippingAddress().street }}</span>
+						<span class="d-block">{% trans %}City, Region, Postcode{% endtrans %}: {{ order.getShippingAddress().city }}, {{ order.getShippingAddress().region }}, {{ order.getShippingAddress().postcode }}</span>
+						<span class="d-block">{% trans %}Country{% endtrans %}: {{ order.getShippingAddress().countryId|country('en') }} ({{ order.getShippingAddress().countryId|country }})</span>
+						<span class="d-block">{% trans %}Telephone{% endtrans %}: {{ order.getShippingAddress().telephone }}</span>
+						{% if order.getShippingAddress() and order.getShippingAddress().getIsWrong() %}
+						<span class="d-block text-danger">{% trans %}Suspected Address{% endtrans %}</span>
+						{% endif %}
+					</div>		
+					{% endif %}			
+				</div>
+			</div>
+		</div>		
+	</div>
+
+	<div class="row">
+		<div class="col-sm-12 col-md-6">
+			<div class="card mb-2">
+				<div class="card-header d-flex">
+					{% trans %}Payment Information{% endtrans %}
+					{% if is_granted(['ROLE_SHIPPER']) %}
+					<div class="ml-auto actions">
+					<a href="{{ path('admin_sales_order_payment_transaction_pull', {'order_id':order.id}) }}" class="btn btn-primary btn-sm">{% trans %}Pull Transaction Id{% endtrans %}</a>
+					{% if order.getPaymentTransactions().isEmpty() != true %}
+					<a href="{{ path('admin_sales_order_payment_transaction_view', {'order_id':order.id}) }}" class="btn btn-primary btn-sm">{% trans %}Order Transaction Id{% endtrans %}</a>
+					{% endif %}
+					{% if is_granted(['ROLE_ADMIN']) and order.canEditPlatformShipmentStatus() %}
+					<a href="{{ path('admin_sales_order_shipment_platform_setsync', {'order_id':order.id}) }}" class="btn btn-primary btn-sm">{% trans %}Update Synced{% endtrans %}</a>
+					{% endif %}					
+					</div>
+					{% endif %}
+				</div>
+				<div class="card-body">
+					<div class="mt-sm-n2 mr-sm-n2 mb-sm-n2 ml-sm-n2">
+						<span class="d-block">{% trans %}Payment Method{% endtrans %}: {{ order.getPayment().method }}</span>
+						<span class="d-block">{% trans %}Amount Ordered{% endtrans %}: {{ order.getPayment().baseAmountOrdered|format_price(order.orderCurrencyCode) }}</span>
+						<span class="d-block">{% trans %}Amount Shipping{% endtrans %}: {{ order.getPayment().baseShippingAmount|format_price(order.orderCurrencyCode) }}</span>
+					</div>						
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-12 col-md-6">
+			<div class="card mb-2">
+				<div class="card-header d-flex">
+					{% trans %}Shipping & Handling Information{% endtrans %}
+
+					<div class="ml-auto actions">
+					{% if order.canEditShippingMethod() and is_granted(['ROLE_SERVICE']) %}
+						<a href="{{ path('admin_sales_order_shipping_method_edit', {'order_id': order.id}) }}" class="btn btn-primary btn-sm">{% trans %}Edit{% endtrans %}</a>
+					{% endif %}
+					{% if order.getShippingHistorys().isEmpty() != true %}
+					<a href="{{ path('admin_sales_order_shipping_history', {'order_id': order.id}) }}" class="btn btn-primary btn-sm">{% trans %}History{% endtrans %}</a>
+					{% endif %}	
+					</div>				
+				</div>
+				<div class="card-body">
+					<div class="mt-sm-n2 mr-sm-n2 mb-sm-n2 ml-sm-n2">
+						<span class="d-block">{% trans %}Shipping Method{% endtrans %}: {{ order.shippingDescription }} (<span class="{{ order.shippingMethod|order_shipping_method_class }}">{{ order.shippingMethod|order_shipping_method|trans }}</span>)</span>
+						<span class="d-block">{% trans %}Shipping Amount{% endtrans %}: {{ order.shippingAmount|format_price(order.orderCurrencyCode) }}</span>
+					</div>						
+				</div>
+			</div>
+		</div>		
+	</div>
+	<div class="row">
+		<div class="col-sm-12 col-md-12">
+			<div class="card mb-2">
+				<div class="card-header d-flex">
+					{% trans %}Items Ordered{% endtrans %}
+					{% if order.canAddItem() %}
+					<div class="ml-auto actions"><a href="{{ path('admin_sales_order_item_add', {'order_id': order.id}) }}" class="btn btn-primary btn-sm">{% trans %}Add{% endtrans %}</a></div>
+					{% endif %}
+				</div>
+				<div class="card-body">
+					<div class="mt-sm-n2 mr-sm-n2 mb-sm-n2 ml-sm-n2">
+					<table class="table table-bordered" width="100%" cellspacing="0">
+						<colgroup>
+							<col>
+							<col width="300">
+							<col>
+							<col>
+							<col>
+							<col>
+							<col>
+							<col>
+							<col>
+							<col>
+							<col>
+							<col width="60">
+						</colgroup>						
+						<thead>
+							<tr>
+								<th>{% trans %}Image{% endtrans %}</th>
+								<th>{% trans %}Product Name{% endtrans %}</th>
+								<th>{% trans %}Sku{% endtrans %}</th>								
+								<th>{% trans %}Item Type{% endtrans %}</th>								
+								<th>{% trans %}Size & Engravings{% endtrans %}</th>								
+								<th>{% trans %}Qty{% endtrans %}</th>								
+								<th>{% trans %}Original Price{% endtrans %}</th>								
+								<th>{% trans %}Price{% endtrans %}</th>	
+								<th>{% trans %}Subtotal{% endtrans %}</th>							
+								<th>{% trans %}Discount Amount{% endtrans %}</th>								
+								<th>{% trans %}Row Total{% endtrans %}</th>								
+								<th>{% trans %}Action{% endtrans %}</th>								
+							</tr>
+						</thead>
+						<tbody>
+						{% for item in order.getItems() %}
+							<tr>
+								<td>
+								{% if item.getProduct().getMedia().first() %}
+								<img src="{{ item.getProduct().getMedia().first().getUrl()|imagine_filter('thumbnail_60x60') }}" width="60" height="60" class="thumbnail" />
+								{% endif %}
+								</td>							
+								<td><a href="{{ item.getProduct().productUrl }}" target="_blank" title="{% trans %}View Product{% endtrans %}">{{ item.name }}</a></td>
+								<td>{{ item.sku }}</td>
+								<td>{{ item.itemType|order_item_type|trans }}</td>
+								<td>{{ item.productOptions|format_options|raw }}</td>
+								<td>
+									<span class="d-block text-primary">{% trans %}Qty Ordered{% endtrans %}: <strong>{{ item.qtyOrdered }}</strong></span>
+									<span class="d-block">{% trans %}Qty Invoiced{% endtrans %}: {{ item.qtyInvoiced }}</span>
+									<span class="d-block text-danger">{% trans %}Qty Canceled{% endtrans %}: <strong>{{ item.qtyCanceled }}</strong></span>
+									<span class="d-block text-danger">{% trans %}Qty Refunded{% endtrans %}: <strong>{{ item.qtyRefunded }}</strong></span>
+									<span class="d-block text-success">{% trans %}Qty Shipped{% endtrans %}: <strong>{{ item.qtyShipped }}</strong></span>
+								</td>
+								<td>{{ item.originalPrice|format_price(order.orderCurrencyCode) }}</td>
+								<td>{{ item.price|format_price(order.orderCurrencyCode) }}</td>
+								<td>{{ item.rowTotal|format_price(order.orderCurrencyCode) }}</td>
+								<td>{{ item.discountAmount |format_price(order.orderCurrencyCode) }}</td>
+								<td>{{ (item.rowTotal - item.discountAmount) |format_price(order.orderCurrencyCode) }}</td>
+								<td class="actions">
+								{% if item.canEdit() and is_granted(['ROLE_SERVICE']) %}
+								<a href="{{ path('admin_sales_order_item_edit', {'order_id': order.id, 'id': item.id}) }}" class="btn btn-primary btn-sm btn-block">{% trans %}Edit{% endtrans %}</a>
+								{% endif %}
+
+								{% if item.canCancel() and is_granted(['ROLE_SERVICE']) %}
+								<a href="{{ path('admin_sales_order_item_cancel', {'order_id': order.id, 'id': item.id}) }}" class="btn btn-primary btn-sm btn-block">{% trans %}Cancel{% endtrans %}</a>
+								{% endif %}
+
+								{% if item.canRefund() and is_granted(['ROLE_SERVICE']) %}
+								<a href="{{ path('admin_sales_order_item_refund', {'order_id': order.id, 'id': item.id}) }}" class="btn btn-primary btn-sm btn-block">{% trans %}Refund{% endtrans %}</a>
+								{% endif %}
+
+								<a href="{{ path('admin_sales_order_item_exchange', {'order_id': order.id, 'id': item.id}) }}" class="btn btn-primary btn-sm btn-block">{% trans %}Exchange{% endtrans %}</a>
+
+								{% if item.getRefunds().isEmpty() != true %}
+								<a href="{{ path('admin_sales_order_refund_view_item', {'id': item.id}) }}" class="btn btn-primary btn-sm btn-block">{% trans %}Refund Detail{% endtrans %}</a>
+								{% endif %}	
+
+								{% if is_granted(['ROLE_SUPPER_ADMIN']) %}
+								<a href="{{ path('admin_sales_order_item_remove', {'order_id': order.id, 'id': item.id}) }}" class="btn btn-primary btn-sm btn-block">{% trans %}Remove{% endtrans %}</a>
+								{% endif %}					
+								</td>
+							</tr>
+						{% endfor %}
+						</tbody>
+					</table>
+					</div>
+				</div>
+			</div>
+		</div>	
+	</div>
+
+	<div class="row">
+		<div class="col-sm-12 col-md-6">
+			<div class="card mb-2">
+				<div class="card-header d-flex">
+					{% trans %}Order Comments{% endtrans %}
+					<div class="ml-auto actions">
+					<a href="{{ path('admin_sales_order_comments', {'order_id':order.id}) }}">{% trans %}View All{% endtrans %}</a>
+					</div>
+				</div>
+				<div class="card-body">
+					<div class="mt-sm-n2 mr-sm-n2 mb-sm-n2 ml-sm-n2">
+						{{ form(formComment) }}
+						<ul class="order-comments">
+						{% for comment in order.getComments().slice(0, 10) %}
+							<li>
+								<strong>
+									{% if comment.user %}
+									{{ comment.getUser().getFullname() }}
+									{% else %}
+									{% trans %}System{% endtrans %}
+									{% endif %}
+									{{ comment.createdAt|date('Y-m-d H:i:s') }} | {{ comment.status|order_status|trans }}
+								</strong>
+								<p>
+								<small>
+								{% if comment.isCustomerNotified == 2 %}
+								Customer Notified
+								{% else %}
+								Customer Notification Not Applicable
+								{% endif %}
+								</small>
+								</p>
+								<small>{{ comment.comment|raw }}</small>
+							</li>
+						{% endfor %}
+						</ul>
+					</div>						
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-12 col-md-6">
+			<div class="card mb-2">
+				<div class="card-header">
+					{% trans %}Order Totals{% endtrans %}
+				</div>
+				<div class="card-body">
+					<div class="mt-sm-n2 mr-sm-n2 mb-sm-n2 ml-sm-n2">
+						<span class="d-block">{% trans %}Subtotal{% endtrans %}: {{ order.subTotal|format_price(order.orderCurrencyCode) }}</span>
+						<span class="d-block">{% trans %}Shipping Amount{% endtrans %}: {{ order.shippingAmount|format_price(order.orderCurrencyCode) }}</span>
+						<span class="d-block">{% trans %}Tax Amount{% endtrans %}: {{ order.taxAmount|format_price(order.orderCurrencyCode) }}</span>
+						<span class="d-block">{% trans %}Discount Amount{% endtrans %}: {{ order.discountAmount|format_price(order.orderCurrencyCode) }}</span>
+						<span class="d-block">{% trans %}Grand Total{% endtrans %}: {{ order.grandTotal|format_price(order.orderCurrencyCode) }}</span>
+					</div>						
+				</div>
+			</div>
+
+			{% if order.getShipments().isEmpty() != true %}
+			<div class="card mb-2">
+				<div class="card-header d-flex">
+					{% trans %}Track Number{% endtrans %}
+					<div class="ml-auto actions">
+					<a href="{{ path('admin_sales_shipment') }}">{% trans %}View All{% endtrans %}</a>
+					<a href="{{ path('admin_sales_order_shipment_platform_push', {'order_id':order.id}) }}">{% trans %}Push Tracking Number{% endtrans %}</a>
+					</div>					
+				</div>
+				<div class="card-body">
+					<div class="mt-sm-n2 mr-sm-n2 mb-sm-n2 ml-sm-n2">
+						<table class="table table-bordered" width="100%" cellspacing="0">
+						<colgroup>
+							<col>
+							<col width="100">
+							<col width="100">
+							<col>
+							<col>
+						</colgroup>								
+							<thead>
+								<tr>
+									<th>{% trans %}Shipment #{% endtrans %}</th>
+									<th>{% trans %}Date Shipped{% endtrans %}</th>							
+									<th>{% trans %}Updated At{% endtrans %}</th>							
+									<th>{% trans %}Ship To Name{% endtrans %}</th>							
+									<th>{% trans %}Track Number{% endtrans %}</th>							
+								</tr>
+							</thead>
+							<tbody>
+							{% for shipment in order.getShipments().slice(0, 10) %}
+								<tr>
+									<td>{{ shipment.incrementId }}</td>
+									<td>{{ shipment.createdAt|date('Y-m-d H:i:s') }}</td>
+									<td>{{ shipment.updatedAt|date('Y-m-d H:i:s') }}</td>
+									<td>{{ shipment.getParent().getShippingAddress().firstname }} {{ shipment.getParent().getShippingAddress().lastname }}</td>
+									<td>
+									{% for track in shipment.getTracks() %}
+										<span class="d-block">{{ track.title }}: <a href="{{ ApiServices.ShipmentTrack|replace({'%track_number%': track.trackNumber}) }}" target="_blank"  title="{% trans %}View Shipment Detail{% endtrans %}">{{ track.trackNumber }}</a></span>
+									{% endfor %}
+									</td>
+								</tr>
+							{% endfor %}
+							</tbody>
+						</table>
+					</div>						
+				</div>
+			</div>
+			{% endif %}			
+		</div>		
+	</div>				
+</div>
+{% endblock %}

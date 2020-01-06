@@ -1,0 +1,48 @@
+<div class="table-responsive" data-filter-response>
+	<div class="dataTables_wrapper">
+
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="actions">
+					<div class="row">
+						<div class="col-sm-12 col-md-8">
+							<a href="javascript:;" class="select-all">{% trans %}Select All{% endtrans %}</a>
+							<span class="separator">|</span>
+							<a href="javascript:;" class="unselect-all">{% trans %}Unselect All{% endtrans %}</a>
+						</div>
+						<div class="col-sm-12 col-md-4">
+							<div class="handle-action">
+								{% trans %}Actions{% endtrans %}
+								<select class="form-control form-control-sm" name="action">
+									<option></option>
+									<option value="delete">{% trans %}Delete{% endtrans %}</option>
+								</select>
+								<button class="btn btn-dark btn-sm">{% trans %}Submit{% endtrans %}</button>
+							</div>
+						</div>								
+					</div>
+				</div>					
+				<table class="table table-bordered" width="100%" cellspacing="0">
+					<thead>
+						<tr>
+							<th>{% trans %}Username{% endtrans %}</th>
+							<th>{% trans %}Fullname{% endtrans %}</th>
+							<th>{% trans %}Ip{% endtrans %}</th>
+							<th>{% trans %}Logged At{% endtrans %}</th>
+						</tr>
+					</thead>
+					<tbody>
+					{% for history in user.getLoginHistory() %}
+						<tr>
+							<td>{{ user.username }}</td>
+							<td>{{ user.getFullname() }}</td>
+							<td><a href="{{ ApiServices.IpSearch }}#{{ history.ip }}" target="_blank"  title="{% trans %}View Detail{% endtrans %}">{{ history.ip }}</a></td>
+							<td>{{ history.createdAt|date('Y-m-d H:i:s') }}</td>
+						</tr>
+					{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
