@@ -58,7 +58,50 @@ final class Version20190709033857 extends AbstractMigration
                 UNIQUE INDEX UNIQ_NAME (name), 
                 PRIMARY KEY(id)
             ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB'
+        );
+
+        $this->addSql('
+            CREATE TABLE api_user (
+                id INT AUTO_INCREMENT NOT NULL,
+                username VARCHAR(40) NOT NULL,
+                security_key VARCHAR(100) NOT NULL,
+                is_active TINYINT(1) NOT NULL,
+                created_at DATETIME DEFAULT NULL, PRIMARY KEY(id)
+            ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB'
+        );
+
+        $this->addSql('
+            CREATE TABLE core_config (
+                id INT AUTO_INCREMENT NOT NULL,
+                path VARCHAR(255) NOT NULL,
+                value LONGTEXT DEFAULT NULL,
+                PRIMARY KEY(id)
+            ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB'
         );        
+
+        $this->addSql('
+            CREATE TABLE sync_record (
+                id INT AUTO_INCREMENT NOT NULL,
+                last_entity_id INT NOT NULL,
+                entity_type VARCHAR(255) NOT NULL,
+                created_at DATETIME NOT NULL,
+                updated_at DATETIME NOT NULL,
+                UNIQUE INDEX UNIQ_entity_type (entity_type),
+                PRIMARY KEY(id)
+            ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB'
+        );
+
+        $this->addSql('
+            CREATE TABLE config_shipping_method (
+                id INT AUTO_INCREMENT NOT NULL,
+                code VARCHAR(255) NOT NULL,
+                active TINYINT(1) DEFAULT NULL,
+                title VARCHAR(255) DEFAULT NULL,
+                name VARCHAR(255) DEFAULT NULL,
+                price DOUBLE PRECISION DEFAULT NULL,
+                PRIMARY KEY(id)
+            ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB'
+        );
 
         // 产品相关表
        $this->addSql('
@@ -79,6 +122,7 @@ final class Version20190709033857 extends AbstractMigration
                 inventory INT DEFAULT NULL, 
                 purchase_url VARCHAR(255) DEFAULT NULL, 
                 supplier_id INT DEFAULT NULL,
+                has_sample TINYINT(1) DEFAULT NULL,
                 created_at DATETIME NOT NULL, 
                 updated_at DATETIME NOT NULL, 
                 PRIMARY KEY(id),
@@ -138,13 +182,16 @@ final class Version20190709033857 extends AbstractMigration
             CREATE TABLE product_option_dropdown (
                 id INT AUTO_INCREMENT NOT NULL, 
                 parent_id INT NOT NULL, 
+                parent_option_id INT DEFAULT NULL,
                 title VARCHAR(255) DEFAULT NULL, 
                 price DOUBLE PRECISION DEFAULT NULL, 
                 price_type VARCHAR(50) DEFAULT NULL, 
                 sku VARCHAR(50) DEFAULT NULL, 
-                inventory INT DEFAULT NULL, 
+                inventory INT DEFAULT NULL,
+                inventory_low INT DEFAULT NULL,
                 sort_order INT DEFAULT NULL, 
                 INDEX IDX_A938C737727ACA70 (parent_id), 
+                INDEX IDX_6543D674568F3281 (parent_option_id),
                 PRIMARY KEY(id)
             ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB'
         );
@@ -191,6 +238,7 @@ final class Version20190709033857 extends AbstractMigration
                 customer_is_guest TINYINT(1) NOT NULL, 
                 order_id INT(11) NOT NULL,
                 order_type smallint(5) UNSIGNED NOT NULL, 
+                tracking_number_to_platform_synced TINYINT(1) DEFAULT NULL,
                 created_at DATETIME NOT NULL, 
                 updated_at DATETIME NOT NULL, 
                 PRIMARY KEY(id)
@@ -287,6 +335,7 @@ final class Version20190709033857 extends AbstractMigration
                 postcode VARCHAR(50) NOT NULL, 
                 country_id VARCHAR(50) NOT NULL, 
                 telephone VARCHAR(50) DEFAULT NULL, 
+                is_wrong TINYINT(1) DEFAULT NULL,
                 INDEX IDX_DAB3402E727ACA70 (parent_id), 
                 PRIMARY KEY(id)
             ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB'
@@ -313,6 +362,11 @@ final class Version20190709033857 extends AbstractMigration
         $this->addSql('DROP TABLE `sessions`');
         $this->addSql('DROP TABLE user');
         $this->addSql('DROP TABLE user_role');
+        $this->addSql('DROP TABLE api_user');
+        $this->addSql('DROP TABLE core_config');
+        $this->addSql('DROP TABLE sync_record');
+
+        $this->addSql('DROP TABLE config_shipping_method');
         
         $this->addSql('DROP TABLE product');
         $this->addSql('DROP TABLE product_media');
