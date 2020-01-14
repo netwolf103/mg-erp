@@ -10,6 +10,7 @@ use App\Controller\AdminControllerAbstract;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 
+use App\Traits\ConfigTrait;
 use App\Repository\Sales\OrderRepository;
 use App\Repository\Sales\Order\InvoiceRepository;
 
@@ -154,7 +155,7 @@ class InvoiceController extends AdminControllerAbstract
         
         // Retrieve the HTML generated in our twig file
         $html = $this->renderView('admin/sales/order/invoice/print.html.twig', [
-            'title' => sprintf('Swetelove Invoice # %s', $invoice->getIncrementId()),
+            'title' => sprintf('%s Invoice # %s', ConfigTrait::configWebname(), $invoice->getIncrementId()),
             'invoice' => $invoice,
             'order' => $invoice->getParent()            
         ]);
