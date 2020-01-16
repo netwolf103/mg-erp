@@ -11,7 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 /**
- * 产品采购采购单备注表单
+ * Form type class of purchase order Comment.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

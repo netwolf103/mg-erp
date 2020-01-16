@@ -5,7 +5,7 @@ namespace App\Api\Geosearch;
 use App\Api\Geosearch\ApiInterface;
 
 /**
- * Geosearch api abstract class.
+ * Abstract class of geosearch api.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

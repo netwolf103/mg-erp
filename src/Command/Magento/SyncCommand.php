@@ -16,7 +16,7 @@ use App\Entity\SyncRecord;
 use App\Traits\ConfigTrait;
 
 /**
- * Abstract class for all sync commands.
+ * Command of magento sync.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

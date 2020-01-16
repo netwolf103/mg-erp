@@ -9,7 +9,7 @@ use Twig\TwigFunction;
 use App\Entity\User;
 
 /**
- * Twig extension for user
+ * Twig extension class of user
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

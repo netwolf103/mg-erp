@@ -7,7 +7,7 @@ use App\Entity\Product;
 use App\Repository\AbstractRepository;
 
 /**
- * Repository for product.
+ * Repository class of product.
  *
  * @method Product|null find($id, $lockMode = null, $lockVersion = null)
  * @method Product|null findOneBy(array $criteria, array $orderBy = null)

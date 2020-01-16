@@ -11,7 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\CountryType;
 
 /**
- * 地址表单
+ * Form type class of Address
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

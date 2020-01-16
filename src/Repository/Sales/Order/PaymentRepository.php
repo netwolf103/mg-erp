@@ -7,7 +7,7 @@ use App\Entity\Sales\Order\Payment;
 use App\Repository\AbstractRepository;
 
 /**
- * Repository for order payment.
+ * Repository class of order payment.
  * 
  * @method Payment|null find($id, $lockMode = null, $lockVersion = null)
  * @method Payment|null findOneBy(array $criteria, array $orderBy = null)

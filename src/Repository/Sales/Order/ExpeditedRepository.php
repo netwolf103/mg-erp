@@ -7,7 +7,7 @@ use App\Entity\Sales\Order\Expedited;
 use App\Repository\AbstractRepository;
 
 /**
- * Repository for Order Expedited.
+ * Repository class of expedited order.
  * 
  * @method Expedited|null find($id, $lockMode = null, $lockVersion = null)
  * @method Expedited|null findOneBy(array $criteria, array $orderBy = null)
@@ -21,7 +21,7 @@ class ExpeditedRepository extends AbstractRepository
     protected $entityClass = Expedited::class;
 
     /**
-     * Return orders.
+     * Return order expediteds.
      *
      * @param  array       $query
      * @param  int|integer $currentPage

@@ -14,7 +14,7 @@ use App\Repository\Sales\Order\ExpeditedRepository;
 use App\Form\Sales\Order\ExpeditedType;
 
 /**
- * Controller for order expedited
+ * Controller of order expedited.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

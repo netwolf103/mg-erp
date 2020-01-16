@@ -7,7 +7,7 @@ use App\Entity\Customer\Address;
 use App\Repository\AbstractRepository;
 
 /**
- * Repository for customer address.
+ * Repository class of customer address.
  * 
  * @method Address|null find($id, $lockMode = null, $lockVersion = null)
  * @method Address|null findOneBy(array $criteria, array $orderBy = null)

@@ -12,7 +12,7 @@ use App\Entity\SaleOrder;
 use App\Entity\Product\Purchase\Order as PurchaseOrder;
 
 /**
- * Twig extension for order
+ * Twig extension class of order.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

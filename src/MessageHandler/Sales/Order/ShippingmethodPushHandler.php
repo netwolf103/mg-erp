@@ -18,7 +18,7 @@ use App\Traits\ConfigTrait;
 class ShippingmethodPushHandler extends MessageHandlerAbstract
 {
     /**
-     * Order address handler.
+     * Push order shipping method handler.
      * 
      * @param  ShippingmethodPush $shippingmethodPush
      * @return void

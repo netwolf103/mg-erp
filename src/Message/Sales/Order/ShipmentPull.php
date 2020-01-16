@@ -18,7 +18,7 @@ class ShipmentPull
     /**
      * Track data.
      * 
-     * @param int $orderId
+     * @param array $data
      */
     public function __construct(array $data)
     {

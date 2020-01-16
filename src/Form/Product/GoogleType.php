@@ -12,7 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 /**
- * Form for google product
+ * Form type class of Google.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

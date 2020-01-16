@@ -8,7 +8,7 @@ use Twig\TwigFunction;
 use Symfony\Component\Intl\Intl;
 
 /**
- * Twig extension for country.
+ * Twig extension class of country.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

@@ -5,7 +5,7 @@ namespace App\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * 控制器查询trait
+ * Trait class of QueryFilter
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

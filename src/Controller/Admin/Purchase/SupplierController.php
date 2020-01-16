@@ -12,7 +12,7 @@ use App\Repository\Purchase\SupplierRepository;
 use App\Form\Purchase\SupplierType;
 
 /**
- * Controller for Supplier
+ * Controller of supplier.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

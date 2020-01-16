@@ -7,7 +7,7 @@ use App\Entity\Sales\Order\Invoice\Item;
 use App\Repository\AbstractRepository;
 
 /**
- * Repository for order item.
+ * Repository class of order invoice items.
  * 
  * @method Item|null find($id, $lockMode = null, $lockVersion = null)
  * @method Item|null findOneBy(array $criteria, array $orderBy = null)

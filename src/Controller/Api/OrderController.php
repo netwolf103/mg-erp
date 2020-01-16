@@ -12,7 +12,7 @@ use App\Repository\Sales\OrderRepository;
 use App\Message\Sales\OrderPull;
 
 /**
- * Controller for Order
+ * Controller of order api.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

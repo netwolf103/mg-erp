@@ -8,7 +8,7 @@ use Twig\TwigFunction;
 use App\Entity\Sales\Order\Item;
 
 /**
- * Twig extension for order item
+ * Twig extension class of order item
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

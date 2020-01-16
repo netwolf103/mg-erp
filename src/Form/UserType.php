@@ -16,7 +16,7 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 /**
- * 用户表单
+ * Form type class of User.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */
@@ -24,6 +24,11 @@ class UserType extends AbstractType
 {
     private $roleRepository;
 
+    /**
+     * Init role repository.
+     * 
+     * @param RoleRepository $roleRepository
+     */
     public function __construct(RoleRepository $roleRepository)
     {
         $this->roleRepository = $roleRepository;
@@ -87,6 +92,11 @@ class UserType extends AbstractType
         ]);
     }
 
+    /**
+     * Return all roles.
+     * 
+     * @return array
+     */
     private function getAllUserRoles()
     {
         $roles = [];

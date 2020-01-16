@@ -13,7 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use App\Form\Product\Purchase\Order\ItemType;
 
 /**
- * 产品订单采购表单
+ * Form type for purchase Order
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

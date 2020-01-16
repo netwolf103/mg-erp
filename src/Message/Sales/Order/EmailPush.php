@@ -19,7 +19,6 @@ class EmailPush
      * Order init.
      * 
      * @param int    $orderId
-     * @param string $email
      */
     public function __construct(int $orderId)
     {

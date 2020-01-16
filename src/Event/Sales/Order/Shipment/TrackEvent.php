@@ -13,7 +13,7 @@ use App\Entity\Sales\Order\Shipment;
 use App\Entity\Sales\Order\Shipment\Track;
 
 /**
- * Sale order address event.
+ * Event class or shipment track.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

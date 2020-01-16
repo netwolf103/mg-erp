@@ -19,7 +19,7 @@ use App\Form\Product\Option\FieldType;
 use App\Form\Product\Option\DropdownType;
 
 /**
- * 产品自定义选项表单
+ * Form type class of product Option.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

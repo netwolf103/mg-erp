@@ -19,7 +19,7 @@ use App\Entity\Sales\Order\Shipment\Item;
 use App\Entity\Sales\Order\Shipment\Track;
 
 /**
- * Command for sync sales order shipment
+ * Command of sync order shipment.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

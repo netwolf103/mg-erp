@@ -15,7 +15,7 @@ use App\Entity\Sales\Order\Item;
 use App\Repository\Product\Option\DropdownRepository;
 
 /**
- * Sale order address event.
+ * Event class of order item.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

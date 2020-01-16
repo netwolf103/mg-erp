@@ -7,7 +7,7 @@ use App\Controller\AdminControllerAbstract;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Controller for Stat
+ * Controller of Stat
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

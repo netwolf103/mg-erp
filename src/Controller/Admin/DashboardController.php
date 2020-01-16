@@ -10,7 +10,7 @@ use App\Repository\Sales\OrderRepository;
 use App\Repository\CustomerRepository;
 
 /**
- * Controller for Dashboard
+ * Controller of Dashboard
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

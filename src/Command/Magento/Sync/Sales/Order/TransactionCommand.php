@@ -12,7 +12,7 @@ use App\Entity\SaleOrder;
 use App\Message\Sales\Order\Payment\TransactionPull;
 
 /**
- * Command for sync sales order shipment
+ * Command of sync order transaction.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

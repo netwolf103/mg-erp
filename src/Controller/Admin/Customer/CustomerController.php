@@ -11,7 +11,7 @@ use App\Repository\CustomerRepository;
 use App\Message\CustomerPull;
 
 /**
- * Controller for Order
+ * Controller of customer.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

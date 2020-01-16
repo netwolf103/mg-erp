@@ -8,7 +8,7 @@ use Twig\TwigFilter;
 use Twig\TwigFunction;
 
 /**
- * Twig extension for google product
+ * Twig extension class of google product.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */
@@ -24,6 +24,12 @@ class GoogleExtension extends AbstractExtension
         ];
     }
 
+    /**
+     * Return yes or no.
+     *
+     * @param  bool   $value
+     * @return string
+     */
     public function getYesOrNo(?bool $value): string
     {
         return $value ? 'Yes' : 'No';

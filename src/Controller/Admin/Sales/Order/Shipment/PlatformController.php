@@ -11,7 +11,7 @@ use App\Repository\Sales\OrderRepository;
 use App\Message\Sales\Order\Shipment\PlatformPush;
 
 /**
- * Controller for Platform Shipment
+ * Controller of shipment to platform.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

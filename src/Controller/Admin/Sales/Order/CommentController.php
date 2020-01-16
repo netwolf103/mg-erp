@@ -17,7 +17,7 @@ use App\Form\Sales\Order\CommentType;
 use App\Message\Sales\Order\CommentPush;
 
 /**
- * Controller for order comment
+ * Controller of order comment.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

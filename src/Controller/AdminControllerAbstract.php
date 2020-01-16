@@ -11,7 +11,7 @@ use App\Controller\QueryFilterTrait;
 use App\Event\ControllerEvent;
 
 /**
- * Abstract controller for Admin
+ * Controller of AdminControllerAbstract.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

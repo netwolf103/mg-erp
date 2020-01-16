@@ -6,7 +6,7 @@ use App\Entity\Product\Stock\Alert;
 use App\Repository\AbstractRepository;
 
 /**
- * Repository for product stock alert.
+ * Repository class of product stock alert.
  * 
  * @method Alert|null find($id, $lockMode = null, $lockVersion = null)
  * @method Alert|null findOneBy(array $criteria, array $orderBy = null)

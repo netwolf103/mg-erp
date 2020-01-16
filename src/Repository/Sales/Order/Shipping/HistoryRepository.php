@@ -6,7 +6,7 @@ use App\Entity\Sales\Order\Shipping\History;
 use App\Repository\AbstractRepository;
 
 /**
- * Sales order shipping repository
+ * Repository class of order shipping.
  * 
  * @method History|null find($id, $lockMode = null, $lockVersion = null)
  * @method History|null findOneBy(array $criteria, array $orderBy = null)

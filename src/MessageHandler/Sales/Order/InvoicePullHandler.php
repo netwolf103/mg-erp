@@ -14,7 +14,7 @@ use App\Message\Sales\Order\InvoicePull;
 use App\Traits\ConfigTrait;
 
 /**
- * Message handler for order address push.
+ * Message handler for order invoice pull.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

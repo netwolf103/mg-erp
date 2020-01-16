@@ -10,7 +10,7 @@ use App\Controller\AdminControllerAbstract;
 use App\Repository\UserRepository;
 
 /**
- * Controller for User login history
+ * Controller of user login history
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

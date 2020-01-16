@@ -15,7 +15,7 @@ use App\Message\Catalog\Category\Product\Google\Delete as GoogleDelete;
 use App\Form\Product\GoogleType;
 
 /**
- * Controller for google product.
+ * Controller of google product.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

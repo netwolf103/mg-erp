@@ -7,6 +7,8 @@ use App\Entity\User\Role;
 use App\Repository\AbstractRepository;
 
 /**
+ * Repository class of user role.
+ * 
  * @method Role|null find($id, $lockMode = null, $lockVersion = null)
  * @method Role|null findOneBy(array $criteria, array $orderBy = null)
  * @method Role[]    findAll()
@@ -17,7 +19,7 @@ class RoleRepository extends AbstractRepository
 	protected $entityClass = Role::class;
 
     /**
-     * Return users.
+     * Return roles.
      *
      * @param  array       $query
      * @param  int|integer $currentPage

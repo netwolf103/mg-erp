@@ -14,7 +14,7 @@ use Symfony\Component\Messenger\MessageBusInterface;
 use App\Message\Catalog\Category\Product\Alert;
 
 /**
- * Subscriber of item.
+ * Event subscriber class of order item.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */
@@ -27,6 +27,11 @@ class ItemSubscriber implements EventSubscriber
      */
     private $bus;
 
+    /**
+     * Init message bus.
+     *
+     * @param MessageBusInterface $bus [description]
+     */
     public function __construct(MessageBusInterface $bus)
     {
         $this->bus = $bus;

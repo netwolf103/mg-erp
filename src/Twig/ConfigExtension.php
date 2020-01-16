@@ -9,12 +9,17 @@ use App\Traits\ConfigTrait;
 use Doctrine\ORM\EntityManagerInterface;
 
 /**
- * Twig extension for config.
+ * Twig extension class of config.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */
 class ConfigExtension extends AbstractExtension
 {
+    /**
+     * Init entity manager.
+     *
+     * @param EntityManagerInterface $em [description]
+     */
     public function __construct(EntityManagerInterface $em)
     {
         ConfigTrait::loadConfigs($em);

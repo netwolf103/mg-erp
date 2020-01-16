@@ -5,7 +5,7 @@ namespace App\Api\Magento1x\Soap;
 use App\Api\Magento1x\Soap\SoapInterface;
 
 /**
- * Magento 1.x soap client abstract class.
+ * Abstract class of Magento 1.x soap client.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

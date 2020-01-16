@@ -7,7 +7,7 @@ use App\Entity\SaleOrder;
 use App\Entity\Config\Shipping\Method;
 
 /**
- * Trait for rates.
+ * Trait class of shipping.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

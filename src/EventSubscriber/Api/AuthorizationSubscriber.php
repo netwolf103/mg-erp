@@ -11,12 +11,18 @@ use App\Controller\ApiControllerAbstract;
 use App\Entity\Api\User;
 
 /**
- * Subscriber of api authorization.
+ * Event subscriber class of api authorization.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */
 class AuthorizationSubscriber implements EventSubscriberInterface
 {
+    /**
+     * Api auth.
+     * 
+     * @param  ControllerEvent $event
+     * @return mixed
+     */
     public function onKernelController(ControllerEvent $event)
     {
         $controller = $event->getController();

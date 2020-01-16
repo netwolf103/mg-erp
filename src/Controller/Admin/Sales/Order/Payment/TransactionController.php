@@ -12,7 +12,7 @@ use App\Repository\Sales\Order\Payment\TransactionRepository;
 use App\Message\Sales\Order\Payment\TransactionPull;
 
 /**
- * Controller for Order Payment Transaction
+ * Controller of order transaction.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

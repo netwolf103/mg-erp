@@ -5,7 +5,7 @@ namespace App\Api\Paypal\Reset;
 use App\Api\Paypal\Reset\ResetInterface;
 
 /**
- * Paypal reset api abstract class.
+ * Abstract class of paypal api.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

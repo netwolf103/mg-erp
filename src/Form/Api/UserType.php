@@ -10,7 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 /**
- * Form for api user.
+ * Form type class of api UserType.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

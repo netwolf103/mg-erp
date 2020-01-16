@@ -6,7 +6,7 @@ use App\Entity\Product\Purchase\Order;
 use App\Repository\AbstractRepository;
 
 /**
- * Repository for product purchase order.
+ * Repository class of product purchase order.
  * 
  * @method Order|null find($id, $lockMode = null, $lockVersion = null)
  * @method Order|null findOneBy(array $criteria, array $orderBy = null)
@@ -20,7 +20,7 @@ class OrderRepository extends AbstractRepository
     protected $entityClass = Order::class;
 
     /**
-     * Return orders.
+     * Return purchase orders.
      *
      * @param  array       $query
      * @param  int|integer $currentPage

@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
- * Controller for User
+ * Controller of user
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

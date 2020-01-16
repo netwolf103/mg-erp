@@ -12,7 +12,7 @@ use App\Repository\Sales\Order\RefundRepository;
 use App\Repository\Sales\Order\ItemRepository;
 
 /**
- * Controller for Order Refund
+ * Controller of order refund
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

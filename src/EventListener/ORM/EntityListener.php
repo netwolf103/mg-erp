@@ -7,12 +7,18 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
 
 /**
- * Listener of controller.
+ * Event listener class of entity.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */
 class EntityListener
 {
+	/**
+	 * Entity pre update.
+	 * 
+	 * @param  LifecycleEventArgs $args
+	 * @return mixed
+	 */
     public function preUpdate(LifecycleEventArgs $args)
     {
         $entity = $args->getObject();

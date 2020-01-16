@@ -2,7 +2,7 @@
 namespace App\Traits;
 
 /**
- * Trait for datetime.
+ * Trait class of datetime.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

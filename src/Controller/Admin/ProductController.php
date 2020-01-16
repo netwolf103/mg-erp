@@ -21,7 +21,7 @@ use App\Message\Catalog\Category\ProductPull;
 use App\Traits\RatesTrait;
 
 /**
- * Controller for Product
+ * Controller of Product
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

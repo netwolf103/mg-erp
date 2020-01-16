@@ -7,7 +7,7 @@ use App\Entity\Sales\Order\Item;
 use App\Repository\AbstractRepository;
 
 /**
- * Sales order item repository.
+ * Repository class of order item.
  *
  * @method Item|null find($id, $lockMode = null, $lockVersion = null)
  * @method Item|null findOneBy(array $criteria, array $orderBy = null)

@@ -24,7 +24,7 @@ use App\Entity\Product;
 use App\Entity\Supplier;
 
 /**
- * 产品表单
+ * Form type class of Product.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

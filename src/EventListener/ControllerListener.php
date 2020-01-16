@@ -7,7 +7,7 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\ControllerTrait;
 
 /**
- * Listener of controller.
+ * Event listener class of controller.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

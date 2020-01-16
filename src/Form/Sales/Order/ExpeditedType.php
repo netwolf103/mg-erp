@@ -10,7 +10,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 /**
- * Form for Order Expedited
+ * Form type class of Expedited
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

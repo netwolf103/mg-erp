@@ -6,7 +6,7 @@ use App\Entity\Config\Core;
 use App\Repository\AbstractRepository;
 
 /**
- * Repository for core config.
+ * Repository class of core config.
  * 
  * @method Core|null find($id, $lockMode = null, $lockVersion = null)
  * @method Core|null findOneBy(array $criteria, array $orderBy = null)

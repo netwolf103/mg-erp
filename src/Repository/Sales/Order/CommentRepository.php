@@ -7,7 +7,7 @@ use App\Entity\Sales\Order\Comment;
 use App\Repository\AbstractRepository;
 
 /**
- * Order comment repository.
+ * Repository class of order comment.
  * 
  * @method Comment|null find($id, $lockMode = null, $lockVersion = null)
  * @method Comment|null findOneBy(array $criteria, array $orderBy = null)
@@ -21,7 +21,7 @@ class CommentRepository extends AbstractRepository
 	protected $entityClass = Comment::class;
 
     /**
-     * Return orders.
+     * Return order comments.
      *
      * @param  array       $query
      * @param  int|integer $currentPage

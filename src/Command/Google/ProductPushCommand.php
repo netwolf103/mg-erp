@@ -16,7 +16,7 @@ use App\Entity\Product\Google as GoogleEntity;
 use App\Traits\ConfigTrait;
 
 /**
- * Class for push product to google commands.
+ * Command of push product to google.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

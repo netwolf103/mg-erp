@@ -8,7 +8,7 @@ use Twig\TwigFilter;
 use App\Entity\Sales\Order\Invoice;
 
 /**
- * Twig extension for order invoice
+ * Twig extension class of order invoice
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

@@ -7,7 +7,7 @@ use App\Entity\Sales\Order\Refund\Track;
 use App\Repository\AbstractRepository;
 
 /**
- * Repository for order refund track.
+ * Repository class of order refund track.
  * 
  * @method Track|null find($id, $lockMode = null, $lockVersion = null)
  * @method Track|null findOneBy(array $criteria, array $orderBy = null)

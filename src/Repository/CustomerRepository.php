@@ -7,6 +7,8 @@ use App\Entity\Customer;
 use App\Repository\AbstractRepository;
 
 /**
+ * Repository class of customer.
+ *
  * @method Customer|null find($id, $lockMode = null, $lockVersion = null)
  * @method Customer|null findOneBy(array $criteria, array $orderBy = null)
  * @method Customer[]    findAll()
@@ -17,7 +19,7 @@ class CustomerRepository extends AbstractRepository
     protected $entityClass = Customer::class;
 
     /**
-     * Return orders.
+     * Return customers.
      *
      * @param  array       $query
      * @param  int|integer $currentPage

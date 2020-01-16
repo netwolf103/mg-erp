@@ -19,7 +19,7 @@ use App\Message\Sales\Order\HoldPush as OrderHoldPush;
 use App\Message\Sales\Order\UnHoldPush as OrderUnHoldPush;
 
 /**
- * Controller for Order
+ * Controller of sale order.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

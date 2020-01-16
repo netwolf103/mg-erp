@@ -19,7 +19,7 @@ use Symfony\Component\Intl\Intl;
 use App\Currency\Rates;
 
 /**
- * 订单Item表单
+ * Form type class of Item
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

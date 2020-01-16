@@ -7,7 +7,7 @@ use App\Entity\Sales\Order\Refund;
 use App\Repository\AbstractRepository;
 
 /**
- * Order refund repository.
+ * Repository class of refund order.
  * 
  * @method Refund|null find($id, $lockMode = null, $lockVersion = null)
  * @method Refund|null findOneBy(array $criteria, array $orderBy = null)
@@ -21,7 +21,7 @@ class RefundRepository extends AbstractRepository
     protected $entityClass = Refund::class;
 
     /**
-     * Return orders.
+     * Return refund orders.
      *
      * @param  array       $query
      * @param  int|integer $currentPage

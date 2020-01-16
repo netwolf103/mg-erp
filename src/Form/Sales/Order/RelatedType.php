@@ -10,7 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 /**
- * Form for related order
+ * Form type class of Related
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

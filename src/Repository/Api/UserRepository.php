@@ -6,7 +6,7 @@ use App\Entity\Api\User;
 use App\Repository\AbstractRepository;
 
 /**
- * Repository for api user.
+ * Repository class of api user.
  * 
  * @method User|null find($id, $lockMode = null, $lockVersion = null)
  * @method User|null findOneBy(array $criteria, array $orderBy = null)
@@ -20,7 +20,7 @@ class UserRepository extends AbstractRepository
     protected $entityClass = User::class;
 
     /**
-     * Return users.
+     * Return api users.
      *
      * @param  array       $query
      * @param  int|integer $currentPage

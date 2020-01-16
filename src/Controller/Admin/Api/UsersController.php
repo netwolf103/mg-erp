@@ -11,6 +11,11 @@ use App\Entity\Api\User;
 use App\Repository\Api\UserRepository;
 use App\Form\Api\UserType;
 
+/**
+ * Controller of user api.
+ *
+ * @author Zhang Zhao <netwolf103@gmail.com>
+ */
 class UsersController extends AdminControllerAbstract
 {
     /**

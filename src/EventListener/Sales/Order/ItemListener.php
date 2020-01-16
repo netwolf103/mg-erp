@@ -14,7 +14,7 @@ use App\Entity\Sales\Order\Refund\Track;
 use App\Repository\Product\Option\DropdownRepository;
 
 /**
- * Listener of item.
+ * Event listener class of order item.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */
@@ -22,6 +22,11 @@ class ItemListener
 {
     private $rates;
 
+    /**
+     * Init ParameterBag
+     *
+     * @param ParameterBagInterface $parameter
+     */
     public function __construct(ParameterBagInterface $parameter)
     {
         $this->rates = new Rates($parameter);

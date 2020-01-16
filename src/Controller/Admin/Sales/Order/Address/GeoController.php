@@ -11,7 +11,7 @@ use App\Repository\Sales\Order\Address\GeoRepository;
 use App\Message\Sales\Order\Address\GeoPull;
 
 /**
- * Controller for Order Address Geo
+ * Controller of order address geo.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

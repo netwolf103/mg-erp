@@ -17,7 +17,7 @@ use App\Repository\ProductRepository;
 use App\Repository\Product\Purchase\OrderRepository;
 
 /**
- * Controller for product purchase order.
+ * Controller of product purchase order.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

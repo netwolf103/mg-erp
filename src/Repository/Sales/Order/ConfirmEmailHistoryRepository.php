@@ -6,7 +6,7 @@ use App\Entity\Sales\Order\ConfirmEmailHistory;
 use App\Repository\AbstractRepository;
 
 /**
- * Order confirm email history repository.
+ * Repository class of order confirm email history.
  * 
  * @method ConfirmEmailHistory|null find($id, $lockMode = null, $lockVersion = null)
  * @method ConfirmEmailHistory|null findOneBy(array $criteria, array $orderBy = null)
@@ -20,7 +20,7 @@ class ConfirmEmailHistoryRepository extends AbstractRepository
     protected $entityClass = ConfirmEmailHistory::class;
 
     /**
-     * Return order items.
+     * Return order onfirm emails.
      *
      * @param  array       $query
      * @param  int|integer $currentPage

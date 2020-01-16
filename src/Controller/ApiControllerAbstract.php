@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Controller\AdminControllerAbstract;
 
 /**
- * Abstract controller for Api
+ * Controller of ApiControllerAbstract.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

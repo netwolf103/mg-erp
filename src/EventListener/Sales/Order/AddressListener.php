@@ -8,7 +8,7 @@ use App\Entity\Sales\Order\Address;
 use App\Entity\Sales\Order\Address\History;
 
 /**
- * Listener of address.
+ * Event listener class of order address.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

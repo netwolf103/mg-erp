@@ -6,7 +6,7 @@ use Symfony\Component\EventDispatcher\Event;
 use Doctrine\ORM\EntityManagerInterface;
 
 /**
- * Sale order event.
+ * Event class of controller.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

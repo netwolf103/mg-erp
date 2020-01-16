@@ -17,7 +17,7 @@ use App\Form\Sales\Order\AddressType;
 use App\Message\Sales\Order\AddressPush;
 
 /**
- * Controller for Order Address
+ * Controller of order address.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

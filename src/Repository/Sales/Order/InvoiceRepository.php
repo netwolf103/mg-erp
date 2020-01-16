@@ -7,7 +7,7 @@ use App\Entity\Sales\Order\Invoice;
 use App\Repository\AbstractRepository;
 
 /**
- * Sale order invoice repository.
+ * Repository class of order invoice.
  * 
  * @method Invoice|null find($id, $lockMode = null, $lockVersion = null)
  * @method Invoice|null findOneBy(array $criteria, array $orderBy = null)
@@ -21,7 +21,7 @@ class InvoiceRepository extends AbstractRepository
     protected $entityClass = Invoice::class;
 
     /**
-     * Return orders.
+     * Return order invoices.
      *
      * @param  array       $query
      * @param  int|integer $currentPage

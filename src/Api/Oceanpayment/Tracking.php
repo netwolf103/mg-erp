@@ -5,7 +5,7 @@ namespace App\Api\Oceanpayment;
 use App\Api\Oceanpayment\ApiAbstract;
 
 /**
- * Oceanpayment api abstract class.
+ * Class of oceanpayment tracking.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

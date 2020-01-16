@@ -6,7 +6,7 @@ use App\Entity\Product\Purchase\Order\Item;
 use App\Repository\AbstractRepository;
 
 /**
- * Repository for product purchase order items.
+ * Repository class of product purchase order items.
  * 
  * @method Item|null find($id, $lockMode = null, $lockVersion = null)
  * @method Item|null findOneBy(array $criteria, array $orderBy = null)

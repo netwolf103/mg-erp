@@ -17,7 +17,7 @@ use App\Message\Sales\Order\EmailPush;
 use App\Message\Sales\Order\Email\ConfirmPush;
 
 /**
- * Controller for Order Email
+ * Controller of order email.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

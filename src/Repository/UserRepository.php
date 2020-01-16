@@ -7,7 +7,7 @@ use App\Entity\User;
 use App\Repository\AbstractRepository;
 
 /**
- * User respository
+ * Repository class of user.
  *
  * @method User|null find($id, $lockMode = null, $lockVersion = null)
  * @method User|null findOneBy(array $criteria, array $orderBy = null)

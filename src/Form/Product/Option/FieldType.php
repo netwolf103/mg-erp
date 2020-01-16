@@ -10,7 +10,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 /**
- * 产品自定义选项值表单
+ * Form type class of product option Field.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

@@ -6,7 +6,7 @@ use App\Entity\Sales\Order\Related;
 use App\Repository\AbstractRepository;
 
 /**
- * Sale related order repository.
+ * Repository class of related order.
  * 
  * @method Related|null find($id, $lockMode = null, $lockVersion = null)
  * @method Related|null findOneBy(array $criteria, array $orderBy = null)

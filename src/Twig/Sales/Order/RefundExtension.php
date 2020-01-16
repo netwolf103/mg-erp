@@ -9,7 +9,7 @@ use Twig\TwigFunction;
 use App\Entity\Sales\Order\Refund;
 
 /**
- * Twig extension for order refund.
+ * Twig extension class of order refund.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

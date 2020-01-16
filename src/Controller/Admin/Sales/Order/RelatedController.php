@@ -14,7 +14,7 @@ use App\Repository\Sales\Order\RelatedRepository;
 use App\Repository\Sales\OrderRepository;
 
 /**
- * Controller for Related Order
+ * Controller of related order.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

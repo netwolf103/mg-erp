@@ -7,7 +7,7 @@ use App\Entity\Supplier;
 use App\Repository\AbstractRepository;
 
 /**
- * Repository for purchase supplier.
+ * RRepository class of purchase supplier.
  *
  * @method Supplier|null find($id, $lockMode = null, $lockVersion = null)
  * @method Supplier|null findOneBy(array $criteria, array $orderBy = null)

@@ -21,7 +21,7 @@ use App\Entity\Product\Option as ProductOption;
 use App\Entity\Product\CatalogInventory;
 
 /**
- * Command for catalog product
+ * Command of sync product.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

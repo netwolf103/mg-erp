@@ -12,7 +12,7 @@ use App\Repository\ProductRepository;
 use App\Repository\Sales\Order\ItemRepository;
 
 /**
- * Controller for product sales.
+ * Controller of product sales.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

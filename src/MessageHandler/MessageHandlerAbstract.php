@@ -9,7 +9,7 @@ use Doctrine\Common\Persistence\ManagerRegistry;
 use App\Traits\DatetimeTrait;
 
 /**
- * Message handler for order shipment push.
+ * Abstract message handler.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

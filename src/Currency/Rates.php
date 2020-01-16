@@ -4,10 +4,18 @@ namespace App\Currency;
 
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
+/**
+ * Class of Rates.
+ */
 class Rates
 {
     private $rates;
 
+    /**
+     * Init ParameterBag.
+     *
+     * @param ParameterBagInterface $parameter [description]
+     */
     public function __construct(ParameterBagInterface $parameter)
     {
         $this->rates = $parameter->get('currency_rates');

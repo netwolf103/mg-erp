@@ -8,7 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * 产品订单采购表单
+ * Form type class of purchase order Item.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

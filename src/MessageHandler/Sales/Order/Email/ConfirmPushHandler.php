@@ -17,7 +17,7 @@ use App\Traits\ConfigTrait;
 class ConfirmPushHandler extends MessageHandlerAbstract
 {
     /**
-     * Order email handler.
+     * Order confirm email handler.
      * 
      * @param  ConfirmPush $emailPush
      * @return void

@@ -11,7 +11,7 @@ use App\Repository\Sales\OrderRepository;
 use App\Repository\Sales\Order\Address\HistoryRepository;
 
 /**
- * Controller for Order Address History
+ * Controller of order address history.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

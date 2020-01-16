@@ -9,7 +9,7 @@ use Twig\TwigFunction;
 use App\Entity\Sales\Order\Payment\Transaction;
 
 /**
- * Twig extension for order payment
+ * Twig extension class of order payment
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

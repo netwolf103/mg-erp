@@ -3,7 +3,7 @@
 namespace App\Api\Oceanpayment;
 
 /**
- * Oceanpayment api interface.
+ * Interface class of oceanpayment api.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

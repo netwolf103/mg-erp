@@ -12,7 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 /**
- * 供应商表单
+ * Form type class of Supplier.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

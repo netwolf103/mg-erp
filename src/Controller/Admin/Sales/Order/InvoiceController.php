@@ -18,7 +18,7 @@ use App\Form\Sales\Order\Invoice\BatchPullType;
 use App\Message\Sales\Order\InvoicePull;
 
 /**
- * Controller for order invoice
+ * Controller of order invoice.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

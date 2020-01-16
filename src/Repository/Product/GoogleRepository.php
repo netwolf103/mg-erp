@@ -6,7 +6,7 @@ use App\Entity\Product\Google;
 use App\Repository\AbstractRepository;
 
 /**
- * Repository for google product.
+ * Repository class of google product.
  * 
  * @method Google|null find($id, $lockMode = null, $lockVersion = null)
  * @method Google|null findOneBy(array $criteria, array $orderBy = null)
@@ -20,7 +20,7 @@ class GoogleRepository extends AbstractRepository
     protected $entityClass = Google::class;
 
     /**
-     * Return products.
+     * Return google products.
      *
      * @param  array       $query
      * @param  int|integer $currentPage

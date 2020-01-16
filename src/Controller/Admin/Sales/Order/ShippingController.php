@@ -15,6 +15,11 @@ use App\Event\Sales\Order\ShippingEvent;
 use App\Traits\RatesTrait;
 use App\Traits\ShippingTrait;
 
+/**
+ * Controller of shipping.
+ * 
+ * @author Zhang Zhao <netwolf103@gmail.com>
+ */
 class ShippingController extends AdminControllerAbstract
 {
     use RatesTrait, ShippingTrait;

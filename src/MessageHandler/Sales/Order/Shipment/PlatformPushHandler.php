@@ -18,7 +18,7 @@ class PlatformPushHandler extends MessageHandlerAbstract
     protected static $_carrier;
 
     /**
-     * Shipment for Platform handler.
+     * Push shipment to platform handler.
      * 
      * @param  PlatformPush $platformPush
      * @return void

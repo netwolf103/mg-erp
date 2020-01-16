@@ -11,7 +11,7 @@ use App\Entity\Config\Core;
 use App\Traits\ConfigTrait;
 
 /**
- * Form for magento api config.
+ * Form type class of MagentoApi config.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

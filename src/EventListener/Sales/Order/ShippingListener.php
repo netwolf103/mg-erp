@@ -10,7 +10,7 @@ use App\Entity\Sales\Order\Refund;
 use App\Entity\Sales\Order\Shipping\History;
 
 /**
- * Listener of order shipping.
+ * Event listener class of order shipping.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */
@@ -18,6 +18,11 @@ class ShippingListener
 {
     private $parameter;
 
+    /**
+     * Init ParameterBag
+     *
+     * @param ParameterBagInterface $parameter
+     */
     public function __construct(ParameterBagInterface $parameter)
     {
         $this->parameter = $parameter;

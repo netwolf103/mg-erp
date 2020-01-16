@@ -12,7 +12,7 @@ use App\Repository\Sales\Order\Shipment\TrackRepository;
 use App\Form\Sales\Order\Shipment\TrackType;
 
 /**
- * Controller for Order Shipment Track
+ * Controller of shipment track.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

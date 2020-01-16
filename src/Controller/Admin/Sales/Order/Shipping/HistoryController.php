@@ -11,7 +11,7 @@ use App\Repository\Sales\OrderRepository;
 use App\Repository\Sales\Order\Shipping\HistoryRepository;
 
 /**
- * Controller for Order Shipping History
+ * Controller of shipping history
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

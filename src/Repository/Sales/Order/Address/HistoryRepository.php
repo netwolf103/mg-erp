@@ -6,7 +6,7 @@ use App\Entity\Sales\Order\Address\History;
 use App\Repository\AbstractRepository;
 
 /**
- * Repository for order address history.
+ * Repository class of order address history.
  * 
  * @method History|null find($id, $lockMode = null, $lockVersion = null)
  * @method History|null findOneBy(array $criteria, array $orderBy = null)

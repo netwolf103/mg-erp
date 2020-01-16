@@ -21,7 +21,7 @@ use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticato
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
 
 /**
- * 登录认证
+ * Class of login auth.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */
@@ -35,7 +35,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     private $passwordEncoder;
 
     /**
-     * 构造方法
+     * Initialization constructor
      *
      * @param EntityManagerInterface       $entityManager
      * @param UrlGeneratorInterface        $urlGenerator
@@ -131,7 +131,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     }
 
     /**
-     * Set last logged time
+     * Update last logged time
      *
      * @param Request $request
      */

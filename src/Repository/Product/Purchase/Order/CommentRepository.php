@@ -6,7 +6,7 @@ use App\Entity\Product\Purchase\Order\Comment;
 use App\Repository\AbstractRepository;
 
 /**
- * Repository for product purchase order comments.
+ * Repository class of product purchase order comments.
  * 
  * @method Comment|null find($id, $lockMode = null, $lockVersion = null)
  * @method Comment|null findOneBy(array $criteria, array $orderBy = null)

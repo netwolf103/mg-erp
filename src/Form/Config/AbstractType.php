@@ -8,7 +8,7 @@ use App\Repository\Config\CoreRepository;
 use App\Traits\ConfigTrait;
 
 /**
- * Form for config abstract.
+ * Config type abstract class.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

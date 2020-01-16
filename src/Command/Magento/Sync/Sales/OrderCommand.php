@@ -24,7 +24,7 @@ use App\Message\Sales\Order\Payment\TransactionPull;
 use App\Message\Sales\Order\Address\GeoPull;
 
 /**
- * Command for sync sales order
+ * Command of sync sales order.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

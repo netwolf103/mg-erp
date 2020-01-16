@@ -15,7 +15,7 @@ use App\Command\Magento\SyncCommand;
 use App\Entity\Config\Shipping\Method;
 
 /**
- * Command for shipping method config.
+ * Command of sync shipping method config.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

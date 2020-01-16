@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 /**
- * 登录认证控制器
+ * Controller of security
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

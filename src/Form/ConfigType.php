@@ -15,7 +15,7 @@ use App\Form\Config\OceanpaymentApiType;
 use App\Form\Config\MagentoApiType;
 
 /**
- * Form for config.
+ * Form type class of Config.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

@@ -7,7 +7,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * Sale order event.
+ * Abstract event class.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

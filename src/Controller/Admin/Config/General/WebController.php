@@ -12,7 +12,7 @@ use App\Repository\Config\CoreRepository;
 use App\Form\ConfigType;
 
 /**
- * Controller for web config.
+ * Controller of web config.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

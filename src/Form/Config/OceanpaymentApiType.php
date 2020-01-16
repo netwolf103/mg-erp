@@ -11,7 +11,7 @@ use App\Entity\Config\Core;
 use App\Traits\ConfigTrait;
 
 /**
- * Form for Oceanpayment api config.
+ * Form type class of Oceanpayment config.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

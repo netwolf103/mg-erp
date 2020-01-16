@@ -10,7 +10,7 @@ use App\Entity\Sales\Order\Shipment;
 use App\Traits\ConfigTrait;
 
 /**
- * Listener of item.
+ * Event listener class of shipment track.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

@@ -7,7 +7,7 @@ use App\Entity\Sales\Order\Shipment\Track;
 use App\Repository\AbstractRepository;
 
 /**
- * Repository for order shipment track.
+ * Repository class of order shipment track.
  * 
  * @method Track|null find($id, $lockMode = null, $lockVersion = null)
  * @method Track|null findOneBy(array $criteria, array $orderBy = null)

@@ -10,7 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 /**
- * 产品Meida表单
+ * Form type class of product Media.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

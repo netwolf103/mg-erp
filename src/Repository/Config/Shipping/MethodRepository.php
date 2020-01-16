@@ -7,7 +7,7 @@ use App\Entity\Config\Shipping\Method;
 use App\Repository\AbstractRepository;
 
 /**
- * Repository for shipping method config.
+ * Repository class of shipping method config.
  * 
  * @method Method|null find($id, $lockMode = null, $lockVersion = null)
  * @method Method|null findOneBy(array $criteria, array $orderBy = null)
@@ -21,7 +21,7 @@ class MethodRepository extends AbstractRepository
 	protected $entityClass = Method::class;
 
     /**
-     * Return products.
+     * Return configs for shiping method.
      *
      * @param  array       $query
      * @param  int|integer $currentPage

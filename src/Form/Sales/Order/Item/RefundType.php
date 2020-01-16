@@ -12,7 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 /**
- * 订单Item refund表单
+ * Form type class of Refund
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

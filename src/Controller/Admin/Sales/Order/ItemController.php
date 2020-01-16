@@ -21,7 +21,7 @@ use App\Form\Sales\Order\Item\CancelType as ItemCancelType;
 use App\Form\Sales\Order\Item\RefundType as ItemRefundType;
 
 /**
- * Controller for Order Item
+ * Controller of order item.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

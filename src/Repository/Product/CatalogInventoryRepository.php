@@ -6,7 +6,7 @@ use App\Entity\Product\CatalogInventory;
 use App\Repository\AbstractRepository;
 
 /**
- * Repository for catalog inventory.
+ * Repository class of catalog inventory.
  * 
  * @method CatalogInventory|null find($id, $lockMode = null, $lockVersion = null)
  * @method CatalogInventory|null findOneBy(array $criteria, array $orderBy = null)

@@ -5,7 +5,7 @@ namespace App\Api\Geosearch;
 use App\Api\Geosearch\ApiInterface;
 
 /**
- * Address search api class.
+ * Class of address search api.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

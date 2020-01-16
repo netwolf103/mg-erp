@@ -6,7 +6,7 @@ use App\Entity\Sales\Order\Address\Geo;
 use App\Repository\AbstractRepository;
 
 /**
- * Repository for order address geo.
+ * Repository class of order address geo.
  * 
  * @method Geo|null find($id, $lockMode = null, $lockVersion = null)
  * @method Geo|null findOneBy(array $criteria, array $orderBy = null)

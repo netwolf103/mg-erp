@@ -9,6 +9,11 @@ use App\Controller\AdminControllerAbstract;
 
 use App\Repository\Config\Shipping\MethodRepository;
 
+/**
+ * Controller of shipping method.
+ *
+ * @author Zhang Zhao <netwolf103@gmail.com>
+ */
 class MethodController extends AdminControllerAbstract
 {
     /**

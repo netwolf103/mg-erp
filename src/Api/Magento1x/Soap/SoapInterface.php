@@ -3,7 +3,7 @@
 namespace App\Api\Magento1x\Soap;
 
 /**
- * Magento 1.x soap client interface.
+ * Interface class of Magento 1.x soap client.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

@@ -7,7 +7,7 @@ use App\Entity\Product\Option\Field;
 use App\Repository\AbstractRepository;
 
 /**
- * Repository for product field option.
+ * Repository class of product field option.
  * 
  * @method Field|null find($id, $lockMode = null, $lockVersion = null)
  * @method Field|null findOneBy(array $criteria, array $orderBy = null)

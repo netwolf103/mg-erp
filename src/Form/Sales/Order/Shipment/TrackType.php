@@ -12,7 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- * 物流追踪自定义选项表单
+ * Form type class of shipment Track
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

@@ -6,7 +6,7 @@ use App\Currency\Rates;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 /**
- * Trait for rates.
+ * Trait class of rates.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

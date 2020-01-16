@@ -18,7 +18,7 @@ use App\Traits\ConfigTrait;
 class CommentPushHandler extends MessageHandlerAbstract
 {
     /**
-     * Order handler.
+     * Order comment handler.
      * 
      * @param  CommentPush $commentPush
      * @return void

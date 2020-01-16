@@ -12,7 +12,7 @@ use App\Entity\SaleOrder;
 use App\Message\Sales\Order\Shipment\PlatformPush;
 
 /**
- * Command for push tracking number to platform.
+ * Command of push tracking number to platform.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

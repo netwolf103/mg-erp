@@ -16,7 +16,7 @@ class Alert
     private $optionId;
 
     /**
-     * Product init.
+     * Init product option id.
      * 
      * @param int $optionId
      */

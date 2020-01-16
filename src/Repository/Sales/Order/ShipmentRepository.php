@@ -7,7 +7,7 @@ use App\Entity\Sales\Order\Shipment;
 use App\Repository\AbstractRepository;
 
 /**
- * Sale order shipment repository.
+ * Repository class of order shipment.
  * 
  * @method Shipment|null find($id, $lockMode = null, $lockVersion = null)
  * @method Shipment|null findOneBy(array $criteria, array $orderBy = null)
@@ -21,7 +21,7 @@ class ShipmentRepository extends AbstractRepository
 	protected $entityClass = Shipment::class;
 
     /**
-     * Return orders.
+     * Return shipments.
      *
      * @param  array       $query
      * @param  int|integer $currentPage

@@ -6,7 +6,7 @@ use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 /**
- * Subscriber of locale.
+ * Event subscriber class of locale.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */
@@ -14,11 +14,22 @@ class LocaleSubscriber implements EventSubscriberInterface
 {
     private $defaultLocale;
 
-    public function __construct($defaultLocale = 'en')
+    /**
+     * Init default locale.
+     * 
+     * @param string $defaultLocale
+     */
+    public function __construct(string $defaultLocale = 'en')
     {
         $this->defaultLocale = $defaultLocale;
     }
 
+    /**
+     * Set locale.
+     * 
+     * @param  RequestEvent $event
+     * @return mixed
+     */
     public function onKernelRequest(RequestEvent $event)
     {
         $request = $event->getRequest();

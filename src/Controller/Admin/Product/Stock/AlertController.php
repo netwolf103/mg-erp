@@ -11,7 +11,7 @@ use App\Entity\Product;
 use App\Repository\Product\Stock\AlertRepository;
 
 /**
- * Controller for product stock alert.
+ * Controller of product stock alert.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

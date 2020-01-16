@@ -6,7 +6,7 @@ use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 
 /**
- * Twig extension for query filter.
+ * Twig extension class of query filter.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

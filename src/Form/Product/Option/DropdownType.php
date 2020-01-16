@@ -11,7 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
 /**
- * 产品自定义选项值表单
+ * Form type class of product option Dropdown.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

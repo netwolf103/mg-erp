@@ -16,10 +16,9 @@ class ConfirmPush
     private $confirmId;  
 
     /**
-     * Order init.
+     * Init confirm id.
      * 
      * @param int    $confirmId
-     * @param string $email
      */
     public function __construct(int $confirmId)
     {
@@ -27,7 +26,7 @@ class ConfirmPush
     }
 
     /**
-     * Get order id.
+     * Get confirm id.
      * 
      * @return int
      */

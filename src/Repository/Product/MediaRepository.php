@@ -7,7 +7,7 @@ use App\Entity\Product\Media;
 use App\Repository\AbstractRepository;
 
 /**
- * Repository for product media.
+ * Repository class of product media.
  *
  * @method Media|null find($id, $lockMode = null, $lockVersion = null)
  * @method Media|null findOneBy(array $criteria, array $orderBy = null)

@@ -5,7 +5,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Config\Core;
 
 /**
- * Trait for datetime.
+ * Trait class of config.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */
@@ -14,7 +14,7 @@ trait ConfigTrait
 	protected static $_configs;
 
 	/**
-	 * Load all configs.
+	 * Return all configs.
 	 * 
 	 * @param  EntityManagerInterface $entityManager
 	 * @return array

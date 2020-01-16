@@ -5,7 +5,7 @@ namespace App\Api\Paypal\Reset;
 use App\Api\Paypal\Reset\ResetAbstract;
 
 /**
- * Paypal reset api tracking class.
+ * Class of paypal api tracking.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

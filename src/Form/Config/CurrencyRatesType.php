@@ -9,7 +9,7 @@ use App\Entity\Config\Core;
 use App\Traits\ConfigTrait;
 
 /**
- * Form for currency rates config.
+ * Form type class of CurrencyRates.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

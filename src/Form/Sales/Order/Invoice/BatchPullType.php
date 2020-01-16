@@ -10,7 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 /**
- * Form for sales order batch pull.
+ * Form type class of invoice BatchPull.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

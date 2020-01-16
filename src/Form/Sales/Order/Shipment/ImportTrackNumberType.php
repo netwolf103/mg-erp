@@ -11,7 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Validator\Constraints\File;
 
 /**
- * 运单号导入表单
+ * Form type class of ImportTrackNumber
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

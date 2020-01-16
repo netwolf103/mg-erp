@@ -3,7 +3,7 @@
 namespace App\Api\Paypal\Reset;
 
 /**
- * Paypal reset api interface.
+ * Interface class of paypal api.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

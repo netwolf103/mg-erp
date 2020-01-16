@@ -17,7 +17,7 @@ use App\Entity\Customer;
 use App\Entity\Customer\Address;
 
 /**
- * Command for customer
+ * Command of sync customer.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

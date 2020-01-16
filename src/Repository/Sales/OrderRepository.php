@@ -8,7 +8,7 @@ use App\Entity\Sales\Order\Address;
 use App\Repository\AbstractRepository;
 
 /**
- * Sale order repository.
+ * Repository class of sale order.
  *
  * @method SaleOrder|null find($id, $lockMode = null, $lockVersion = null)
  * @method SaleOrder|null findOneBy(array $criteria, array $orderBy = null)

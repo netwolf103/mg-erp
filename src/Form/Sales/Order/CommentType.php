@@ -14,7 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 /**
- * 订单备注表单
+ * Form type class of Comment
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

@@ -11,7 +11,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\Intl\Intl;
 
 /**
- * Twig extension for product
+ * Twig extension class of product
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

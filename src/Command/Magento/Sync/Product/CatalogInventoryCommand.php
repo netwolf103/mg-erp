@@ -16,7 +16,7 @@ use App\Entity\Product;
 use App\Entity\Product\CatalogInventory;
 
 /**
- * Command for catalog inventory
+ * Command of sync product inventory.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

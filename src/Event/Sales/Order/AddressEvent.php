@@ -11,7 +11,7 @@ use App\Event\AbstractEvent;
 use App\Entity\Sales\Order\Address;
 
 /**
- * Sale order address event.
+ * Event class of order address.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

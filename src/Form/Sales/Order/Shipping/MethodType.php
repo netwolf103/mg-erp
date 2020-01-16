@@ -14,7 +14,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\Config\Shipping\MethodRepository;
 
 /**
- * 订单Shipping Method表单
+ * Form type class of shipping Method
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

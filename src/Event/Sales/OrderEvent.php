@@ -10,7 +10,7 @@ use App\Event\AbstractEvent;
 use App\Entity\SaleOrder;
 
 /**
- * Sale order event.
+ * Event class for sales order.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

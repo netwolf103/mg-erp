@@ -7,7 +7,7 @@ use App\Entity\Product\Option\Dropdown;
 use App\Repository\AbstractRepository;
 
 /**
- * Repository for product dropdown option.
+ * Repository class of product dropdown option.
  *
  * @method Dropdown|null find($id, $lockMode = null, $lockVersion = null)
  * @method Dropdown|null findOneBy(array $criteria, array $orderBy = null)

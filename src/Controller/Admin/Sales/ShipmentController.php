@@ -19,7 +19,7 @@ use App\Form\Sales\Order\Shipment\ImportTrackNumberType;
 use App\Message\Sales\Order\ShipmentPush;
 
 /**
- * Controller for Order Shipment
+ * Controller of order shipment.
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

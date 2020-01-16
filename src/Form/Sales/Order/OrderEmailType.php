@@ -11,7 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 /**
- * Form for order email
+ * Form type class of OrderEmail
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */

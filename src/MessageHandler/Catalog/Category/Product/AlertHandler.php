@@ -15,7 +15,7 @@ use App\Message\Catalog\Category\Product\Alert;
 class AlertHandler extends MessageHandlerAbstract
 {
 	/**
-	 * Product handler.
+	 * Product alert handler.
 	 * 
 	 * @param  Alert $alert
 	 * @return void
