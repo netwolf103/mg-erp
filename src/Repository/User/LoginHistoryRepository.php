@@ -3,8 +3,7 @@
 namespace App\Repository\User;
 
 use App\Entity\User\LoginHistory;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Symfony\Bridge\Doctrine\RegistryInterface;
+use App\Repository\AbstractRepository;
 
 /**
  * Repository class of user login history.
@@ -14,7 +13,7 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  * @method LoginHistory[]    findAll()
  * @method LoginHistory[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class LoginHistoryRepository extends ServiceEntityRepository
+class LoginHistoryRepository extends AbstractRepository
 {
     protected $entityClass = LoginHistory::class;
 }
