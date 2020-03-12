@@ -8,6 +8,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use Symfony\Component\Messenger\MessageBusInterface;
 
 use App\Traits\DatetimeTrait;
@@ -203,11 +204,11 @@ abstract class SyncCommand extends Command
 	}
 
 	/**
-	 * Get RegistryInterface object.
+	 * Get ManagerRegistry object.
 	 * 
-	 * @return RegistryInterface
+	 * @return ManagerRegistry
 	 */
-	protected function getDoctrine(): RegistryInterface
+	protected function getDoctrine(): ManagerRegistry
 	{
 		return $this->container->get('doctrine');
 	}

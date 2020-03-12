@@ -11,6 +11,7 @@
 /var/
 /vendor/
 /public/robots.txt
+/tests/
 /config/
 !/config/services.yaml
 !/config/packages/liip_imagine.yaml

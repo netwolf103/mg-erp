@@ -52,42 +52,13 @@ Wechat: netwolf103
     "symfony/web-server-bundle": "4.3.*"
 ### 依赖库安装
     composer install
-### 编辑配置(开发)
-
-  vim .env.dev.local
-    
-	APP_ENV=dev
-
-	# DB info
-	DB_NAME=mg-erp
-	DB_HOST=localhost
-	DB_PORT=3306
-	DB_USER=user
-	DB_PASS=pass
-
-	# Develop Paypal
-	PAYPAL_CLIENTID="Your Client Id"
-	PAYPAL_CLIENTSECRET="Your Client Secret"
-
-	# Develop Oceanpayment
-	OC_ACCOUNT="Your Account"
-	OC_TERMINAL="Your Terminal"
-	OC_SECURECODE="Your secure code"
-	
-	DATABASE_URL=mysql://user:pass@localhost:3306/mg-erp
-	MESSENGER_TRANSPORT_DSN=amqp://user:pass@localhost:5672/%2f/
-
-	运行
-	php bin/console server:run
-
-	浏览器访问，初始账号 & 密码 admin 111111
-	http://127.0.0.1:8000
 
 ### 编辑配置(生产)
 
-    vim .env.prod.local
+    vim .env.local
 
-	APP_ENV=PROD
+    # dev or prod
+	APP_ENV=prod
 
 	# DB info
 	DB_NAME=mg-erp
@@ -108,11 +79,16 @@ Wechat: netwolf103
 	DATABASE_URL=mysql://user:pass@localhost:3306/mg-erp
 	MESSENGER_TRANSPORT_DSN=amqp://user:pass@localhost:5672/%2f/
 
-	运行
+### 执行SQL生成表结构
+	php --env=prod bin/console doctrine:migrations:migrate
+
+### 运行APP
 	php --env=prod bin/console server:run
 
-	浏览器访问，初始账号 & 密码 admin 111111
+### 浏览器访问
+#### 初始账号 & 密码 admin 111111
 	http://127.0.0.1:8000
+
 ### 应用命令
 #### 同步产品
     php bin/console app:magento:sync-catalog-product <api_username> <api_key> <api_url>

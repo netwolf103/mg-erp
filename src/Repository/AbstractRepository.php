@@ -3,7 +3,7 @@
 namespace App\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use LogicException;
@@ -35,9 +35,9 @@ abstract class AbstractRepository extends ServiceEntityRepository
     /**
      * Init entity instance.
      *
-     * @param RegistryInterface $registry
+     * @param ManagerRegistry $registry
      */
-    public function __construct(RegistryInterface $registry)
+    public function __construct(ManagerRegistry $registry)
     {
     	if (is_null($this->entityClass)) {
             throw new LogicException('Object property "entityClass" is null.');    		
