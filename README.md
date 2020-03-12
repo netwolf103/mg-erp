@@ -89,6 +89,24 @@ Wechat: netwolf103
 #### 初始账号 & 密码 admin 111111
 	http://127.0.0.1:8000
 
+### Web服务器配置
+#### 以Apache为例，运行
+	composer require symfony/apache-pack
+#### 配置Vhosts
+	<VirtualHost *:80>
+	    ServerName domain.tld
+	    ServerAlias www.domain.tld
+
+	    DocumentRoot "/var/www/project/public"
+	    ErrorLog "logs/domain.tld-error_log"
+	    CustomLog "logs/domain.tld-access_log" combined
+	    <Directory "/var/www/project/public">
+	        Options Indexes FollowSymLinks
+	        AllowOverride All
+	        Require all granted
+	    </Directory>
+	</VirtualHost>
+
 ### 应用命令
 #### 同步产品
     php bin/console app:magento:sync-catalog-product <api_username> <api_key> <api_url>
