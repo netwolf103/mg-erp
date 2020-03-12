@@ -1,8 +1,6 @@
 
 ###> symfony/framework-bundle ###
-/.env.local
-/.env.local.php
-/.env.*.local
+/.env*
 /composer.lock
 /symfony.lock
 /phpunit.xml.dist
