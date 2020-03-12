@@ -9,7 +9,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityManagerInterface;
 
 use App\Entity\Product\Google as GoogleEntity;
@@ -143,11 +143,11 @@ class ProductPushCommand extends Command
     }
 
     /**
-     * Get RegistryInterface object.
+     * Get ManagerRegistry object.
      * 
-     * @return RegistryInterface
+     * @return ManagerRegistry
      */
-    protected function getDoctrine(): RegistryInterface
+    protected function getDoctrine(): ManagerRegistry
     {
         return $this->container->get('doctrine');
     }

@@ -7,7 +7,6 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Symfony\Component\Messenger\MessageBusInterface;
 
