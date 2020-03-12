@@ -1,0 +1,111 @@
+framework:
+    messenger:
+        # Uncomment this (and the failed transport below) to send failed messages to this transport for later handling.
+        # failure_transport: failed
+
+        serializer:
+            default_serializer: messenger.transport.symfony_serializer
+            symfony_serializer:
+                format: json
+                context: { }
+
+        transports:
+            # https://symfony.com/doc/current/messenger.html#transport-configuration
+            # async: '%env(MESSENGER_TRANSPORT_DSN)%'
+            # failed: 'doctrine://default?queue_name=failed'
+            # sync: 'sync://'
+
+            pull:catalog:category:product:
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%pull:catalog:category:product'
+
+            catalog:category:product:stock:alert:
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%catalog:category:product:stock:alert'
+
+            catalog:category:product:google:create:
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%catalog:category:product:google:create'
+
+            catalog:category:product:google:push:
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%catalog:category:product:google:push'
+
+            catalog:category:product:google:delete:
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%catalog:category:product:google:delete'
+
+            pull:sales:order:
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%pull:sales:order'
+
+            push:sales:order:hold:
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%push:sales:order:hold'
+
+            push:sales:order:unhold:
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%push:sales:order:unhold'
+
+            push:sales:order:comment:
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%push:sales:order:comment'
+
+            push:sales:order:shipment:
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%push:sales:order:shipment'
+                serializer: messenger.transport.symfony_serializer
+
+            pull:sales:order:shipment:
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%pull:sales:order:shipment'
+                serializer: messenger.transport.symfony_serializer
+
+            push:sales:order:shipment:platform:
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%push:sales:order:shipment:platform'
+                serializer: messenger.transport.symfony_serializer
+
+            pull:sales:order:invoice:
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%pull:sales:order:invoice'
+                serializer: messenger.transport.symfony_serializer
+
+            push:sales:order:address:
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%push:sales:order:address'
+                serializer: messenger.transport.symfony_serializer
+
+            pull:sales:order:address:geo:
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%push:sales:order:address:geo'
+                serializer: messenger.transport.symfony_serializer
+
+            push:sales:order:shippingmethod:
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%push:sales:order:shippingmethod'
+                serializer: messenger.transport.symfony_serializer
+
+            push:sales:order:email:
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%push:sales:order:email'
+                serializer: messenger.transport.symfony_serializer
+
+            push:sales:order:send:confirm:email:
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%push:push:sales:order:send:confirm:email'
+                serializer: messenger.transport.symfony_serializer
+
+            pull:sales:order:payment:transaction:
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%pull:sales:order:payment:transaction'
+                serializer: messenger.transport.symfony_serializer
+
+            pull:customer:
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%pull:customer'
+                serializer: messenger.transport.symfony_serializer
+
+        routing:
+            # Route your messages to the transports
+            # 'App\Message\YourMessage': async
+            'App\Message\Catalog\Category\ProductPull': pull:catalog:category:product
+            'App\Message\Catalog\Category\Product\Alert': catalog:category:product:stock:alert
+            'App\Message\Catalog\Category\Product\Google': catalog:category:product:google:create
+            'App\Message\Catalog\Category\Product\Google\Push': catalog:category:product:google:push
+            'App\Message\Catalog\Category\Product\Google\Delete': catalog:category:product:google:delete
+            'App\Message\Sales\OrderPull': pull:sales:order
+            'App\Message\Sales\Order\ShipmentPush': push:sales:order:shipment
+            'App\Message\Sales\Order\ShipmentPull': pull:sales:order:shipment
+            'App\Message\Sales\Order\Shipment\PlatformPush': push:sales:order:shipment:platform
+            'App\Message\Sales\Order\CommentPush': push:sales:order:comment
+            'App\Message\Sales\Order\HoldPush': push:sales:order:hold
+            'App\Message\Sales\Order\UnHoldPush': push:sales:order:unhold
+            'App\Message\CustomerPull': pull:customer
+            'App\Message\Sales\Order\AddressPush': push:sales:order:address
+            'App\Message\Sales\Order\Address\GeoPull': pull:sales:order:address:geo
+            'App\Message\Sales\Order\ShippingmethodPush': push:sales:order:shippingmethod
+            'App\Message\Sales\Order\InvoicePull': pull:sales:order:invoice
+            'App\Message\Sales\Order\EmailPush': push:sales:order:email
+            'App\Message\Sales\Order\Email\ConfirmPush': push:sales:order:send:confirm:email
+            'App\Message\Sales\Order\Payment\TransactionPull': pull:sales:order:payment:transaction
