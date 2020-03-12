@@ -80,10 +80,10 @@ Wechat: netwolf103
 	MESSENGER_TRANSPORT_DSN=amqp://user:pass@localhost:5672/%2f/
 
 ### 执行SQL生成表结构
-	php --env=prod bin/console doctrine:migrations:migrate
+	php bin/console --env=prod doctrine:migrations:migrate
 
 ### 运行APP
-	php --env=prod bin/console server:run
+	php bin/console --env=prod server:run
 
 ### 浏览器访问
 #### 初始账号 & 密码 admin 111111
