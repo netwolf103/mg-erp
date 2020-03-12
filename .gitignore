@@ -7,6 +7,7 @@
 /symfony.lock
 /phpunit.xml.dist
 /public/bundles/
+/public/.htaccess
 /bin/
 /var/
 /vendor/
