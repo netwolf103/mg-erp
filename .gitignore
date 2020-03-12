@@ -5,10 +5,21 @@
 /.env.*.local
 /composer.lock
 /symfony.lock
+/phpunit.xml.dist
 /public/bundles/
+/bin/
 /var/
 /vendor/
 /public/robots.txt
+/config/
+!/config/services.yaml
+!/config/packages/liip_imagine.yaml
+!/config/packages/messenger.yaml
+!/config/packages/security.yaml
+!/config/packages/translation.yaml
+!/config/packages/twig.yaml
+!/config/packages/dev/services.yaml
+!/config/packages/prod/services.yaml
 ###< symfony/framework-bundle ###
 
 ###> symfony/phpunit-bridge ###
