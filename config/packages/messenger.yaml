@@ -63,7 +63,7 @@ framework:
                 serializer: messenger.transport.symfony_serializer
 
             pull:sales:order:address:geo:
-                dsn: '%env(MESSENGER_TRANSPORT_DSN)%push:sales:order:address:geo'
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%pull:sales:order:address:geo'
                 serializer: messenger.transport.symfony_serializer
 
             push:sales:order:shippingmethod:

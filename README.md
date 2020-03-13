@@ -15,6 +15,36 @@ Wechat: netwolf103
 
 ### 安装 MySQL & RabbitMQ
 
+### 安装php_amqp
+    wget https://pecl.php.net/get/amqp-1.9.4.tgz
+    tar zxvf amqp-1.9.4.tgz
+    cd amqp-1.9.4
+    /php-bin-path/phpize
+    ./configure --with-php-config=/php-bin-path/php-config
+    make
+    make install
+
+### 安装 & 配置Supervisor
+    yum install supervisor
+    systemctl start supervisord
+    systemctl enable supervisord
+
+#### 配置Supervisor
+    ; /etc/supervisord.d/messenger-worker.ini
+    [program:messenger-consume]
+    command=php /var/www/erp-old/bin/console messenger:consume pull:catalog:category:product catalog:category:product:stock:alert catalog:category:product:google:create catalog:category:product:google:push catalog:category:product:google:delete pull:sales:order push:sales:order:hold push:sales:order:unhold push:sales:order:comment push:sales:order:shipment pull:sales:order:shipment push:sales:order:shipment:platform pull:sales:order:invoice push:sales:order:address pull:sales:order:address:geo push:sales:order:shippingmethod push:sales:order:email push:sales:order:send:confirm:email pull:sales:order:payment:transaction pull:customer --time-limit=3600
+    user=www
+    numprocs=2
+    autostart=true
+    autorestart=true
+    process_name=%(program_name)s_%(process_num)02d
+
+#### 启动Supervisor
+    supervisorctl reread
+    supervisorctl update
+    supervisorctl start messenger-consume:*
+    supervisorctl status
+
 ### 软件包依赖
     "php": "^7.1.3",
     "ext-ctype": "*",
