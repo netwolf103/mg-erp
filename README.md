@@ -32,7 +32,7 @@ Wechat: netwolf103
 #### 配置Supervisor
     ; /etc/supervisord.d/messenger-worker.ini
     [program:messenger-consume]
-    command=php /var/www/erp-old/bin/console messenger:consume pull:catalog:category:product catalog:category:product:stock:alert catalog:category:product:google:create catalog:category:product:google:push catalog:category:product:google:delete pull:sales:order push:sales:order:hold push:sales:order:unhold push:sales:order:comment push:sales:order:shipment pull:sales:order:shipment push:sales:order:shipment:platform pull:sales:order:invoice push:sales:order:address pull:sales:order:address:geo push:sales:order:shippingmethod push:sales:order:email push:sales:order:send:confirm:email pull:sales:order:payment:transaction pull:customer --time-limit=3600
+    command=php /path/to/your/app/bin/console messenger:consume pull:catalog:category:product catalog:category:product:stock:alert catalog:category:product:google:create catalog:category:product:google:push catalog:category:product:google:delete pull:sales:order push:sales:order:hold push:sales:order:unhold push:sales:order:comment push:sales:order:shipment pull:sales:order:shipment push:sales:order:shipment:platform pull:sales:order:invoice push:sales:order:address pull:sales:order:address:geo push:sales:order:shippingmethod push:sales:order:email push:sales:order:send:confirm:email pull:sales:order:payment:transaction pull:customer --time-limit=3600
     user=www
     numprocs=2
     autostart=true
