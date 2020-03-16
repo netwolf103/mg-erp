@@ -20,7 +20,7 @@
 
 				View
 				<select class="form-control form-control-sm" id="select-limit" action-xhr="{{ app.request.getRequestUri() }}">
-					{% for i in range(10, 100, 20) %}
+					{% for i in range(20, 100, 20) %}
 					<option value="{{ i }}"{% if i == app.request.getSession().get('Page.Limit', 20) %} selected="selected"{% endif %}>{{ i }}</option>
 					{% endfor %}
 				</select>

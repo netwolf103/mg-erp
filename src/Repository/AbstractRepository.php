@@ -64,21 +64,21 @@ abstract class AbstractRepository extends ServiceEntityRepository
             ->setMaxResults($pageSize)
             ->getQuery();
 
-        $paginator = new Paginator($query);
-        $numResults = $paginator->count();
-        $hasPreviousPage = $currentPage > 1;
-        $hasNextPage = ($currentPage * $pageSize) < $numResults;
+        $paginator      = new Paginator($query);
+        $numResults     = $paginator->count();
+        $hasPreviousPage= $currentPage > 1;
+        $hasNextPage    = ($currentPage * $pageSize) < $numResults;
 
         return [
-            'results' => $paginator->getIterator(),
-            'numResults' => $numResults,
-            'currentPage' => $currentPage,
-            'hasPreviousPage' => $hasPreviousPage,
-            'hasNextPage' => $hasNextPage,
-            'previousPage' => $hasPreviousPage ? $currentPage - 1 : null,
-            'nextPage' => $hasNextPage ? $currentPage + 1 : null,
-            'numPages' => (int) ceil($numResults / $pageSize),
-            'haveToPaginate' => $numResults > $pageSize,
+            'results'           => $paginator->getIterator(),
+            'numResults'        => $numResults,
+            'currentPage'       => $currentPage,
+            'hasPreviousPage'   => $hasPreviousPage,
+            'hasNextPage'       => $hasNextPage,
+            'previousPage'      => $hasPreviousPage ? $currentPage - 1 : null,
+            'nextPage'          => $hasNextPage ? $currentPage + 1 : null,
+            'numPages'          => (int) ceil($numResults / $pageSize),
+            'haveToPaginate'    => $numResults > $pageSize,
         ];
     }        
 }
