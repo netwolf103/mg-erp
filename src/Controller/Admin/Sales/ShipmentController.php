@@ -151,4 +151,12 @@ class ShipmentController extends AdminControllerAbstract
             'track' => $track
         ]);              
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function _renderAction(): string
+    {
+        return $this->renderView('admin/sales/order/shipment/blocks/action/handle.html.twig');
+    }
 }

@@ -6,16 +6,7 @@
 				<div class="actions">
 					<div class="row">
 						<div class="col-sm-12 col-md-8">{{ include('blocks/action/select.html.twig') }}</div>
-						<div class="col-sm-12 col-md-4">
-							<div class="handle-action">
-								{% trans %}Actions{% endtrans %}
-								<select class="form-control form-control-sm" name="action">
-									<option></option>
-									<option value="delete">{% trans %}Delete{% endtrans %}</option>
-								</select>
-								<button class="btn btn-dark btn-sm">{% trans %}Submit{% endtrans %}</button>
-							</div>
-						</div>								
+						<div class="col-sm-12 col-md-4">{{ include('blocks/action/handle.html.twig', {'_controller': _controller}) }}</div>
 					</div>
 				</div>					
 				<table class="table table-bordered" width="100%" cellspacing="0">

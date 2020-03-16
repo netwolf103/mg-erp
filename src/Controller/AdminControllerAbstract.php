@@ -5,6 +5,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 use App\Controller\QueryFilterTrait;
@@ -33,6 +34,16 @@ abstract class AdminControllerAbstract extends AbstractController
 		$this->eventDispatcher = $dispatcher;
 	}
 
+    /**
+     * Renders a action.
+     *
+     * @return string
+     */
+    public function _renderAction(): string
+    {
+        return '';
+    }
+    
     /**
      * Get EventDispatcherInterface object.
      * 
@@ -117,5 +128,17 @@ abstract class AdminControllerAbstract extends AbstractController
     protected function getCurrentRequest(): ?Request
     {
         return $this->container->get('request_stack')->getCurrentRequest();
+    }
+
+    /**
+     * Renders a view.
+     *
+     * @final
+     */
+    protected function render(string $view, array $parameters = [], Response $response = null): Response
+    {
+        $parameters['_controller'] = $this;
+
+        return parent::render($view, $parameters, $response);
     }
 }
