@@ -20,13 +20,22 @@
   // Select All & Unselect All
   $(document).on('click', '.dataTables_wrapper .select-all', function(e) {
     e.preventDefault();
-    $('input:checkbox[name="ids"]').attr('checked', 'checked');
+    $('input:checkbox[name="ids"]').prop('checked', true);
   });
 
   $(document).on('click', '.dataTables_wrapper .unselect-all', function(e) {
     e.preventDefault();
 
-    $('input:checkbox[name="ids"]').removeAttr('checked');
+    $('input:checkbox[name="ids"]').prop('checked', false);
+  });
+
+  $(document).on('click', '.dataTables_wrapper .select-invert', function(e) {
+    e.preventDefault();
+
+    $('input:checkbox[name="ids"]').each(function(){
+      var _checked = $(this).prop('checked');
+      $(this).prop('checked', !_checked);
+    });
   });
 
   // Do filter

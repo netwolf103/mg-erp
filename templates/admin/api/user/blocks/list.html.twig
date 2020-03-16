@@ -5,11 +5,7 @@
 			<div class="col-sm-12">
 				<div class="actions">
 					<div class="row">
-						<div class="col-sm-12 col-md-8">
-							<a href="javascript:;" class="select-all">{% trans %}Select All{% endtrans %}</a>
-							<span class="separator">|</span>
-							<a href="javascript:;" class="unselect-all">{% trans %}Unselect All{% endtrans %}</a>
-						</div>
+						<div class="col-sm-12 col-md-8">{{ include('blocks/action/select.html.twig') }}</div>
 						<div class="col-sm-12 col-md-4">
 							<div class="handle-action">
 								{% trans %}Actions{% endtrans %}
