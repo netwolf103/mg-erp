@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Command\Google;
 
 use Symfony\Component\Console\Command\Command;
@@ -99,7 +98,6 @@ class ProductPushCommand extends Command
 
         if (!ConfigTrait::configGoogleMerchantsEnabled()) {
             throw new \Exception('Please enable google merchants.');
-            
         }
 
         $products = $this->getDoctrine()->getRepository(GoogleEntity::class)->findAll();
