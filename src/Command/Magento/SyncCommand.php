@@ -2,14 +2,13 @@
 
 namespace App\Command\Magento;
 
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Doctrine\Common\Persistence\ManagerRegistry;
 use Symfony\Component\Messenger\MessageBusInterface;
 
+use App\Command\AbstractCommand;
 use App\Traits\DatetimeTrait;
 use App\Entity\SyncRecord;
 
@@ -20,7 +19,7 @@ use App\Traits\ConfigTrait;
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */
-abstract class SyncCommand extends Command
+abstract class SyncCommand extends AbstractCommand
 {
 	use DatetimeTrait;
 
@@ -46,25 +45,11 @@ abstract class SyncCommand extends Command
 	protected static $complexFilterKey;
 
     /**
-     * Containe manager.
-     * 
-     * @var ContainerInterface
-     */
-    private $container;	
-
-    /**
      * Api params from services.yaml
      * 
      * @var array
      */
 	private $apiConfig;
-
-	/**
-	 * Message bus.
-	 * 
-	 * @var MessageBusInterface
-	 */
-	private $bus;
 
 	/**
 	 * SyncRecordRepository object.
@@ -104,51 +89,7 @@ abstract class SyncCommand extends Command
         $this
         	->addOption('filter', null, InputOption::VALUE_OPTIONAL, 'Magento "complex_filter", Example --filter="field1=val1;field2=val2".', false)
         ;
-    }
-
- 	/**
-	 * Set MessageBusInterface object.
-	 * 
-	 * @param MessageBusInterface $container
-	 */
-	public function setBus(MessageBusInterface $bus): self
-	{
-		$this->bus = $bus;
-
-		return $this;
-	}
-
-	/**
-	 * Get MessageBusInterface object.
-	 * 
-	 * @return [type] [description]
-	 */
-	public function getBus(): MessageBusInterface
-	{
-		return $this->bus;
-	}   	
-
-	/**
-	 * Set ContainerInterface object.
-	 * 
-	 * @param ContainerInterface $container
-	 */
-	public function setContainer(ContainerInterface $container): self
-	{
-		$this->container = $container;
-
-		return $this;
-	}
-
-	/**
-	 * Get ContainerInterface object.
-	 * 
-	 * @return [type] [description]
-	 */
-	public function getContainer(): ContainerInterface
-	{
-		return $this->container;
-	}
+    }  	
 
 	/**
 	 * Set api config.
@@ -203,16 +144,6 @@ abstract class SyncCommand extends Command
 	}
 
 	/**
-	 * Get ManagerRegistry object.
-	 * 
-	 * @return ManagerRegistry
-	 */
-	protected function getDoctrine(): ManagerRegistry
-	{
-		return $this->container->get('doctrine');
-	}
-
-	/**
 	 * Return soap client.
 	 * 
 	 * @param  InterfaceSoap  $class
@@ -226,18 +157,6 @@ abstract class SyncCommand extends Command
             $input->getArgument('api_username'), 
             $input->getArgument('api_key')
 		);
-	}
-
-    /**
-     * Dispatches a message to the bus.
-     *
-     * @param object|Envelope $message The message or the message pre-wrapped in an envelope
-     *
-     * @final
-     */
-	protected function dispatchMessage($message)
-	{
-		return $this->bus->dispatch($message);
 	}
 
     /**

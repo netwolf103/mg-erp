@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
+use App\__NGERP;
 use App\Controller\QueryFilterTrait;
 use App\Event\ControllerEvent;
 
@@ -27,29 +28,29 @@ abstract class AdminControllerAbstract extends AbstractController
      */
     protected static $_defaultRoute = 'admin_dashboard';
 
+    /**
+     * Event dispatched
+     *
+     * @var EventDispatcherInterface
+     */
 	protected $eventDispatcher;
 
+    /**
+     * Initialize the event dispatched
+     *
+     * @param EventDispatcherInterface $dispatcher
+     */
 	public function __construct(EventDispatcherInterface $dispatcher)
 	{
 		$this->eventDispatcher = $dispatcher;
 	}
-
-    /**
-     * Renders a action.
-     *
-     * @return string
-     */
-    public function _renderAction(): string
-    {
-        return '';
-    }
     
     /**
      * Get EventDispatcherInterface object.
      * 
      * @return EventDispatcherInterface
      */
-    public function getDispatcher()
+    public function getDispatcher(): ?EventDispatcherInterface
     {
         return $this->eventDispatcher;
     }
@@ -137,8 +138,19 @@ abstract class AdminControllerAbstract extends AbstractController
      */
     protected function render(string $view, array $parameters = [], Response $response = null): Response
     {
-        $parameters['_controller'] = $this;
+        $parameters['__NGERP']               = __NGERP::toArray();
+        $parameters['__NGERP']['controller'] = $this;
 
         return parent::render($view, $parameters, $response);
     }
+
+    /**
+     * Renders a action.
+     *
+     * @return string
+     */
+    public function __renderAction(): string
+    {
+        return '';
+    }    
 }

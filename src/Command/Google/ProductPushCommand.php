@@ -1,16 +1,14 @@
 <?php
 namespace App\Command\Google;
 
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityManagerInterface;
 
+use App\Command\AbstractCommand;
 use App\Entity\Product\Google as GoogleEntity;
 use App\Traits\ConfigTrait;
 
@@ -19,7 +17,7 @@ use App\Traits\ConfigTrait;
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */
-class ProductPushCommand extends Command
+class ProductPushCommand extends AbstractCommand
 {
     const SCOPE = 'https://www.googleapis.com/auth/content';
 
@@ -49,14 +47,7 @@ class ProductPushCommand extends Command
      * 
      * @var Google_Service_ShoppingContent
      */
-    private $service;
-
-    /**
-     * Containe manager.
-     * 
-     * @var ContainerInterface
-     */
-    private $container;     
+    private $service;    
   
 
     public function __construct(ContainerInterface $container, EntityManagerInterface $em)
@@ -125,38 +116,6 @@ class ProductPushCommand extends Command
         }
 
         $io->success('Products successfully push done.');
-    }
-
-    /**
-     * Set ContainerInterface object.
-     * 
-     * @param ContainerInterface $container
-     */
-    protected function setContainer(ContainerInterface $container): self
-    {
-        $this->container = $container;
-
-        return $this;
-    }
-
-    /**
-     * Get ContainerInterface object.
-     * 
-     * @return [type] [description]
-     */
-    protected function getContainer(): ContainerInterface
-    {
-        return $this->container;
-    }
-
-    /**
-     * Get ManagerRegistry object.
-     * 
-     * @return ManagerRegistry
-     */
-    protected function getDoctrine(): ManagerRegistry
-    {
-        return $this->container->get('doctrine');
     }
 
     /**

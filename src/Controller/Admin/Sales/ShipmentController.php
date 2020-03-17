@@ -155,7 +155,7 @@ class ShipmentController extends AdminControllerAbstract
     /**
      * {@inheritdoc}
      */
-    public function _renderAction(): string
+    public function __renderAction(): string
     {
         return $this->renderView('admin/sales/order/shipment/blocks/action/handle.html.twig');
     }
