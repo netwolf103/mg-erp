@@ -57,7 +57,7 @@ class Product2GoogleCommand extends Command
     {
         $this
             ->setDescription('Local products to google products')
-            ->addArgument('sku', InputArgument::OPTIONAL, 'Argument description')
+            ->addArgument('sku', InputArgument::OPTIONAL, 'Product sku')
         ;
     }
 

@@ -86,6 +86,7 @@ class ProductPushCommand extends Command
     {
         $this
             ->setDescription('Push local product to google shopping content.')
+            ->addArgument('sku', InputArgument::OPTIONAL, 'Product sku')
         ;
     }
 
@@ -100,10 +101,18 @@ class ProductPushCommand extends Command
             throw new \Exception('Please enable google merchants.');
         }
 
-        $products = $this->getDoctrine()->getRepository(GoogleEntity::class)->findAll();
+        $sku = $input->getArgument('sku');
+
+        $query = [];
+
+        if ($sku) {
+            $query['g_offer_id'] = $sku;
+        }
+
+        $products = $this->getDoctrine()->getRepository(GoogleEntity::class)->findBy($query);
         $total = count($products);
         $adder = 0;
-        $io->writeln(sprintf('Total %d products.', $total));
+        $io->writeln(sprintf('Total %d products.', $total));exit;
         foreach ($products as $product) {
             try {
                 $io->writeln(sprintf('%s # %d/%d', $product->getGOfferId(), $total, ++$adder));
