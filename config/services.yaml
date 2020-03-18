@@ -27,6 +27,18 @@ parameters:
         tracking_apis:
             paypal_express: App\Api\Paypal\Reset\Tracking
             oceanpayment_csecreditcard: App\Api\Oceanpayment\Tracking
+
+    App\Api\Paypal\Reset\Tracking:
+        sandbox: '%env(PAYPAL_SANDBOX_MODE)%'
+        version: '%env(PAYPAL_API_VERSION)%'
+        clientId: '%env(PAYPAL_CLIENTID)%'
+        clientSecret: '%env(PAYPAL_CLIENTSECRET)%'
+
+    App\Api\Oceanpayment\Tracking:
+        account: '%env(OC_ACCOUNT)%'
+        terminal: '%env(OC_TERMINAL)%'
+        secureCode: '%env(OC_SECURECODE)%'
+
     tracking:
         dhl:
             site: https://www.dhl.com/
@@ -78,7 +90,13 @@ services:
     # as action arguments even if you don't extend any base controller class
     App\Controller\:
         resource: '../src/Controller'
-        tags: ['controller.service_arguments']       
+        tags: ['controller.service_arguments']
+
+    # session save to database
+    Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler:
+        arguments:
+            - 'mysql:dbname=%env(DB_NAME)%; host=%env(DB_HOST)%; port=%env(DB_PORT)%'
+            - { db_table: 'sessions', db_username: '%env(DB_USER)%', db_password: '%env(DB_PASS)%' }
 
     # Event subscriber.
     App\EventSubscriber\Sales\Order\ItemSubscriber:

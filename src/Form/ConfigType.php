@@ -10,8 +10,6 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use App\Form\Config\WebType;
 use App\Form\Config\CurrencyRatesType;
 use App\Form\Config\GoogleMerchantsType;
-use App\Form\Config\PaypalApiType;
-use App\Form\Config\OceanpaymentApiType;
 use App\Form\Config\MagentoApiType;
 
 /**
@@ -43,14 +41,6 @@ class ConfigType extends AbstractType
                 'label' => 'Google Merchants',
                 'attr' => ['class' => 'fieldset-block']
             ])
-            ->add('paypalApi', PaypalApiType::class, [
-                'label' => 'Paypal Api',
-                'attr' => ['class' => 'fieldset-block']
-            ])
-            ->add('oceanpaymentApi', OceanpaymentApiType::class, [
-                'label' => 'Oceanpayment Api',
-                'attr' => ['class' => 'fieldset-block']
-            ])                                                     
             ->add('save', SubmitType::class, ['label' => 'Save'])
         ;
     }

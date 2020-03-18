@@ -14,7 +14,7 @@ class Rates
     /**
      * Init ParameterBag.
      *
-     * @param ParameterBagInterface $parameter [description]
+     * @param ParameterBagInterface $parameter
      */
     public function __construct(ParameterBagInterface $parameter)
     {
