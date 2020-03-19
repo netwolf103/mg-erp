@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 trait QueryFilterTrait
 {
     /**
-     * 处理查询
+     * Handle filter
      *
      * @param  Request $request
      * @return $this
@@ -58,7 +58,7 @@ trait QueryFilterTrait
     }
 
     /**
-     * 从session中获取查询参数
+     * Return filter value from session.
      *
      * @param  Request $request
      * @return mixed
@@ -75,7 +75,7 @@ trait QueryFilterTrait
     }
 
     /**
-     * 从session中获取分页大小
+     * Return page limit from session.
      *
      * @param  Request $request
      * @return integer
@@ -86,7 +86,7 @@ trait QueryFilterTrait
     }
 
     /**
-     * 获取查询session key名
+     * Build filter session key.
      *
      * @return string
      */
@@ -96,7 +96,7 @@ trait QueryFilterTrait
     }
 
     /**
-     * 获取分页session key名
+     * Return key name of page limit.
      *
      * @return string
      */
