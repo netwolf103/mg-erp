@@ -81,6 +81,8 @@ Wechat: netwolf103
     "symfony/profiler-pack": "*",
     "symfony/test-pack": "*",
     "symfony/web-server-bundle": "4.3.*"
+### Composer方式安装
+    composer create-project netwolf103/mg-erp
 ### 依赖库安装
     composer install
 
