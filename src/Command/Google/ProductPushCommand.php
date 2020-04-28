@@ -103,7 +103,7 @@ class ProductPushCommand extends AbstractCommand
         $products = $this->getDoctrine()->getRepository(GoogleEntity::class)->findBy($query);
         $total = count($products);
         $adder = 0;
-        $io->writeln(sprintf('Total %d products.', $total));exit;
+        $io->writeln(sprintf('Total %d products.', $total));
         foreach ($products as $product) {
             try {
                 $io->writeln(sprintf('%s # %d/%d', $product->getGOfferId(), $total, ++$adder));
