@@ -154,6 +154,7 @@
 							<td class="actions text-center">
 							<a href="{{ path('admin_product_edit', {'id': product.id}) }}" class="btn btn-dark btn-sm btn-block">{% trans %}Edit{% endtrans%}</a>
 							<a href="{{ path('admin_product_pull', {'id': product.id}) }}" class="btn btn-dark btn-sm btn-block">{% trans %}Pull{% endtrans%}</a>
+							<a href="{{ path('admin_product_remove', {'id': product.id}) }}" class="btn btn-dark btn-sm btn-block">{% trans %}Remove{% endtrans%}</a>
 							<a href="{{ path('admin_product_google_create', {'product_id': product.id}) }}" class="btn btn-dark btn-sm btn-block">{% trans %}Generate Google Product{% endtrans%}</a>
 							{% if product.isPurchase() %}
 							<a href="{{ path('admin_product_purchase_order_add', {'product_id': product.id}) }}" class="btn btn-dark btn-sm btn-block">{% trans %}Purchase{% endtrans%}</a>
