@@ -144,10 +144,6 @@ class PushHandler extends MessageHandlerAbstract
 			$price->setCurrency($currency);
 
 			$product->setSalePrice($price);
-		}		
-
-		if ($google->getGSalePriceEffectiveDate()) {
-			$product->setSalePriceEffectiveDate($google->getGSalePriceEffectiveDate());
 		}
 
 		if ($google->getGUnitPriceMeasure()) {
