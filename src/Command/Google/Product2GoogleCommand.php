@@ -55,14 +55,15 @@ class Product2GoogleCommand extends AbstractCommand
         $sku = $input->getArgument('sku');
 
         $query = [
-            'catalogInventory' => 1
+            'catalogInventory' => 1,
+            'google' => 'no'
         ];
 
         if ($sku) {
             $query['sku'] = $sku;
         }
 
-        $paginator = $this->getDoctrine()->getRepository(Product::class)->getAll($query);
+        $paginator = $this->getDoctrine()->getRepository(Product::class)->getAll($query, 1, 10000);
         
         foreach ($paginator['results'] as $_product) {
             $this->dispatchMessage(new Google($_product->getId()));
