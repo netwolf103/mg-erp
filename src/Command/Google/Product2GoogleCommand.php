@@ -54,7 +54,9 @@ class Product2GoogleCommand extends AbstractCommand
 
         $sku = $input->getArgument('sku');
 
-        $query = [];
+        $query = [
+            'catalogInventory' => 1
+        ];
 
         if ($sku) {
             $query['sku'] = $sku;
