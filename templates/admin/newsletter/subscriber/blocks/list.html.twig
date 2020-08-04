@@ -36,22 +36,36 @@
 						<tr class="filter">
 							<td></td>
 							<td><input type="text" name="filters[subscriber_email]" class="form-control form-control-sm" value="{{ app.request.getSession().get(filterSessionKey)|getFilter('subscriber_email')}}" /></td>
+							<td>
+							<select name="filters[type]" class="form-control form-control-sm">
+								<option></option>
+								{% for value, name in subscriber_type_list() %}
+								<option value="{{ value }}"{% if app.request.getSession().get(filterSessionKey)|getFilter('type', -1) == value %} selected="selected"{% endif %}>{{ name }}</option>
+								{% endfor %}
+							</select>
+							</td>
 							<td></td>
 							<td></td>
 							<td></td>
-							<td></td>
-							<td></td>
+							<td>
+							<select name="filters[subscriber_status]" class="form-control form-control-sm">
+								<option></option>
+								{% for value, name in subscriber_status_list() %}
+								<option value="{{ value }}"{% if app.request.getSession().get(filterSessionKey)|getFilter('subscriber_status', -1) == value %} selected="selected"{% endif %}>{{ name }}</option>
+								{% endfor %}
+							</select>
+							</td>
 							<td></td>
 						</tr>
 					{% for subscriber in paginator.results %}
 						<tr>
 							<td><input type="checkbox" name="ids" value="{{ subscriber.id }}" /></td>
 							<td>{{ subscriber.getSubscriberEmail() }}</td>
-							<td>{{ subscriber.getType() }}</td>
+							<td>{{ subscriber.getType()|subscriber_type }}</td>
 							<td>{{ subscriber.getCustomerFirstname() }}</td>
 							<td>{{ subscriber.getCustomerMiddlename() }}</td>
 							<td>{{ subscriber.getCustomerLastname() }}</td>
-							<td>{{ subscriber.getSubscriberStatus() }}</td>
+							<td>{{ subscriber.getSubscriberStatus()|subscriber_status }}</td>
 							<td class="actions">
 							</td>
 						</tr>

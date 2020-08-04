@@ -37,11 +37,21 @@ class SubscriberRepository extends AbstractRepository
             ->orderBy('s.id', 'DESC')
         ;
 
-        foreach ($query as $field => $val) {
-            $qb->andWhere(sprintf('s.%s LIKE :%s', $field, $field))
-                ->setParameter($field, '%' . $val . '%');
+        if (isset($query['email'])) {
+            $qb->andWhere('s.subscriber_email LIKE :email')
+                ->setParameter('email', '%' . $query['email'] . '%');
         }
 
+        if (isset($query['type'])) {
+            $qb->andWhere('s.type = :type')
+                ->setParameter('type', $query['type']);
+        }
+
+        if (isset($query['subscriber_status'])) {
+            $qb->andWhere('s.subscriber_status = :subscriber_status')
+                ->setParameter('subscriber_status', $query['subscriber_status']);
+        }
+        
         return $this->createPaginator($qb, $currentPage, $limit);
     }    
 }
