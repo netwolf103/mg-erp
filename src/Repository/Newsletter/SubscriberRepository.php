@@ -42,6 +42,21 @@ class SubscriberRepository extends AbstractRepository
                 ->setParameter('email', '%' . $query['email'] . '%');
         }
 
+        if (isset($query['customer_firstname'])) {
+            $qb->andWhere('s.customer_firstname LIKE :customer_firstname')
+                ->setParameter('customer_firstname', '%' . $query['customer_firstname'] . '%');
+        }
+
+        if (isset($query['customer_middlename'])) {
+            $qb->andWhere('s.customer_middlename LIKE :customer_middlename')
+                ->setParameter('customer_middlename', '%' . $query['customer_middlename'] . '%');
+        }
+
+        if (isset($query['customer_lastname'])) {
+            $qb->andWhere('s.customer_lastname LIKE :customer_lastname')
+                ->setParameter('customer_lastname', '%' . $query['customer_lastname'] . '%');
+        }                        
+
         if (isset($query['type'])) {
             $qb->andWhere('s.type = :type')
                 ->setParameter('type', $query['type']);
@@ -51,7 +66,7 @@ class SubscriberRepository extends AbstractRepository
             $qb->andWhere('s.subscriber_status = :subscriber_status')
                 ->setParameter('subscriber_status', $query['subscriber_status']);
         }
-        
+
         return $this->createPaginator($qb, $currentPage, $limit);
     }    
 }

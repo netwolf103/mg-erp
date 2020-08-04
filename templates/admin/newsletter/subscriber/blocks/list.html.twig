@@ -44,9 +44,9 @@
 								{% endfor %}
 							</select>
 							</td>
-							<td></td>
-							<td></td>
-							<td></td>
+							<td><input type="text" name="filters[customer_firstname]" class="form-control form-control-sm" value="{{ app.request.getSession().get(filterSessionKey)|getFilter('customer_firstname')}}" /></td>
+							<td><input type="text" name="filters[customer_middlename]" class="form-control form-control-sm" value="{{ app.request.getSession().get(filterSessionKey)|getFilter('customer_middlename')}}" /></td>
+							<td><input type="text" name="filters[customer_lastname]" class="form-control form-control-sm" value="{{ app.request.getSession().get(filterSessionKey)|getFilter('customer_lastname')}}" /></td>
 							<td>
 							<select name="filters[subscriber_status]" class="form-control form-control-sm">
 								<option></option>
