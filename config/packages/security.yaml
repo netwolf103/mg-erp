@@ -78,6 +78,8 @@ security:
         - {path: ^/admin/sales/order, roles: [ROLE_SERVICE, ROLE_SHIPPER, ROLE_MARKET]}
 
         - {path: ^/admin/mail, roles: ROLE_SERVICE}
+        
+        - {path: ^/admin/newsletter, roles: ROLE_SERVICE}
 
         - {path: ^/admin/product, roles: [ROLE_SERVICE, ROLE_SHIPPER, ROLE_MARKET]}
 

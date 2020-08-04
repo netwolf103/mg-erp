@@ -117,9 +117,20 @@
     <div class="dropdown-menu" aria-labelledby="pagesDropdown">
       <h6 class="dropdown-header">{% trans %}Customers{% endtrans %}:</h6>
       <a class="dropdown-item" href="{{ path('admin_customer_customer') }}">{% trans %}List{% endtrans %}</a>
-    </div>
+    </div>  
   </li>
   {% endif %}
+
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="{{ path('admin_newsletter_subscriber') }}" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <i class="fas fa-fw fa-folder"></i>
+      <span>{% trans %}Manager Newsletter Subscriber{% endtrans %}</span>
+    </a>
+    <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+      <h6 class="dropdown-header">{% trans %}Customers{% endtrans %}:</h6>
+      <a class="dropdown-item" href="{{ path('admin_newsletter_subscriber') }}">{% trans %}List{% endtrans %}</a>
+    </div>     
+  </li>  
 
   {# ---------------------邮件管理-------------------- #}
   {% if is_granted('ROLE_ADMIN') %}
