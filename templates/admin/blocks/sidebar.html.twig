@@ -119,7 +119,22 @@
       <a class="dropdown-item" href="{{ path('admin_customer_customer') }}">{% trans %}List{% endtrans %}</a>
     </div>
   </li>
-  {% endif %}     
+  {% endif %}
+
+  {# ---------------------邮件管理-------------------- #}
+  {% if is_granted('ROLE_ADMIN') %}
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <i class="fas fa-fw fa-folder"></i>
+      <span>{% trans %}Manager Mail{% endtrans %}</span>
+    </a>
+    <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+      <h6 class="dropdown-header">{% trans %}Mail{% endtrans %}:</h6>
+      <a class="dropdown-item" href="{{ path('admin_mail_folder') }}">{% trans %}Folder{% endtrans %}</a>
+      <a class="dropdown-item" href="{{ path('admin_mail') }}">{% trans %}List{% endtrans %}</a>
+    </div>
+  </li>
+  {% endif %}
 
   {# ----------------------数据统计------------------ #}
   {% if is_granted('ROLE_ADMIN') %}

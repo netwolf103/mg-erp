@@ -1,0 +1,70 @@
+<div class="table-responsive" data-filter-response>
+	<div class="dataTables_wrapper">
+		{{ include('blocks/paginate.html.twig', {'numPages': paginator.numPages, 'numResults': paginator.numResults}) }}
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="actions">
+					<div class="row">
+						<div class="col-sm-12 col-md-8">{{ include('blocks/action/select.html.twig') }}</div>
+						<div class="col-sm-12 col-md-4">{{ include('blocks/action/handle.html.twig') }}</div>
+					</div>
+				</div>					
+				<table class="table table-bordered" width="100%" cellspacing="0">
+					<colgroup>
+						<col width="30">
+						<col>
+						<col>
+						<col>
+						<col>
+						<col>
+						<col>
+						<col width="80">
+					</colgroup>					
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>{% trans %}Folder Name{% endtrans %}</th>
+							<th>{% trans %}Folder Alias{% endtrans %}</th>
+							<th>{% trans %}Folder Fullpath{% endtrans %}</th>
+							<th>{% trans %}Pause Mail{% endtrans %}</th>
+							<th>{% trans %}Created At{% endtrans %}</th>
+							<th>{% trans %}Updated At{% endtrans %}</th>
+							<th>{% trans %}Action{% endtrans %}</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="filter">
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+					{% for folder in paginator.results %}
+						<tr>
+							<td><input type="checkbox" name="ids" value="{{ folder.id }}" /></td>
+							<td>{{ folder.name }}</td>
+							<td>{{ folder.alias }}</td>
+							<td>{{ folder.fullpath }}</td>
+							<td>{{ folder.isPause|getYesOrNo }}</td>
+							<td>{{ folder.createdAt|date('Y-m-d H:i:s') }}</td>
+							<td>{{ folder.updatedAt|date('Y-m-d H:i:s') }}</td>
+							<td class="actions">
+								<a href="{{ path('admin_mail_folder_edit', {'id': folder.id}) }}" class="btn btn-dark btn-sm btn-block">{% trans %}Edit{% endtrans%}</a>
+								{% if folder.isPause %}
+								<a href="{{ path('admin_mail_folder_pause_cancel', {'id': folder.id}) }}" class="btn btn-dark btn-sm btn-block">{% trans %}Pause Cancel{% endtrans%}</a>
+								{% else %}
+								<a href="{{ path('admin_mail_folder_pause', {'id': folder.id}) }}" class="btn btn-dark btn-sm btn-block">{% trans %}Pause Mail{% endtrans%}</a>
+								{% endif %}
+							</td>
+						</tr>
+					{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

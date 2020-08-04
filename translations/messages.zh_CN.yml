@@ -391,3 +391,21 @@ Sandbox Model: 沙箱模式
 Api Version: Api版本
 Enable: 启用
 Oceanpayment Api: 钱海API
+
+Manager Mail: 邮件管理
+Mail: 邮件
+Sender Name: 发件人
+Send To: 发送给
+Mail Body: 邮件内容
+Folder: 目录
+Mail ID: 邮件号
+Mail Date: 邮件时间
+Reply: 回复
+Reply To: 回复到
+Subject: 主题
+Folder Name: 目录名
+Folder Alias: 目录别名
+Folder Fullpath: 路径
+Mail Folder Edit: 编辑目录
+Pause Mail: 暂停收取
+Pause Cancel: 取消暂停

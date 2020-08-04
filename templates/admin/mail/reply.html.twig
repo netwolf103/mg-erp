@@ -1,0 +1,51 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}{% trans %}Manager Mail{% endtrans %}{% endblock %}
+
+{% block body %}
+
+<ol class="breadcrumb">
+	<li class="breadcrumb-item">
+		<a href="{{ path('admin_dashboard') }}">{% trans %}Dashboard{% endtrans %}</a>
+	</li>
+	<li class="breadcrumb-item">
+		<a href="{{ path('admin_mail') }}">{% trans %}Manager Mail{% endtrans %}</a>
+	</li>	
+	<li class="breadcrumb-item active">{% trans %}Reply{% endtrans %}</li>
+</ol>
+
+<div class="mb-3">
+	{{ include('blocks/message.html.twig') }}
+	<div class="row">	
+		<div class="col-sm-12 col-md-4">
+			<div class="card mb-2">
+				<div class="card-header d-flex">
+					{{ mail.fromName|mail_from(mail.fromAddress) }} {% trans %}Send To{% endtrans %} {{ mail.toAddress }}
+				</div>
+				<div class="card-body">
+					<div class="mt-sm-n2 mr-sm-n2 mb-sm-n2 ml-sm-n2">
+						<span class="d-block">{% trans %}Mail Date{% endtrans %}: {{ mail.date|date('Y-m-d H:i:s') }}</span>
+						<span class="d-block">
+							{% trans %}Folder{% endtrans %}:
+							{% if mail.getFolder().alias %}{{ mail.getFolder().alias }}{% else %}{{ mail.getFolder().name }}{% endif %}
+						</span>
+						<span class="d-block">{% trans %}Sender Name{% endtrans %}: {{ mail.fromName|mail_from(mail.fromAddress) }}</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-12 col-md-8">
+			<div class="card mb-2">
+				<div class="card-header d-flex">
+					#{{ mail.msgId }} {{ mail.subject }}
+				</div>			
+				<div class="card-body">
+					<div class="mt-sm-n2 mr-sm-n2 mb-sm-n2 ml-sm-n2">
+						<iframe name="mail-{{ mail.id }}" src="{{ path('admin_mail_view', {'id': mail.id}) }}" width="100%" height="500" frameborder="0"></iframe>
+					</div>
+				</div>
+			</div>
+		</div>		
+	</div>
+</div>
+{% endblock %}

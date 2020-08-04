@@ -1,0 +1,98 @@
+<div class="table-responsive" data-filter-response>
+	<div class="dataTables_wrapper">
+		{{ include('blocks/paginate.html.twig', {'numPages': paginator.numPages, 'numResults': paginator.numResults}) }}
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="actions">
+					<div class="row">
+						<div class="col-sm-12 col-md-8">{{ include('blocks/action/select.html.twig') }}</div>
+						<div class="col-sm-12 col-md-4">{{ include('blocks/action/handle.html.twig') }}</div>
+					</div>
+				</div>					
+				<table class="table table-bordered" width="100%" cellspacing="0">
+					<colgroup>
+						<col width="30">
+						<col width="100">
+						<col width="60">
+						<col>
+						<col>
+						<col>
+						<col>
+						<col width="60">
+					</colgroup>					
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>{% trans %}Folder{% endtrans %}</th>
+							<th>{% trans %}Mail ID{% endtrans %}</th>
+							<th>{% trans %}Mail Date{% endtrans %}</th>
+							<th>{% trans %}Sender Name{% endtrans %}</th>
+							<th>{% trans %}Subject{% endtrans %}</th>
+							<th>{% trans %}Created At{% endtrans %}</th>
+							<th>{% trans %}Action{% endtrans %}</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="filter">
+							<td></td>
+							<td>
+							<select name="filters[folder]" class="form-control form-control-sm">
+								<option></option>
+								{% for folder in folder.results %}
+								<option value="{{ folder.id }}"{% if app.request.getSession().get(filterSessionKey)|getFilter('folder', -1) == folder.id %} selected="selected"{% endif %}>{{ folder.name|mail_foler_name(folder.alias) }}</option>
+								{% endfor %}
+							</select>
+							</td>
+							<td></td>
+							<td>
+								<div class="input-group input-group-sm mb-1">
+									<div class="input-group-prepend">
+										<span class="input-group-text"">{% trans %}From{% endtrans %}:</span>
+									</div>
+									<input data-role="datetime" type="date" name="filters[date][from]" class="form-control" value="{{ app.request.getSession().get(filterSessionKey)|getFilter('date.from')}}" />
+								</div>
+								<div class="input-group input-group-sm">
+									<div class="input-group-prepend">
+										<span class="input-group-text"">{% trans %}To{% endtrans %}:</span>
+									</div>
+									<input data-role="datetime" type="date" name="filters[date][to]" class="form-control" value="{{ app.request.getSession().get(filterSessionKey)|getFilter('date.to')}}" />
+								</div>
+							</td>
+							<td><input type="text" name="filters[from]" class="form-control form-control-sm" value="{{ app.request.getSession().get(filterSessionKey)|getFilter('from')}}" /></td>					
+							<td><input type="text" name="filters[subject]" class="form-control form-control-sm" value="{{ app.request.getSession().get(filterSessionKey)|getFilter('subject')}}" /></td>
+							<td>
+								<div class="input-group input-group-sm mb-1">
+									<div class="input-group-prepend">
+										<span class="input-group-text"">{% trans %}From{% endtrans %}:</span>
+									</div>
+									<input data-role="datetime" type="date" name="filters[created_at][from]" class="form-control" value="{{ app.request.getSession().get(filterSessionKey)|getFilter('created_at.from')}}" />
+								</div>
+								<div class="input-group input-group-sm">
+									<div class="input-group-prepend">
+										<span class="input-group-text"">{% trans %}To{% endtrans %}:</span>
+									</div>
+									<input data-role="datetime" type="date" name="filters[created_at][to]" class="form-control" value="{{ app.request.getSession().get(filterSessionKey)|getFilter('created_at.to')}}" />
+								</div>
+							</td>					
+							<td></td>					
+						</tr>
+					{% for mail in paginator.results %}
+						<tr>
+							<td><input type="checkbox" name="ids" value="{{ mail.id }}" /></td>
+							<td>{{ mail.getFolder().name|mail_foler_name(mail.getFolder().alias) }}</td>
+							<td>{{ mail.msgId }}</td>
+							<td>{{ mail.date|date('Y-m-d H:i:s') }}</td>
+							<td>{{ mail.fromName|mail_from(mail.fromAddress) }}</td>
+							<td>{{ mail.subject }}</td>
+							<td>{{ mail.createdAt|date('Y-m-d H:i:s') }}</td>
+							<td class="actions">
+								<a href="{{ path('admin_mail_reply', {'id': mail.id}) }}" class="btn btn-dark btn-sm btn-block">{% trans %}Reply{% endtrans%}</a>
+							</td>
+						</tr>
+					{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
