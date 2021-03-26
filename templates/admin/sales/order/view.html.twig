@@ -46,7 +46,11 @@
 
 					{% if is_granted(['ROLE_SERVICE']) %}
 					<a href="{{ path('admin_sales_order_email_sendconfirm', {'order_id': order.id}) }}" class="btn btn-primary btn-sm">{% trans %}Send Confirm Email{% endtrans %}</a>
-					{% endif %}					
+					{% endif %}
+
+					{% if order.canShip() and is_granted(['ROLE_SHIPPER']) %}
+					<a href="{{ path('admin_sales_order_yunexpress_create', {'id': order.id}) }}" class="btn btn-primary btn-sm">{% trans %}YunExpress Order Create{% endtrans %}</a>
+					{% endif %}
 					</div>			
 				</div>
 				<div class="card-body">

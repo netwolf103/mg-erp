@@ -73,6 +73,14 @@ class Core
     const CONFIG_PATH_OCEANPAYMENT_API_SECURE_CODE = 'config:oceanpayment:api:secure_code';
 
     /**
+     * Config path for YunExpress api.
+     */
+    const CONFIG_PATH_YUNEXPRESS_API_ENABLED    = 'config:yunexpress:api:enabled';
+    const CONFIG_PATH_YUNEXPRESS_API_SANDBOX    = 'config:yunexpress:api:sandbox';
+    const CONFIG_PATH_YUNEXPRESS_API_ACCOUNT    = 'config:yunexpress:api:account';
+    const CONFIG_PATH_YUNEXPRESS_API_SECRET     = 'config:yunexpress:api:secret';
+
+    /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")

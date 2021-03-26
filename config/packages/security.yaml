@@ -75,6 +75,7 @@ security:
 
         - {path: ^/admin/sales/order/invoice, roles: [ROLE_SERVICE, ROLE_SHIPPER]}
         - {path: ^/admin/sales/order/shipment, roles: [ROLE_SERVICE, ROLE_SHIPPER]}
+        - {path: ^/admin/sales/order/yunexpress, roles: [ROLE_SERVICE, ROLE_SHIPPER]}
         - {path: ^/admin/sales/order, roles: [ROLE_SERVICE, ROLE_SHIPPER, ROLE_MARKET]}
 
         - {path: ^/admin/mail, roles: ROLE_SERVICE}

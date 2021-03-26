@@ -86,6 +86,10 @@ framework:
                 dsn: '%env(MESSENGER_TRANSPORT_DSN)%pull:customer'
                 serializer: messenger.transport.symfony_serializer
 
+            push:sales:order:yunexpress:
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%push:sales:order:yunexpress'
+                serializer: messenger.transport.symfony_serializer
+
         routing:
             # Route your messages to the transports
             # 'App\Message\YourMessage': async
@@ -109,3 +113,4 @@ framework:
             'App\Message\Sales\Order\EmailPush': push:sales:order:email
             'App\Message\Sales\Order\Email\ConfirmPush': push:sales:order:send:confirm:email
             'App\Message\Sales\Order\Payment\TransactionPull': pull:sales:order:payment:transaction
+            'App\Message\YunExpress\OrderPush': push:sales:order:yunexpress

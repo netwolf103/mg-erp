@@ -11,6 +11,7 @@ use App\Form\Config\WebType;
 use App\Form\Config\CurrencyRatesType;
 use App\Form\Config\GoogleMerchantsType;
 use App\Form\Config\MagentoApiType;
+use App\Form\Config\YunExpress;
 
 /**
  * Form type class of Config.
@@ -39,6 +40,10 @@ class ConfigType extends AbstractType
             ])            
             ->add('googleMerchants', GoogleMerchantsType::class, [
                 'label' => 'Google Merchants',
+                'attr' => ['class' => 'fieldset-block']
+            ])
+            ->add('yunExpress', YunExpress::class, [
+                'label' => 'YunExpress API',
                 'attr' => ['class' => 'fieldset-block']
             ])
             ->add('save', SubmitType::class, ['label' => 'Save'])

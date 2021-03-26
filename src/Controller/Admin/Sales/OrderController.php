@@ -17,6 +17,7 @@ use App\Form\Sales\Order\CommentType;
 use App\Message\Sales\OrderPull;
 use App\Message\Sales\Order\HoldPush as OrderHoldPush;
 use App\Message\Sales\Order\UnHoldPush as OrderUnHoldPush;
+use App\Message\YunExpress\OrderPush as YunExpressOrderPush;
 
 /**
  * Controller of sale order.
@@ -235,6 +236,30 @@ class OrderController extends AdminControllerAbstract
         $this->addSuccessFlash('The order joined task queue.');
 
         return $this->_back(); 
+    }
+
+    /**
+     * @Route("/admin/sales/order/yunexpress/create/{id}", name="admin_sales_order_yunexpress_create", requirements={"id"="\d+"})
+     */
+    public function yunExpressCreateOrder(OrderRepository $order, int $id)
+    {
+        $event = $this->verifyData([
+            'order' => $order->find($id)
+        ]);
+
+        $order = $event->getObject('order');
+
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $entityManager->persist($order);
+
+        $entityManager->flush();
+
+        $this->dispatchMessage(new YunExpressOrderPush($id));
+
+        $this->addSuccessFlash('The order joined task queue.');
+
+        return $this->_back();
     }
 
     /**

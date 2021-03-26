@@ -161,6 +161,20 @@ trait ConfigTrait
 	}
 
 	/**
+	 * Return YunExpress api configs.
+	 *
+	 * @return array
+	 */
+	public static function configYunExpress(): array
+	{
+		return [
+			'account' => static::getConfigValue(Core::CONFIG_PATH_YUNEXPRESS_API_ACCOUNT),
+			'secret' => static::getConfigValue(Core::CONFIG_PATH_YUNEXPRESS_API_SECRET),
+			'sandbox' => static::getConfigValue(Core::CONFIG_PATH_YUNEXPRESS_API_SANDBOX),
+		];
+	}
+
+	/**
 	 * Return config valur by path.
 	 * 
 	 * @param  string $path
