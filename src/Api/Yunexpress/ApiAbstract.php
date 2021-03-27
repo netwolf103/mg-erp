@@ -164,6 +164,8 @@ abstract class ApiAbstract implements ApiInterface {
 
 		$response = json_decode($response);
 
+		$response->requestUrl = $requestUrl;
+
 		return $response;
 	}
 }
