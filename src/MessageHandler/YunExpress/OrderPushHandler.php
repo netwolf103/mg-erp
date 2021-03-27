@@ -40,12 +40,12 @@ class OrderPushHandler extends MessageHandlerAbstract
 
         $client = $this->getClient();
 
-        //$response = $client->deleteOrder(2, 'test'.$orderEntity->getIncrementId());
+        //$response = $client->deleteOrder(2, $orderEntity->getIncrementId());
 
         try {
             $response = $client->createOrder([
                 [
-                    'CustomerOrderNumber' => 'test'.$orderEntity->getIncrementId(),
+                    'CustomerOrderNumber' => $orderEntity->getIncrementId(),
                     'ShippingMethodCode' => $client->getShippingCodeByCountryId($shipAddress->getCountryId()),
                     'PackageCount' => 1,
                     'Weight' => 0.21,
