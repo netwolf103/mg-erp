@@ -164,12 +164,6 @@ abstract class ApiAbstract implements ApiInterface {
 
 		$response = json_decode($response);
 
-		if ($response->Code != '0000') {
-			$item = $response->Item[0];
-			$message = $item['Remark'];
-			throw new \Exception(sprintf('YunExpress API error: %s', $message));
-		}
-
 		return $response;
 	}
 }
