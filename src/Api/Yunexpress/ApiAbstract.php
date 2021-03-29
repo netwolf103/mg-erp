@@ -81,7 +81,7 @@ abstract class ApiAbstract implements ApiInterface {
 	{
 		$codes = [
 			'US' => 'THZXR', // 美国
-			'DE' => 'THZXR', // THZXR
+			'DE' => 'THZXR', // 德国
 			'IT' => 'BKZXR', // 意大利
 			'FR' => 'BKZXR', // 法国
 			'GB' => 'THZXR', // 英国
