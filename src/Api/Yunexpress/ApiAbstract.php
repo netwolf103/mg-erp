@@ -80,22 +80,22 @@ abstract class ApiAbstract implements ApiInterface {
 	final public function getShippingCodeByCountryId(string $countryId)
 	{
 		$codes = [
-			'US' => 'THZXR', // 美国
-			'DE' => 'THZXR', // 德国
-			'IT' => 'BKZXR', // 意大利
-			'FR' => 'BKZXR', // 法国
-			'GB' => 'THZXR', // 英国
+			'US' => 'THPHR', // 美国
+			'DE' => 'THPHR', // 德国
+			'IT' => 'THPHR', // 意大利
+			'FR' => 'THPHR', // 法国
+			'GB' => 'THPHR', // 英国
 			'MX' => 'THZXR', // 墨西哥
-			'CA' => 'THZXR', // 加拿大
-			'ES' => 'THZXR', // 西班牙
-			'AT' => 'THZXR', // 奥地利
+			'CA' => 'THPHR', // 加拿大
+			'ES' => 'THPHR', // 西班牙
+			'AT' => 'THPHR', // 奥地利
 			'NL' => 'THZXR', // 荷兰
-			'AU' => 'THZXR', // 澳大利亚
+			'AU' => 'THPHR', // 澳大利亚
 			'BR' => 'THZXR', // 巴西
 			'DK' => 'THZXR', // 丹麦
-			'BG' => 'THZXR', // 保加利亚
+			'BG' => 'THPHR', // 保加利亚
 			'HR' => 'THZXR', // 克罗地亚
-			'CY' => 'THZXR', // 塞浦路斯
+			'CY' => 'THPHR', // 塞浦路斯
 			'CZ' => 'THZXR', // 捷克
 			'EE' => 'THZXR', // 爱沙尼亚
 			'FI' => 'THZXR', // 芬兰
