@@ -169,7 +169,7 @@ trait ConfigTrait {
 	 * @return array
 	 */
 	public static function configYunOrderPrefix(): string {
-		return static::getConfigValue(Core::CONFIG_PATH_YUNEXPRESS_ORDER_PREFIX);
+		return static::getConfigValue(Core::CONFIG_PATH_YUNEXPRESS_ORDER_PREFIX, '');
 	}
 
 	/**

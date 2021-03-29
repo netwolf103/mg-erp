@@ -13,14 +13,16 @@ use App\Traits\ConfigTrait;
  *
  * @author Zhang Zhao <netwolf103@gmail.com>
  */
-class OrderPushHandler extends MessageHandlerAbstract {
+class OrderPushHandler extends MessageHandlerAbstract
+{
 	/**
 	 * Order handler.
 	 *
 	 * @param  OrderPush $orderPush
 	 * @return void
 	 */
-	public function __invoke(OrderPush $orderPush) {
+	public function __invoke(OrderPush $orderPush)
+	{
 		$orderId = $orderPush->getOrderId();
 
 		$entityManager = $this->getDoctrine()->getManager();
@@ -89,14 +91,15 @@ class OrderPushHandler extends MessageHandlerAbstract {
 	 *
 	 * @return OrderSoap
 	 */
-	private function getClient(): WayBill{
+	private function getClient(): WayBill
+	{
 		ConfigTrait::loadConfigs($this->getDoctrine()->getManager());
 		$apiParams = ConfigTrait::configYunExpress();
 
 		$client = new WayBill([
 			'apiId' => $apiParams['account'],
 			'apiSecret' => $apiParams['secret'],
-			'sandbox' => !$apiParams['sandbox'],
+			'sandbox' => $apiParams['sandbox'],
 		]);
 
 		return $client;

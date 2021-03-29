@@ -42,7 +42,8 @@ abstract class ApiAbstract implements ApiInterface {
 	 *
 	 * @param array $params
 	 */
-	public function __construct(array $params) {
+	public function __construct(array $params)
+	{
 		$this->apiId = $params['apiId'] ?? '';
 		$this->apiSecret = $params['apiSecret'] ?? '';
 		$sandbox = $params['sandbox'] ?? false;
@@ -55,7 +56,8 @@ abstract class ApiAbstract implements ApiInterface {
 	 *
 	 * @return string
 	 */
-	final public function getApiEndPoint(): string {
+	final public function getApiEndPoint(): string
+	{
 		return $this->apiEndPoint;
 	}
 
@@ -64,7 +66,8 @@ abstract class ApiAbstract implements ApiInterface {
 	 *
 	 * @return string
 	 */
-	final public function setPostBodyPackage(bool $bool) {
+	final public function setPostBodyPackage(bool $bool)
+	{
 		$this->postBodyPackage = $bool;
 		return $this;
 	}
@@ -74,42 +77,43 @@ abstract class ApiAbstract implements ApiInterface {
 	 *
 	 * @return string
 	 */
-	final public function getShippingCodeByCountryId(string $countryId) {
+	final public function getShippingCodeByCountryId(string $countryId)
+	{
 		$codes = [
-			'US' => 'THZXR',
-			'DE' => 'THZXR',
-			'IT' => 'BKZXR',
-			'FR' => 'BKZXR',
-			'GB' => 'THZXR',
-			'MX' => 'THZXR',
-			'CA' => 'THZXR',
-			'ES' => 'THZXR',
-			'AT' => 'THZXR',
-			'NL' => 'THZXR',
-			'AU' => 'THZXR',
-			'BR' => 'THZXR',
-			'DK' => 'THZXR',
-			'BG' => 'THZXR',
-			'HR' => 'THZXR',
-			'CY' => 'THZXR',
-			'CZ' => 'THZXR',
-			'EE' => 'THZXR',
-			'FI' => 'THZXR',
-			'HU' => 'THZXR',
-			'LV' => 'THZXR',
-			'LT' => 'THZXR',
-			'MT' => 'THZXR',
-			'PL' => 'THZXR',
-			'PT' => 'THZXR',
-			'RO' => 'THZXR',
-			'SK' => 'THZXR',
-			'SI' => 'THZXR',
-			'SE' => 'THZXR',
-			'GR' => 'THZXR',
-			'IE' => 'THZXR',
-			'BE' => 'THZXR',
-			'LU' => 'THZXR',
-			'ZA' => 'THZXR',
+			'US' => 'THZXR', // 美国
+			'DE' => 'THZXR', // THZXR
+			'IT' => 'BKZXR', // 意大利
+			'FR' => 'BKZXR', // 法国
+			'GB' => 'THZXR', // 英国
+			'MX' => 'THZXR', // 墨西哥
+			'CA' => 'THZXR', // 加拿大
+			'ES' => 'THZXR', // 西班牙
+			'AT' => 'THZXR', // 奥地利
+			'NL' => 'THZXR', // 荷兰
+			'AU' => 'THZXR', // 澳大利亚
+			'BR' => 'THZXR', // 巴西
+			'DK' => 'THZXR', // 丹麦
+			'BG' => 'THZXR', // 保加利亚
+			'HR' => 'THZXR', // 克罗地亚
+			'CY' => 'THZXR', // 塞浦路斯
+			'CZ' => 'THZXR', // 捷克
+			'EE' => 'THZXR', // 爱沙尼亚
+			'FI' => 'THZXR', // 芬兰
+			'HU' => 'THZXR', // 匈牙利
+			'LV' => 'THZXR', // 拉脱维亚
+			'LT' => 'THZXR', // 立陶宛
+			'MT' => 'THZXR', // 马耳他
+			'PL' => 'THZXR', // 波兰
+			'PT' => 'THZXR', // 葡萄牙
+			'RO' => 'THZXR', // 罗马尼亚
+			'SK' => 'THZXR', // 斯洛伐克
+			'SI' => 'THZXR', // 斯洛文尼亚
+			'SE' => 'THZXR', // 瑞典
+			'GR' => 'THZXR', // 希腊
+			'IE' => 'THZXR', // 爱尔兰
+			'BE' => 'THZXR', // 比利时
+			'LU' => 'THZXR', // 卢森堡
+			'ZA' => 'THZXR', // 南非
 		];
 
 		return $codes[$countryId] ?? '';
@@ -121,7 +125,8 @@ abstract class ApiAbstract implements ApiInterface {
 	 * @param  array  $curlOptions
 	 * @return array
 	 */
-	public function call($requestUri, array $data = [], array $curlOptions = []) {
+	public function call($requestUri, array $data = [], array $curlOptions = [])
+	{
 		$ch = curl_init();
 
 		$requestUrl = $this->getApiEndPoint() . $requestUri;
@@ -163,6 +168,11 @@ abstract class ApiAbstract implements ApiInterface {
 		}
 
 		$response = json_decode($response);
+
+		if ($response->Code == '0000') {
+			$errorMessage = $response->Item[0]->Remark;
+			throw new \Exception(sprintf('YunExpress API error: %s', $errorMessage));
+		}
 
 		$response->requestUrl = $requestUrl;
 
